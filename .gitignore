@@ -2,3 +2,4 @@ myProjectFlask
 venv
 env
 myenv
+__pycache__
