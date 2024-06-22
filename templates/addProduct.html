@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <title>Add Product</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                 theme: {
+                   extend: {
+                     // grayscale: {
+                     //     50: '50%',
+                    
+                     fontFamily: { 
+                           pop: ["Poppins", "sans-serif"], 
+                           fraun:["Fraunces", "sans-serif"],
+                       },
+                     colors: { 
+                       darkgreen:"#677E52",
+                       light: "#fcf5eb", // hada bach khdemt lbackground
+                       lightbeige:"#EAE2CB",
+                       lightgreen:"#cfdb98",
+                       beige:"#c4b494",
+                     },
+                   },
+                 },
+               };
+          </script>
+          <style>
+                #navbar {
+                    display: none;
+                }
+                #burgerlist {
+                    display: block;
+                }
+                #unshowlist {
+                    display: none;
+                }
+                .dropdown:hover .dropdown-menu {
+                    display: block;
+                }
+        </style>
+    </head>
+    <body class="bg-light">
+       
+        <main class="mb-10">
+            <div class="pb-6 mt-10 w-[80%] md:w-[80%] md:mt-0 mx-auto xl:max-w-[1400px] xl:mx-auto">
+                <form action="" class="bg-lightbeige bg-opacity-30 shadow-2xl rounded-[50px] px-12  mt-10 md:w-[60%] mx-auto py-10  xl:max-w-[1400px] xl:mx-auto mb-20">
+                  <label for="ProductName" class="text-darkgreen font-bold ">Product Name </label><br>
+                  <input type="text" id="ProductName" placeholder="Enter your product's name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen  placeholder-opacity-65"><br>
+                  <label for="ProductImage" class="text-darkgreen font-bold ">Product Image </label><br>
+                  <input type="file" id="ProductImage"placeholder="choose your product's image" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen pl file-opacity-25 file:border-0 file:bg-beige file:rounded-lg  file:shadow-xl  file:text-[14px]  file:text-light file:cursor-pointer file:hover:opacity-80 file:transition-opacity file:duration-300 "><br>
+                  <label for="ProductDescription" class="text-darkgreen font-bold ">Product
+                    Description </label><br>
+                  <input type="text" id="ProductDescription" placeholder="Enter your product's description" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
+                  <label for="ProductPrice" class="text-darkgreen font-bold ">Product
+                    Price </label><br>
+                  <input type="text" id="ProductPrice" placeholder="Enter your product price" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
+                  <label for="ProductQuantity" class="text-darkgreen font-bold ">Product
+                    Quantity </label><br>
+                  <input type="text" id="ProductQuantity" placeholder="Enter your product's quantity" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
+                  <button type="submit" class="bg-darkgreen text-[13px] text-light font-pop py-1 px-5 rounded-lg mt-3 hover:opacity-80 transition-opacity duration-300">Add your product</button>
+                </form>
+              </div> 
+        </main>
+        <script src="../static/js/main.js"></script>
+</body>
+</html>

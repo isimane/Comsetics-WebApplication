@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <title>Aboutus</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                 theme: {
+                   extend: {
+                     // grayscale: {
+                     //     50: '50%',
+                    
+                     fontFamily: { 
+                           pop: ["Poppins", "sans-serif"], 
+                           fraun:["Fraunces", "sans-serif"],
+                       },
+                     colors: { 
+                       darkgreen:"#677E52",
+                       light: "#fcf5eb", // hada bach khdemt lbackground
+                       lightbeige:"#EAE2CB",
+                       lightgreen:"#cfdb98",
+                       beige:"#c4b494",
+                     },
+                   },
+                 },
+               };
+          </script>
+          <style>
+           #navbar{
+                display:none;
+            }
+            #hburgerlist{
+                display: block;
+            }
+            #unshowlist{
+                display: none;
+            }
+          </style>
+    </head>
+<body class=>
+    <section class="md:hidden outline-none bg-light bg-cover bg-no-repeat bg-center bg-bottom pt-10 pb-10" style="background-image: url(../static/images/mask.jpg); ">
+        <p class="text-3xl font-fraun text-light font-bold w-[70%] mx-auto text-center">Welcome Back To NUOVA!</p>
+        <div  class=" mt-5 mx-auto shadow-2xl p-20">
+            <form action="" class="bg-light  mx-auto rounded-3xl p-7 w-[70%] md:w-[40%] ">
+                <label for="FirstName" class="t font-bold mb-2">Your Email</label><br>
+                <input type="text" id="FirstName" placeholder="Enter Your Email" class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen"><br>
+                <label for="Email" class=" font-bold  mb-2">Your Password </label><br>
+                <input type="email" placeholder="Enter Your Password" id="Email" class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen"><br>
+                <button type="submit" class="bg-darkgreen text-light font-pop py-1 px-10 rounded-lg mt-3">Login</button>
+                <p class="text-black  mt-5">Don't have an account? <a href="signup.html" class="text-darkgreen font-pop font-bold  hover:font-bold hover:underline">Sign Up</a></p>
+            </form>
+        </div>
+    </section>
+
+    <section class="hidden md:block bg-light bg-cover bg-no-repeat bg-center pb-20" style="background-image: url(../static/images/mask.jpg); ">
+        <p class="text-5xl font-fraun text-light font-bold w-[30%] leading-[90px] mx-auto text-center">Welcome Back To NUOVA!</p>
+        <div  class=" mt-10 mx-auto shadow-2xl text-cent p-20">
+            <form action="" class="bg-light  mx-auto rounded-3xl p-10 w-[70%] md:w-[30%] mb-[20px] px-10 py-10">
+                <label for="FirstName" class="t font-bold mb-2">Your Email</label><br>
+                <input type="email" id="FirstName" required placeholder="Enter Your Email" class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen "><br>
+                <label for="Email" class=" font-bold  mb-2">Your Password </label><br>
+                <input type="password" placeholder="Enter Your Password" required id="Email" class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen"><br>
+                <button type="submit" class="bg-darkgreen text-light font-pop py-1 px-10 rounded-lg mt-3 ">Login</button>
+                <p class="text-black  mt-5">Don't have an account? <a href="signup.html" class="text-darkgreen font-pop font-bold  hover:font-bold hover:underline">Sign Up</a></p>
+              </form>
+        </div> 
+    </section>
+</body>
+</html>
