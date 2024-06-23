@@ -47,7 +47,7 @@
     </head>
     <body class="bg-light">
       {% block content %}
-    <h1 class="text-4xl font-bold mb-4 text-darkgreen font-fraun justify-center flex mt-5 ">Our Products</h1>
+    <h1 class="text-4xl font-bold mb-4 text-darkgreen font-fraun justify-center flex mt-1 ">Our Products</h1>
     <button class="bg-darkgreen px-3 py-1 text-light rounded-lg ml-[0.2%] hover:opacity-80 transition-opacity duration-300">Add product</button><br>
     <table class=" border-beige  mx-auto rounded-lg table-auto  w-full mb-4 border-separate border-spacing-0 mt-10">
         <thead class="rounded">
@@ -67,8 +67,8 @@
           <tr>
             <td class="border-b border-lightbeige  py-1 px-4 font-bold items-center">{{ product.id }}</td>
             <td class="border-b border-lightbeige  py-1 px-4  text-darkgreen w-[15%] items-center">{{ product.name }}</td>
-            <td class=" border-b border-lightbeige py-1 px-4 items-center">{{ product.category_name }}</td>
-            <td class="border-b border-lightbeige  py-1 px-4 items-center">{{ product.image }} <img src="" alt="" class="rounded-xl w-[150px] h-[150px] object-cover"></td>
+            <td class=" border-b border-lightbeige py-1 px-4 items-center font-bold font-fraun">{{ product.category_name }}</td>
+            <td class="border-b border-lightbeige  py-1 px-4 items-center">  <img src="{{ url_for('static', filename='products/' + product['image']) }}" alt="Product Image" class="rounded-xl w-[150px] h-[150px] object-cover"></td>
             <td class="border-b border-lightbeige  py-1 px-4 w-[19%] items-center">{{ product.description }}</td>
             <td class=" border-b border-lightbeige py-1 px-4  font-bold items-center">{{ product.price }}$</td>
             <td class=" border-b border-lightbeige  py-1 px-4 items-center" >{{ product.quantity }}</td>

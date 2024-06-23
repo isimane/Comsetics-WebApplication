@@ -9,8 +9,8 @@ app=Flask(__name__)
 
 
 @app.route("/")
+
 def home():
-  def home():
     with sqlite3.connect("db.db") as con:
         con.row_factory = sqlite3.Row
         cur = con.cursor()
@@ -18,7 +18,9 @@ def home():
             SELECT p.*, c.name AS category_name
             FROM products p
             JOIN categories c ON p.category_id = c.id
+            
         """)
+       
         data = cur.fetchall()
         return render_template("productstable.html", products=data)
    
