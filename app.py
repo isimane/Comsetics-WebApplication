@@ -15,10 +15,10 @@ def home():
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute("""
-            SELECT p.*, c.name AS category_name
-            FROM products p
-            JOIN categories c ON p.category_id = c.id
-            
+            SELECT prod.*, categ.name AS category_name
+            FROM products prod
+            JOIN categories categ ON prod.category_id = categ.id
+            ORDER BY RANDOM()
         """)
        
         data = cur.fetchall()
