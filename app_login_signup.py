@@ -26,7 +26,7 @@ def login():
         email = request.form['Email']
         password = request.form['password']
         user = User.query.filter_by(email=email).first()
-        if user and user.password == password:  # Replace this with a hashed password check
+        if user and user.password == password:  
             login_user(user)
             return redirect(url_for('dashboard'))
         else:
