@@ -2,3 +2,4 @@ myProjectFlask
 venv
 env
 myenv
+.venv
