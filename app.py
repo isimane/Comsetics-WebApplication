@@ -23,7 +23,27 @@ def home():
        
         data = cur.fetchall()
         return render_template("productstable.html", products=data)
-   
+    
+
+@app.route("/add_product", methods=["GET", "POST"]) 
+def add_product():
+    if request.method == "POST":
+        id = request.form["id"]
+        name = request.form["name"]
+        description = request.form["description"]
+        price = request.form["price"]
+        image = request.form["image"]
+        quantity = request.form["quantity"]
+        with sqlite3.connect("db.db") as con:
+            cur = con.cursor()
+            cur.execute("INSERT INTO products (name, description, price, image, quantity) VALUES (?, ?, ?, ?, ?)",(name, description, price, image,quantity))
+            con.commit()
+            flash('Product added','success')
+            return redirect(url_for("home"))
+    return render_template("addProduct.html")
+
+
+
 if __name__ == "__main__":
     # db.create_all
     app.run(debug=True)

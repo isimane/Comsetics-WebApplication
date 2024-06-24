@@ -47,8 +47,8 @@
     </head>
     <body class="bg-light">
       {% block content %}
-    <h1 class="text-4xl font-bold mb-4 text-darkgreen font-fraun justify-center flex mt-10 ">Our Products</h1>
-    <button class="bg-darkgreen px-3 py-1 text-light rounded-lg ml-[0.2%] hover:opacity-80 transition-opacity duration-300">Add product</button><br>
+    <h1 class="text-4xl font-bold mb-4 text-darkgreen font-fraun justify-center flex mt-20 ">Product Management Table</h1>
+    <button class="bg-darkgreen px-3 py-1 text-light rounded-lg ml-[0.2%] hover:opacity-80 transition-opacity duration-300 mt-20"><a href="{{ url_for('add_product') }}">+ Add product</a></button><br>
     <table class=" border-beige  mx-auto rounded-lg table-auto  w-full mb-4 border-separate border-spacing-0 mt-2">
         <thead class="rounded">
           <tr class="text-light ">

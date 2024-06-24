@@ -49,7 +49,7 @@
        
         <main class="mb-10">
             <div class="pb-6 mt-10 w-[80%] md:w-[80%] md:mt-0 mx-auto xl:max-w-[1400px] xl:mx-auto">
-                <form action="" class="bg-lightbeige bg-opacity-30 shadow-2xl rounded-[50px] px-12  mt-10 md:w-[60%] mx-auto py-10  xl:max-w-[1400px] xl:mx-auto mb-20">
+                <form action="{{url_for('add_product')}}" method="post" class="bg-lightbeige bg-opacity-30 shadow-2xl rounded-[50px] px-12  mt-10 md:w-[60%] mx-auto py-10  xl:max-w-[1400px] xl:mx-auto mb-20">
                   <label for="ProductName" class="text-darkgreen font-bold ">Product Name </label><br>
                   <input type="text" id="ProductName" placeholder="Enter your product's name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen  placeholder-opacity-65"><br>
                   <label for="ProductImage" class="text-darkgreen font-bold ">Product Image </label><br>
