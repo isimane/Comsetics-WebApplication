@@ -48,11 +48,10 @@
     <body class="bg-light">
       {% block content %}
     <h1 class="text-4xl font-bold mb-4 text-darkgreen font-fraun justify-center flex mt-20 ">Product Management Table</h1>
-    <button class="bg-darkgreen px-3 py-1 text-light rounded-lg ml-[0.2%] hover:opacity-80 transition-opacity duration-300 mt-20"><a href="{{ url_for('add_product') }}">+ Add product</a></button><br>
+    <button class="bg-darkgreen px-3 py-1 text-light rounded-lg ml-[0.2%] hover:opacity-80 transition-opacity duration-300 mt-20"><a href="{{ url_for('add_product') }}"> Add product</a></button><br>
     <table class=" border-beige  mx-auto rounded-lg table-auto  w-full mb-4 border-separate border-spacing-0 mt-2">
         <thead class="rounded">
           <tr class="text-light ">
-            <th class="  py-2 px-2 border-b border-lightbeige bg-beige bg-opacity-65">Id</th>
             <th class="  py-2 px-2 border-b border-lightbeige bg-beige bg-opacity-65">Name</th>
             <th class="  py-2 px-2 border-b border-lightbeige bg-beige bg-opacity-65">Category</th>
             <th class="  py-2 px-2 border-b border-lightbeige bg-beige bg-opacity-65">Image</th>
@@ -65,7 +64,6 @@
         <tbody>
             {% for product in products %}
           <tr>
-            <td class="border-b border-lightbeige  py-1 px-4 font-bold items-center">{{ product.id }}</td>
             <td class="border-b border-lightbeige  py-1 px-4  text-darkgreen w-[15%] items-center">{{ product.name }}</td>
             <td class=" border-b border-lightbeige py-1 px-4 items-center font-bold font-fraun">{{ product.category_name }}</td>
             <td class="border-b border-lightbeige  py-1 px-4 items-center"> <img src="{{ url_for('static', filename='products/' + product['image']) }}" alt="Product Image" class="rounded-xl w-[150px] h-[150px] object-cover"></td>
