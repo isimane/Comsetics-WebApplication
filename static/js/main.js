@@ -1,4 +1,5 @@
 const hamburgerlist = document.getElementById("burgerlist");
+const noAnimationElements = document.querySelectorAll(".noAnimation");
 
 const navbar = document.getElementById("navbar");
 const unshowlist = document.getElementById("unshowlist")
@@ -28,3 +29,21 @@ unshowlist.addEventListener("click",() =>{
         
     }
 })
+
+if (navbar) {
+    navbar.classList.add("animateScroll");
+  }
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("animateScroll");
+      }
+    });
+  });
+  
+  noAnimationElements.forEach((element) => {
+    if (element !== navbar) {
+      observer.observe(element);
+    }
+  });
