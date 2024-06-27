@@ -137,148 +137,37 @@
         <p class="text-center max-w-xl text-dark mt-4 mb-1">Discover our wide range of premium beauty products designed to enhance your natural beauty and elevate your daily routine. From skincare essentials to luxurious fragrances, find everything you need to look and feel your best.</p>
        
         <section class="px-4 md:px-16 py-8 w-fit text-center md:text-left">
-          <h2 class="text-2xl font-fraun font-bold text-beige border-b-2 border-beige ">Our Products:</h2>
+          <h2 class="text-2xl font-fraun font-bold text-beige border-b-2 border-beige ">
+            {% if category %}
+                {{ category }} Products:
+            {% else %}
+                Our Products:
+            {% endif %}
+        </h2>
         </section>
-        <section>
+        <section class="grid grid-cols-3 gap-20 ">
             {% for product in products %}
-            <div class=" w-[90%] mx-auto text-center mt-20 flex flex-col justify-center md:flex-row gap-10">
-                <div class=" shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-0">
-                        <img src="{{ url_for('static', filename='products/' + product['image']) }}" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                        <div class="p-6 bg-light rounded-[40px]">
-                            <h3 class="font-bold text-lg">{{ product.name }}</h3>
-                            <p class="text-darkgreen">{{ product.description }}</p>
-                            <p class="font-bold mt-2">{{ product.price }}$</p>
-                            <button class=" px-4 py-2 mt-4 w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
-                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
-                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                            </svg>
-                            </button>
-                            <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
-                        </div>
-                        {%endfor%}
-                </div>
-                <div class="shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-auto">
-                            <img src="../static/images/cosmeticProductCard2.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
+                <div class="text-center flex flex-col justify-center md:flex-row gap-20 ">
+
+                    <div class=" shadow-2xl rounded-3xl ">
+                            <img src="{{ url_for('static', filename='products/' + product['image']) }}" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
                             <div class="p-6 bg-light rounded-[40px]">
-                            <h3 class="font-bold text-lg">Revitalizing Night Cream</h3>
-                            <p class="text-darkgreen">A hydrating night cream with hyaluronic acid and vitamin E for overnight rejuvenation.</p>
-                            <p class="font-bold mt-2">Price: $45</p>
-                            <button class=" px-4 py-2 mt-4   w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
+                                <h3 class="font-bold text-lg">{{ product.name }}</h3>
+                                <p class="text-darkgreen">{{ product.description }}</p>
+                                <p class="font-bold mt-2">{{ product.price }}$</p>
+                                <button class=" px-4 py-2 mt-4 w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
                                 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
-                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                                </svg>
-                            </button>
-                            <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
-                            </div>
-                </div>
-                <div class="shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-0">
-                    <img src="../static/images/cosmeticProductCard5.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                    <div class="p-6 bg-light rounded-[40px]">
-                        <h3 class="font-bold text-lg">Nourishing Hair Mask</h3>
-                        <p class="text-darkgreen">A conditioning hair mask that repairs and strengthens damaged hair, enriched with argan oil.</p>
-                        <p class="font-bold mt-2">Price: $35</p>
-                        <button class=" px-4 py-2 mt-4   w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
-                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
-                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                            </svg>
-                        </button>
-                        <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300 mb-3"> <a href="shopnow.html"> Shop Now</a></button>
-                    </div>
-                    </div>
-                </div>
-                <div>
-                    <div class=" w-[90%] mx-auto text-center mt-20 flex flex-col justify-center md:flex-row gap-10">
-                        <div class=" shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-0">
-                                <img src="../static/images/cosmeticProductCard.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                                <div class="p-6 bg-light rounded-[40px]">
-                                    <h3 class="font-bold text-lg">Hydra Boost Moisturizer</h3>
-                                    <p class="text-darkgreen">A hydrating moisturizer that nourishes and revitalizes the skin, leaving it soft and supple.</p>
-                                    <p class="font-bold mt-2">Price: $54</p>
-                                    <button class=" px-4 py-2 mt-4 w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
-                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                                    </svg>
-                                    </button>
-                                    <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
-                                </div>
-                        </div>
-                        <div class="shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-auto">
-                                    <img src="../static/images/cosmeticProductCard2.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                                    <div class="p-6 bg-light rounded-[40px]">
-                                    <h3 class="font-bold text-lg">Revitalizing Night Cream</h3>
-                                    <p class="text-darkgreen">A hydrating night cream with hyaluronic acid and vitamin E for overnight rejuvenation.</p>
-                                    <p class="font-bold mt-2">Price: $45</p>
-                                    <button class=" px-4 py-2 mt-4   w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
-                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                                        </svg>
-                                    </button>
-                                    <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
-                                    </div>
-                        </div>
-                        <div class="shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-0">
-                            <img src="../static/images/cosmeticProductCard5.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                            <div class="p-6 bg-light rounded-[40px]">
-                                <h3 class="font-bold text-lg">Nourishing Hair Mask</h3>
-                                <p class="text-darkgreen">A conditioning hair mask that repairs and strengthens damaged hair, enriched with argan oil.</p>
-                                <p class="font-bold mt-2">Price: $35</p>
-                                <button class=" px-4 py-2 mt-4   w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
                                     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                                    </svg>
+                                </svg>
                                 </button>
                                 <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
                             </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class=" w-[90%] mx-auto text-center mt-20 flex flex-col justify-center md:flex-row gap-10">
-                                <div class=" shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-0">
-                                        <img src="../static/images/cosmeticProductCard.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                                        <div class="p-6 bg-light rounded-[40px]">
-                                            <h3 class="font-bold text-lg">Hydra Boost Moisturizer</h3>
-                                            <p class="text-darkgreen">A hydrating moisturizer that nourishes and revitalizes the skin, leaving it soft and supple.</p>
-                                            <p class="font-bold mt-2">Price: $54</p>
-                                            <button class=" px-4 py-2 mt-4 w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
-                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                                            </svg>
-                                            </button>
-                                            <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
-                                        </div>
-                                </div>
-                                <div class="shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-auto">
-                                            <img src="../static/images/cosmeticProductCard2.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                                            <div class="p-6 bg-light rounded-[40px]">
-                                            <h3 class="font-bold text-lg">Revitalizing Night Cream</h3>
-                                            <p class="text-darkgreen">A hydrating night cream with hyaluronic acid and vitamin E for overnight rejuvenation.</p>
-                                            <p class="font-bold mt-2">Price: $45</p>
-                                            <button class=" px-4 py-2 mt-4   w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
-                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                                                </svg>
-                                            </button>
-                                            <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
-                                            </div>
-                                </div>
-                                <div class="shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-0">
-                                    <img src="../static/images/cosmeticProductCard5.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                                    <div class="p-6 bg-light rounded-[40px]">
-                                        <h3 class="font-bold text-lg">Nourishing Hair Mask</h3>
-                                        <p class="text-darkgreen">A conditioning hair mask that repairs and strengthens damaged hair, enriched with argan oil.</p>
-                                        <p class="font-bold mt-2">Price: $35</p>
-                                        <button class=" px-4 py-2 mt-4   w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
-                                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                                            </svg>
-                                        </button>
-                                        <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
-                                    </div>
-                                    </div>
-                                </div>
-                        </div>
+                          
+                    </div>
+                    
                 </div>
-            </section>
+            {%endfor%}
+        </section>
             
     </main>
     <footer class="bg-darkgreen mt-20 md:block pb-3 text-light items-center">
@@ -310,10 +199,6 @@
                       <li class="pt-1">  <a href="shop.html">SHOP</a></li>
                       <li class="pt-1"> <a href="about.html">ABOUT US</a></li>
                       <li class="pt-1"><a href="contactus.html">CONTACT US</a></li>
-                     
-              
-               
-                
                     </ul>
                 </div>
       

@@ -1,18 +1,16 @@
-from flask import Flask, render_template, url_for,request,redirect,url_for,flash,session
+from flask import Flask, render_template, url_for, request, redirect, url_for, flash, session
+from werkzeug.utils import secure_filename
 import os
-# from flask_sqlalchemy import SQLAlchemy'
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, FileField
-from wtforms.validators import DataRequired
+# from flask_wtf import FlaskForm
+# from wtforms import StringField, SubmitField, FileField
+# from wtforms.validators import DataRequired
 import sqlite3
 
+app = Flask(__name__)
+app.secret_key = 'your_secret_key_here' 
+app.config['UPLOAD_DIRECTORY'] = 'media/'
 
-app=Flask(__name__)
-app.config['SECRET_KEY'] = 'secretKey'
-app.config['UPLOAD_FOLDER'] = 'static/products'
-
-
-@app.route("/productTable")
+@app.route("/")
 def home():
     with sqlite3.connect("db.db") as con:
         con.row_factory = sqlite3.Row
@@ -23,57 +21,80 @@ def home():
             JOIN categories categ ON prod.category_id = categ.id
             ORDER BY RANDOM()
         """)
-       
         data = cur.fetchall()
         return render_template("productstable.html", products=data)
-    
 
-
-
-class ProductForm(FlaskForm):
-    name = StringField('Product Name', validators=[DataRequired()])
-    image = FileField('Product Image', validators=[DataRequired()])
-    description = StringField('Product Description', validators=[DataRequired()])
-    price = StringField('Product Price', validators=[DataRequired()])
-    quantity = StringField('Product Quantity', validators=[DataRequired()])
-    
-    submit = SubmitField('Submit')
-    
-@app.route("/add_product", methods=['GET', 'POST'])
+@app.route("/add_product", methods=["GET", "POST"]) 
 def add_product():
-    form = ProductForm()
-    if form.validate_on_submit():
-        name = form.name.data
-        description = form.description.data
-        price = form.price.data
-        quantity = form.quantity.data
-        image = form.image.data
-        
-        # Create a directory to store the uploaded images if it doesn't exist
-        upload_dir = os.path.join(app.root_path, 'static/products')
-        if not os.path.exists(upload_dir):
-            os.makedirs(upload_dir)
-        
-        # Save the uploaded image
-        if image:
-            image_filename = image.filename
-            image_path = os.path.join(upload_dir, image_filename)
-            image.save(image_path)
-        else:
-            image_filename = None
-        
-        with sqlite3.connect("db.db") as con:
+    if request.method == "POST":
+        name = request.form["ProductName"]
+        description = request.form["ProductDescription"]
+        price = request.form["ProductPrice"]
+        quantity = request.form["ProductQuantity"]
+        category_id = request.form["ProductCategory"]
+        image = request.files["ProductImage"]
+    else:
+         with sqlite3.connect("db.db") as con:
             cur = con.cursor()
-            cur.execute("INSERT INTO products(name, image, description, price, quantity) VALUES (?,?,?,?,?)",
-                        (name, image_filename, description, price, quantity))
+            cur.execute("""SELECT categ.*
+               FROM categories categ
+               ORDER BY categ.name""")
+            categories = cur.fetchall()
+            print(categories)
+            return render_template("addProduct.html", categories=categories)
+    if image:
+            image.save(os.path.join(
+                app.config['UPLOAD_DIRECTORY'],
+                secure_filename(image.filename)
+            ))
+        
+    with sqlite3.connect("db.db") as con:
+            cur = con.cursor()
+            cur.execute("SELECT 1 FROM categories WHERE id = ?", (category_id,))
+            if not cur.fetchone():
+                flash('Invalid category ID', 'error')
+                return render_template("addProduct.html")
+        
+    with sqlite3.connect("db.db") as con:
+            cur = con.cursor()
+            cur.execute("INSERT INTO products (name, image, description, price, quantity, category_id) VALUES (?,?,?,?,?,?)", 
+                        (name, image.filename, description, price, quantity, category_id))
             con.commit()
-            flash('Product added successfully', 'success')
-        return redirect(url_for("home"))
-    return render_template("addProduct.html", form=form)
+            flash('Product added', 'success')
+            return redirect(url_for("home"))
+    return render_template("addProduct.html")
+
+
+@app.route("/shop")
+def shop():
+    category = request.args.get("category")
+    with sqlite3.connect("db.db") as con:
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        # cur.execute("""
+        #     SELECT prod.*, categ.name AS category_name
+        #     FROM products prod
+        #     JOIN categories categ ON prod.category_id = categ.id
+        #     ORDER BY RANDOM()
+        # """)
+        sql = """
+            SELECT prod.*, categ.name AS category_name
+            FROM products prod
+            JOIN categories categ ON prod.category_id = categ.id
+        """
+        if category:
+            sql += " WHERE categ.id = " + category
+            
+        sql += " ORDER BY RANDOM()"
+            
+        cur.execute(sql)
+        
+        data = cur.fetchall()
+        if category:
+            # get category name from db using the id
+            category = 'test cat'
+        return render_template("shop.html", products=data, category=category)
+
 
 if __name__ == "__main__":
-    # db.create_all
     app.run(debug=True)
-
-
-
