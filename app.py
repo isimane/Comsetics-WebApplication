@@ -65,37 +65,27 @@ def add_product():
     return render_template("addProduct.html")
 
 
-@app.route("/shop")
-def shop():   
-    category = request.args.get("category")
+@app.route("/<string:id>/edit_product", methods=['GET','POST'])
+def edit_product(id):
     with sqlite3.connect("db.db") as con:
-        con.row_factory = sqlite3.Row
-        cur = con.cursor()
-        sql = """
-            SELECT prod.*, categ.name AS category_name
-            FROM products prod
-            JOIN categories categ ON prod.category_id = categ.id
-        """
-        if category:
-            sql += " WHERE categ.id = ?"
-            
-        sql += " ORDER BY RANDOM()"
-        
-        if category:
-            cur.execute(sql, (int(category),))
-        else:
-            cur.execute(sql)
-            
-        data = cur.fetchall()
-            
-        if category:
-         # get category name from db using the id
-           categoryname = "SELECT name FROM categories WHERE id = ?"
-           cur.execute(categoryname, (int(category),))
-           category_name = cur.fetchone()[0]
-           category = category_name
-
-        return render_template("shop.html", products=data, category=category)
+      cur = con.cursor()
+      cur.execute("SELECT * FROM products WHERE id =?", (id[0]))
+      product=cur.fetchone()
+    if request.method == "POST":
+        name = request.form["ProductName"]
+        description = request.form["ProductDescription"]
+        price = request.form["ProductPrice"]
+        quantity = request.form["ProductQuantity"]
+        category_id = request.form["ProductCategory"]
+        image = request.files["ProductImage"]
+        cur.execute("UPDATE products SET name =?, image=?, description=?, price=?, quantity=?, category_id=? WHERE id=?",
+                        (name, image.filename, description, price, quantity, category_id, id))
+        con.commit()
+        flash('Product updated', 'success')
+        return redirect(url_for("home"))
+    else:
+        categories = cur.execute("SELECT * FROM categories").fetchall()
+        return render_template("editProduct.html", product=product, categories=categories)
     
 if __name__ == "__main__":
     app.run(debug=True)
