@@ -137,7 +137,7 @@
         <p class="text-center max-w-xl text-dark mt-4 mb-1">Discover our wide range of premium beauty products designed to enhance your natural beauty and elevate your daily routine. From skincare essentials to luxurious fragrances, find everything you need to look and feel your best.</p>
        
         <section class="px-4 md:px-16 py-8 w-fit text-center md:text-left">
-          <h2 class="text-2xl font-fraun font-bold text-beige border-b-2 border-beige ">
+          <h2 class="text-4xl my-10 font-fraun font-bold text-beige border-b-2 border-beige ">
             {% if category %}
                 {{ category }} Products:
             {% else %}
@@ -152,8 +152,8 @@
                     <div class=" shadow-2xl rounded-3xl ">
                             <img src="{{ url_for('static', filename='products/' + product['image']) }}" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
                             <div class="p-6 bg-light rounded-[40px]">
-                                <h3 class="font-bold text-lg">{{ product.name }}</h3>
-                                <p class="text-darkgreen">{{ product.description }}</p>
+                                <h3 class="font-bold text-lg pb-3">{{ product.name }}</h3>
+                                <p class="text-darkgreen pb-3">{{ product.description }}</p>
                                 <p class="font-bold mt-2">{{ product.price }}$</p>
                                 <button class=" px-4 py-2 mt-4 w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
                                 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
