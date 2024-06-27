@@ -8,7 +8,7 @@ import sqlite3
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here' 
-app.config['UPLOAD_DIRECTORY'] = 'media/'
+app.config['UPLOAD_DIRECTORY'] = 'static/products/'
 
 @app.route("/")
 def home():
@@ -19,7 +19,7 @@ def home():
             SELECT prod.*, categ.name AS category_name
             FROM products prod
             JOIN categories categ ON prod.category_id = categ.id
-            ORDER BY RANDOM()
+            ORDER BY id DESC
         """)
         data = cur.fetchall()
         return render_template("productstable.html", products=data)
@@ -48,12 +48,12 @@ def add_product():
                 secure_filename(image.filename)
             ))
         
-    with sqlite3.connect("db.db") as con:
-            cur = con.cursor()
-            cur.execute("SELECT 1 FROM categories WHERE id = ?", (category_id,))
-            if not cur.fetchone():
-                flash('Invalid category ID', 'error')
-                return render_template("addProduct.html")
+    # with sqlite3.connect("db.db") as con:
+    #         cur = con.cursor()
+    #         cur.execute("SELECT 1 FROM categories WHERE id =?", (category_id,))
+    #         if not cur.fetchone():
+    #             flash('Invalid category ID', 'error')
+    #             return render_template("addProduct.html")
         
     with sqlite3.connect("db.db") as con:
             cur = con.cursor()
@@ -66,35 +66,36 @@ def add_product():
 
 
 @app.route("/shop")
-def shop():
+def shop():   
     category = request.args.get("category")
     with sqlite3.connect("db.db") as con:
         con.row_factory = sqlite3.Row
         cur = con.cursor()
-        # cur.execute("""
-        #     SELECT prod.*, categ.name AS category_name
-        #     FROM products prod
-        #     JOIN categories categ ON prod.category_id = categ.id
-        #     ORDER BY RANDOM()
-        # """)
         sql = """
             SELECT prod.*, categ.name AS category_name
             FROM products prod
             JOIN categories categ ON prod.category_id = categ.id
         """
         if category:
-            sql += " WHERE categ.id = " + category
+            sql += " WHERE categ.id = ?"
             
         sql += " ORDER BY RANDOM()"
-            
-        cur.execute(sql)
         
-        data = cur.fetchall()
         if category:
-            # get category name from db using the id
-            category = 'test cat'
+            cur.execute(sql, (int(category),))
+        else:
+            cur.execute(sql)
+            
+        data = cur.fetchall()
+            
+        if category:
+         # get category name from db using the id
+           categoryname = "SELECT name FROM categories WHERE id = ?"
+           cur.execute(categoryname, (int(category),))
+           category_name = cur.fetchone()[0]
+           category = category_name
+
         return render_template("shop.html", products=data, category=category)
-
-
+    
 if __name__ == "__main__":
     app.run(debug=True)
