@@ -9,6 +9,10 @@ db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(150))
@@ -46,15 +50,10 @@ def signup():
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user)
-            return redirect(url_for('index'))
+            return redirect(url_for('login'))
         else:
             flash('Email address already exists', 'danger')
     return render_template('signup.html')
-
-@app.route('/dashboard')
-@login_required
-def dashboard():
-    return f'Hello, {current_user.firstname}! Welcome to your dashboard.'
 
 @app.route('/logout')
 @login_required
