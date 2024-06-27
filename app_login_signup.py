@@ -28,7 +28,7 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user and user.password == password:  
             login_user(user)
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('index'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login.html')
@@ -46,7 +46,7 @@ def signup():
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user)
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('index'))
         else:
             flash('Email address already exists', 'danger')
     return render_template('signup.html')
