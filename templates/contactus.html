@@ -43,10 +43,18 @@
             .dropdown:hover .dropdown-menu {
                 display: block;
             }
+            .animateScroll {
+        animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+        }
         </style>
     </head>
     <body class="bg-light">
-        <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
+        <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px] noAnimation">
             <img src="../static/images/NUovalogo2.png" alt="" class="w-[79px] h-[30px]"> 
             <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
                 <a href="index.html" class="p-8  hover:text-darkgreen">HOME</a>
@@ -93,7 +101,7 @@
             </button>
         </header>
         <!-- this navbar is for samll screens -->
-        <nav class="flex flex-col" id="navbar">
+        <nav class="flex flex-col noAnimation" id="navbar">
             <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
                 <a href="index.html" class="text-light p-3">HOME</a>
                 <div class="dropdown">
@@ -127,7 +135,7 @@
             </div>
         </nav>
       <main class=" xl:max-w-[1400px] xl:mx-auto">
-        <section class=" flex  flex-col md:flex-row items-center xl:max-w-[1400px] xl:mx-auto md:mt-20 mt-10">
+        <section class=" flex  flex-col md:flex-row items-center xl:max-w-[1400px] xl:mx-auto md:mt-20 mt-10 noAnimation">
           <div class="text-center  mx-auto md:text-left md:w-[60%] ">
             <div class=" md:ml-[10%] w-[90%] mx-auto">
               <h1 class=" text-darkgreen font-fraun font-bold text-4xl md:text-4xl  sm:text-center mt-20 md:text-left">Contact Us</h1>
@@ -139,7 +147,7 @@
             </div>
           </div>
           
-          <div class="pb-6 w-[90%] mt-10 md:w-[40%] md:mt-0 ">
+          <div class="pb-6 w-[90%] mt-10 md:w-[40%] md:mt-0 noAnimation">
             <form action="" class="bg-[#D2C5AA] bg-opacity-10  mx-auto rounded-3xl p-7 md:w-[80%]">
               <label for="FirstName" class="text-darkgreen font-bold mb-2">First Name </label><br>
               <input type="text" id="FirstName" class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4"><br>
@@ -153,9 +161,9 @@
             </form>
           </div>
         </section>
-        <p class="text-beige  font-fraun font-bold text-xl md:text-xl text-center mt-3 md:text-left w-[90%] mx-auto mt-20" >Thank you for reaching out to Nuova. We look forward to assisting you!</p>
+        <p class="text-beige  font-fraun font-bold text-xl md:text-xl text-center mt-3 md:text-left w-[90%] mx-auto mt-20 noAnimation" >Thank you for reaching out to Nuova. We look forward to assisting you!</p>
       </main>
-      <footer class="bg-darkgreen mt-20 md:block pb-3 text-light items-center">
+      <footer class="bg-darkgreen mt-20 md:block pb-3 text-light items-center noAnimation">
         <section class="w-[90%] mx-auto xl:max-w-[1400px] xl:mx-auto">
           <section class=" flex flex-col justify-center items-center md:flex md:flex-row  md:justify-between mx-auto ">
             <div class=" items-center flex flex-col justify-center md:text-start md:items-start md:justify-between md:w-[40%] pt-10">
