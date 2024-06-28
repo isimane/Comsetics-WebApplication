@@ -102,5 +102,38 @@ def delete_product(id):
       cur.execute("DELETE FROM products WHERE id =?", (id,))
       con.commit()
       return redirect(url_for("home"))
+  
+@app.route("/shop")
+def shop():   
+    category = request.args.get("category")
+    with sqlite3.connect("db.db") as con:
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        sql = """
+            SELECT prod.*, categ.name AS category_name
+            FROM products prod
+            JOIN categories categ ON prod.category_id = categ.id
+        """
+        if category:
+            sql += " WHERE categ.id = ?"
+            
+        sql += " ORDER BY RANDOM()"
+        
+        if category:
+            cur.execute(sql, (int(category),))
+        else:
+            cur.execute(sql)
+            
+        data = cur.fetchall()
+            
+        if category:
+         # get category name from db using the id
+           categoryname = "SELECT name FROM categories WHERE id = ?"
+           cur.execute(categoryname, (int(category),))
+           category_name = cur.fetchone()[0]
+           category = category_name
+
+        return render_template("shop.html", products=data, category=category)
+    
 if __name__ == "__main__":
     app.run(debug=True)

@@ -132,17 +132,17 @@
                     <label for="ProductName" class="text-darkgreen font-bold " >Product Name </label><br>
                     <input type="text" id="ProductName" name="ProductName"  value="{{ product[2] }}" required placeholder="Change your product's name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen  placeholder-opacity-65"><br>
                     <label for="ProductImage" class="text-darkgreen font-bold ">Product Image </label><br>
-                    <img src="{{ url_for('static', filename='products/' + product[1]) }}" alt="Current image" class=" w-[150px] h-[150px] object-cover mb-4 rounded-lg">
+                    <img src="{{ url_for('static', filename='media/' + product[1]) }}" alt="Current image" class=" w-[150px] h-[150px] object-cover mb-4 rounded-lg">
                     <input type="file" id="ProductImage" name="ProductImage"   value="{{ product[1] }}" placeholder="choose your product's image" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen pl file-opacity-25 file:border-0 file:bg-beige file:rounded-lg  file:shadow-xl  file:text-[14px]  file:text-light file:cursor-pointer file:hover:opacity-80 file:transition-opacity file:duration-300 "><br>
                     <label for="ProductDescription" class="text-darkgreen font-bold ">Product
                       Description </label><br>
-                    <input type="text" id="ProductDescription" name="ProductDescription"  value="{{ product[6]}} " required placeholder="Change your product's description" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
+                    <textarea id="ProductDescription" name="ProductDescription" required placeholder="Change your product's description" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65">{{ product[6]}}</textarea><br>
                     <label for="ProductPrice" class="text-darkgreen font-bold ">Product
                       Price </label><br>
-                    <input type="text" id="ProductPrice" name="ProductPrice"  value="{{ product[4] }}" required placeholder="Change your product price" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
+                    <input type="number" id="ProductPrice" name="ProductPrice"  value="{{ product[4] }}" required placeholder="Change your product price" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
                     <label for="ProductQuantity" class="text-darkgreen font-bold ">Product
                       Quantity </label><br>
-                    <input type="text" id="ProductQuantity" name="ProductQuantity"  value="{{ product[5] }}" required placeholder="Change your product's quantity" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
+                    <input type="number" id="ProductQuantity" name="ProductQuantity"  value="{{ product[5] }}" required placeholder="Change your product's quantity" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
                     <label for="ProductCategory" class="text-darkgreen font-bold ">Product
                       Category </label><br>
                       <select name="ProductCategory" id="ProductCategory" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65">

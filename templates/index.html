@@ -54,6 +54,7 @@
     </style>
 </head>
 <body class="bg-light ">
+    {% block content %}
     <header class="w-[90%] mx-auto flex noAnimation items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
         <img src="../static/images/NUovalogo2.png" alt="" class="w-[79px] h-[30px]"> 
         <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
@@ -61,10 +62,10 @@
             <div class="dropdown p-8">
                 <a href="shop.html" class="hover:text-darkgreen ">SHOP</a>
                 <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
-                    <a href="category1.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
-                    <a href="category2.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
-                    <a href="category3.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
-                    <a href="category4.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
+                    <a href="{{ url_for('shop', category=1, **request.args) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
+                    <a href="{{ url_for('shop', category=2, **request.args) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
+                    <a href="{{ url_for('shop', category=3, **request.args) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
+                    <a href="{{ url_for('shop', category=4, **request.args) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
                 </div>
             </div>
             <a href="about.html" class="p-8 hover:text-darkgreen">ABOUT US</a>
@@ -378,6 +379,7 @@
 
       </footer>
 
-<script src="../static/js/main.js"></script>
+    <script src="../static/js/main.js"></script>
+    {% endblock %}
 </body>
 </html>
