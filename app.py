@@ -8,7 +8,7 @@ import sqlite3
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here' 
-app.config['UPLOAD_DIRECTORY'] = 'static/products/'
+app.config['UPLOAD_DIRECTORY'] = 'static/media/'
 
 @app.route("/")
 def home():
@@ -33,8 +33,22 @@ def add_product():
         quantity = request.form["ProductQuantity"]
         category_id = request.form["ProductCategory"]
         image = request.files["ProductImage"]
+        if image:
+                image.save(os.path.join(
+                    app.config['UPLOAD_DIRECTORY'],
+                    secure_filename(image.filename)
+                ))
+            
+        with sqlite3.connect("db.db") as con:
+                cur = con.cursor()
+                cur.execute("INSERT INTO products (name, image, description, price, quantity, category_id) VALUES (?,?,?,?,?,?)", 
+                            (name, image.filename, description, price, quantity, category_id))
+                con.commit()
+                flash('Your product was added succesfully', 'success')
+                
+        return redirect(url_for("home"))
     else:
-         with sqlite3.connect("db.db") as con:
+        with sqlite3.connect("db.db") as con:
             cur = con.cursor()
             cur.execute("""SELECT categ.*
                FROM categories categ
@@ -42,36 +56,16 @@ def add_product():
             categories = cur.fetchall()
             print(categories)
             return render_template("addProduct.html", categories=categories)
-    if image:
-            image.save(os.path.join(
-                app.config['UPLOAD_DIRECTORY'],
-                secure_filename(image.filename)
-            ))
-        
-    # with sqlite3.connect("db.db") as con:
-    #         cur = con.cursor()
-    #         cur.execute("SELECT 1 FROM categories WHERE id =?", (category_id,))
-    #         if not cur.fetchone():
-    #             flash('Invalid category ID', 'error')
-    #             return render_template("addProduct.html")
-        
-    with sqlite3.connect("db.db") as con:
-            cur = con.cursor()
-            cur.execute("INSERT INTO products (name, image, description, price, quantity, category_id) VALUES (?,?,?,?,?,?)", 
-                        (name, image.filename, description, price, quantity, category_id))
-            con.commit()
-            flash('Product added', 'success')
-            return redirect(url_for("home"))
-    return render_template("addProduct.html")
 
 
-@app.route("/edit_product/<int:id>", methods=['GET','POST'],endpoint='edit_product')
+@app.route("/edit_product/<int:id>", methods=['GET','POST'], endpoint='edit_product')
 def edit_product(id):
     product_id = int(id)
     with sqlite3.connect("db.db") as con:
       cur = con.cursor()
       cur.execute("SELECT * FROM products WHERE id =?", (id,))
       product=cur.fetchone()
+    
     if request.method == "POST":
         name = request.form["ProductName"]
         description = request.form["ProductDescription"]
@@ -87,11 +81,13 @@ def edit_product(id):
             image_filename = image.filename
         else :
             image_filename = product[1]
+            
+        image = image.filename if image else product[1]
         cur.execute("UPDATE products SET name =?, image=?, description=?, price=?, quantity=?, category_id=? WHERE id=?",
-                        (name, image.filename, description, price, quantity, category_id, id))
-                        #  (name, image.filename if image else product[1], description, price, quantity, category_id, id))
+                        # (name, image.filename, description, price, quantity, category_id, id))
+                         (name, image, description, price, quantity, category_id, id))
         con.commit()
-        flash('Product updated', 'success')
+        flash('Your product was edited succesfully', 'success')
         return redirect(url_for("home"))
     else:
             categories = cur.execute("SELECT * FROM categories").fetchall()
