@@ -130,7 +130,7 @@ def shop():
          # get category name from db using the id
            categoryname = "SELECT name FROM categories WHERE id = ?"
            cur.execute(categoryname, (int(category),))
-           category_name = cur.fetchone()[0]
+           category_name = cur.fetchone()[0     ]
            category = category_name
 
         return render_template("shop.html", products=data, category=category)

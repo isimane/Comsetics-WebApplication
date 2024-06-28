@@ -150,7 +150,7 @@
                 <div class="text-center flex flex-col justify-center md:flex-row gap-20 ">
 
                     <div class=" shadow-2xl rounded-3xl ">
-                            <img src="{{ url_for('static', filename='products/' + product['image']) }}" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
+                            <img src="{{ url_for('static', filename='media/' + product['image']) }}" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
                             <div class="p-6 bg-light rounded-[40px]">
                                 <h3 class="font-bold text-lg pb-3">{{ product.name }}</h3>
                                 <p class="text-darkgreen pb-3">{{ product.description }}</p>
