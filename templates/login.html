@@ -43,6 +43,17 @@
           </style>
     </head>
 <body class=>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li class="{{ message[1] }}">{{ message[0] }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
     <section class="md:hidden outline-none bg-light bg-cover bg-no-repeat bg-center bg-bottom pt-10 pb-10" style="background-image: url(../static/images/mask.jpg); ">
         <p class="text-3xl font-fraun text-light font-bold w-[70%] mx-auto text-center">Welcome Back To NUOVA!</p>
         <div  class=" mt-5 mx-auto shadow-2xl p-20">
@@ -52,7 +63,7 @@
                 <label for="password" class="font-bold mb-2">Your Password</label><br>
                 <input type="password" id="password" name="password" placeholder="Enter Your Password" class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen" required><br>
                 <button type="submit" class="bg-darkgreen text-light font-pop py-1 px-10 rounded-lg mt-3">Login</button>
-                <p class="text-black mt-5">Don't have an account? <a href="signup.html" class="text-darkgreen font-pop font-bold hover:font-bold hover:underline">Sign Up</a></p>
+                <p class="text-black mt-5">Don't have an account? <a href="{{ url_for('signup') }}" class="text-darkgreen font-pop font-bold hover:font-bold hover:underline">Sign Up</a></p>
             </form>
         </div>
     </section>

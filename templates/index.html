@@ -49,9 +49,9 @@
     <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
         <img src="../static/images/NUovalogo2.png" alt="" class="w-[79px] h-[30px]"> 
         <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
-            <a href="index.html" class="p-8 font-bold text-darkgreen ">HOME</a>
+            <a href="{{ url_for('index') }}" class="p-8 font-bold text-darkgreen ">HOME</a>
             <div class="dropdown p-8">
-                <a href="shop.html" class="hover:text-darkgreen ">SHOP</a>
+                <a href="{{ url_for('shop') }}" class="hover:text-darkgreen ">SHOP</a>
                 <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
                     <a href="category1.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
                     <a href="category2.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
@@ -59,8 +59,8 @@
                     <a href="category4.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
                 </div>
             </div>
-            <a href="about.html" class="p-8 hover:text-darkgreen">ABOUT US</a>
-            <a href="contactus.html" class="hover:text-darkgreen">CONTACT US</a>
+            <a href="{{ url_for('about') }}" class="p-8 hover:text-darkgreen">ABOUT US</a>
+            <a href="{{ url_for('contactus') }}" class="hover:text-darkgreen">CONTACT US</a>
         </nav>
         <div class="flex hidden md:flex items-center gap-4">
             <button class="hover:text-darkgreen"> 
@@ -69,14 +69,14 @@
                 </svg>
             </button>
             <button>
-                <a href="login" class="hover:text-darkgreen">
+                <a href="{{ url_for('login') }}" class="hover:text-darkgreen">
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                         <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
                     </svg>
                 </a>
             </button>
             <button>
-                <a href="cart.html" class="hover:text-darkgreen">
+                <a href="{{ url_for('cart') }}" class="hover:text-darkgreen">
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                     </svg>
@@ -94,9 +94,9 @@
     </header>
     <nav class="flex flex-col" id="navbar">
         <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
-            <a href="index.html" class="text-light p-3">HOME</a>
+            <a href="{{ url_for('index') }}" class="text-light p-3">HOME</a>
             <div class="dropdown">
-                <a href="shop.html" class="font-bold text-light p-8">SHOP</a>
+                <a href="{{ url_for('shop') }}" class="font-bold text-light p-8">SHOP</a>
                 <div class="absolute hidden dropdown-menu bg-light text-beige shadow-md mt-1 rounded-md">
                     <a href="category1.html" class="block px-4 py-2 hover:bg-lightbeige">Makeup</a>
                     <a href="category2.html" class="block px-4 py-2 hover:bg-lightbeige">Skincare</a>
@@ -104,8 +104,8 @@
                     <a href="category4.html" class="block px-4 py-2 hover:bg-lightbeige">Men's grooming</a>
                 </div>
             </div>
-            <a href="about.html" class="p-3 text-light font-bold">ABOUT US</a>
-            <a href="contactus.html" class="text-light pb-3">CONTACT US</a>
+            <a href="{{ url_for('about') }}" class="p-3 text-light font-bold">ABOUT US</a>
+            <a href="{{ url_for('contactus') }}" class="text-light pb-3">CONTACT US</a>
             <div class="flex block md:hidden items-center gap-4 mt-3">
                 <button>
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-search cursor-pointer hover:bg-opacity-30 dark:text-light" viewBox="0 0 16 16">
@@ -135,7 +135,7 @@
                 </h1>
                 <p class="md:w-[80%] pb-6 md:pb-4">Discover <span class="font-bold">NUOVA</span>, where beauty innovation meets luxury.
                     Our eco-friendly, high-quality cosmetics enhance your natural glow. Explore our range and experience the future of beauty today.</p>
-                <a href="about.html"><button class="bg-darkgreen text-light rounded-lg py-2 px-4 mt-4 font-bold  hover:opacity-80 transition-opacity duration-300">
+                <a href="{{ url_for('about') }}"><button class="bg-darkgreen text-light rounded-lg py-2 px-4 mt-4 font-bold  hover:opacity-80 transition-opacity duration-300">
                     Learn more about us
                 </button></a>
             </div>
@@ -219,7 +219,7 @@
                   </h2>
                   <p class="md:w-[80%] text-light pb-6 md:pb-4">Discover <span class="font-bold">NUOVA</span> Revitalizing Handwash for clean, nourished hands. Its unique formula deeply cleanses while hydrating, leaving hands refreshed and smooth. Suitable for all skin types with a delightful fragrance.</p>
                   <button class="bg-light text-darkgreen rounded-lg py-2 px-4 mt-4 font-bold hover:opacity-80 transition-opacity duration-300 ">
-                     <a href="shopnow.html"> Shop Now</a>
+                     <a href="{{ url_for('shopnow') }}"> Shop Now</a>
                   </button>
               </div>
               <div class="my-9 md:justify-end md:w-[70%] hidden md:block ">
@@ -312,7 +312,7 @@
             </div>
             </div>
             <div class="ml-[5%] mt-20">
-              <a href="shop.html" class="text-black mt-6 border-b-2 border-beige hover:font-bold  transition duration-300  font-bold">Click for more Products <span class="font-bold text-beige">></span></a>
+              <a href="{{ url_for('shop') }}" class="text-black mt-6 border-b-2 border-beige hover:font-bold  transition duration-300  font-bold">Click for more Products <span class="font-bold text-beige">></span></a>
             </div>
       </section>
       
@@ -342,10 +342,10 @@
                 <div class=" md:flex md:gap-4  items-center text-center flex flex-col md:flex-row mt-10 md:mt-0  md:text-start">
                     <ul class="pb-2 ">
                       <li class="text-[24px] font-bold border-b-2 border-beige">Explore</li>
-                      <li class=" pt-3"> <a href="index.html">HOME</a></li>
-                      <li class="pt-1">  <a href="shop.html">SHOP</a></li>
-                      <li class="pt-1"> <a href="about.html">ABOUT US</a></li>
-                      <li class="pt-1"><a href="contactus.html">CONTACT US</a></li>
+                      <li class=" pt-3"> <a href="{{ url_for('index') }}">HOME</a></li>
+                      <li class="pt-1">  <a href="{{ url_for('shop') }}">SHOP</a></li>
+                      <li class="pt-1"> <a href="{{ url_for('about') }}">ABOUT US</a></li>
+                      <li class="pt-1"><a href="{{ url_for('contactus') }}">CONTACT US</a></li>
                     
               
               

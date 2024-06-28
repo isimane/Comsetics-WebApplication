@@ -43,6 +43,17 @@
           </style>
     </head>
 <body>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li class="{{ message[1] }}">{{ message[0] }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
     <section class=" outline-none bg-light bg-cover bg-no-repeat bg-center bg-bottom pt-10 pb-20" style="background-image: url(../static/images/mask.jpg); ">
         <p class="text-3xl font-fraun text-light font-bold w-[70%] mx-auto text-center md:text-5xl md:w-[30%] md:leading-[90px]">Welcome To NUOVA!</p>
         <div  class=" mt-10 mx-auto shadow-2xl">

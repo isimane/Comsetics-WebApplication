@@ -50,6 +50,7 @@ def signup():
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user)
+            flash('Account created successfully! Please log in.', 'success')
             return redirect(url_for('login'))
         else:
             flash('Email address already exists', 'danger')
