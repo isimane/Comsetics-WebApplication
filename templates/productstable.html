@@ -94,14 +94,14 @@
         </thead>
         <tbody>
             {% for product in products %}
-          <tr>
-            <td class="border-b border-lightbeige  py-1 px-4  text-darkgreen w-[15%] items-center">{{ product.name }}</td>
-            <td class=" border-b border-lightbeige py-1 px-4 items-center font-bold font-fraun">{{ product.category_name }}</td>
+          <tr class="hover:bg-lightbeige hover:bg-opacity-25">
             <td class="border-b border-lightbeige  py-1 px-4 items-center"> <img src="{{ url_for('static', filename='media/' + product['image']) }}" alt="Product Image" class="rounded-xl w-[150px] h-[150px] object-cover"></td>
-            <td class="border-b border-lightbeige  py-1 px-4 w-[19%] items-center">{{ product.description }}</td>
-            <td class=" border-b border-lightbeige py-1 px-4  font-bold items-center">{{ product.price }}$</td>
-            <td class=" border-b border-lightbeige  py-1 px-4 items-center" >{{ product.quantity }}</td>
-            <td class="border-b  border-lightbeige  py-1 px-4 items-center"> 
+            <td class="border-b border-lightbeige  py-1 px-4  text-darkgreen w-[15%] items-center text-center">{{ product.name }}</td>
+            <td class=" border-b border-lightbeige  py-1 px-4 items-center font-bold font-fraun">{{ product.category_name }}</td>
+            <td class="border-b border-lightbeige  py-1 px-4 w-[19%] items-center text-center">{{ product.description }}</td>
+            <td class=" border-b border-lightbeige py-1 px-4  font-bold items-center text-center">{{ product.price }}$</td>
+            <td class=" border-b border-lightbeige  py-1 px-4 items-center text-center" >{{ product.quantity }}</td>
+            <td class="border-b  border-lightbeige  py-1 px-4 items-center "> 
                 <a href="{{url_for('delete_product', id=product.id)}}"><button class="bg-beige px-2 py-1 rounded-lg text-light shadow hover:opacity-80 transition-opacity duration-300">Delete</button></a>
                 <a href="{{ url_for('edit_product', id=product.id) }}"><button class="bg-darkgreen px-2 py-1 rounded-lg text-light shadow hover:opacity-80 transition-opacity duration-300" >Edit</button></a>
             </td>

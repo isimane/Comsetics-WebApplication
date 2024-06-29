@@ -22,6 +22,20 @@ def home():
             ORDER BY id DESC
         """)
         data = cur.fetchall()
+        return render_template("index.html", products=data)
+
+@app.route("/product_table")
+def productTable():
+    with sqlite3.connect("db.db") as con:
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("""
+            SELECT prod.*, categ.name AS category_name
+            FROM products prod
+            JOIN categories categ ON prod.category_id = categ.id
+            ORDER BY id DESC
+        """)
+        data = cur.fetchall()
         return render_template("productstable.html", products=data)
 
 @app.route("/add_product", methods=["GET", "POST"]) 
@@ -46,7 +60,7 @@ def add_product():
                 con.commit()
                 flash('Your product was added succesfully', 'success')
                 
-        return redirect(url_for("home"))
+        return redirect(url_for("productTable"))
     else:
         with sqlite3.connect("db.db") as con:
             cur = con.cursor()
@@ -88,7 +102,7 @@ def edit_product(id):
                          (name, image, description, price, quantity, category_id, id))
         con.commit()
         flash('Your product was edited succesfully', 'success')
-        return redirect(url_for("home"))
+        return redirect(url_for("productTable"))
     else:
             categories = cur.execute("SELECT * FROM categories").fetchall()
             return render_template("editProduct.html",product_id = product_id, product=product, categories=categories)
@@ -101,7 +115,7 @@ def delete_product(id):
       cur = con.cursor()
       cur.execute("DELETE FROM products WHERE id =?", (id,))
       con.commit()
-      return redirect(url_for("home"))
+      return redirect(url_for("productTable"))
   
 @app.route("/shop")
 def shop():   
