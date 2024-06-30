@@ -237,7 +237,7 @@
         </div>
       </section>
       <section class="xl:w-[1400px] xl:mx-auto">  
-        <section class="grid grid-cols-3 gap-20 w-[90%] mx-auto">
+        <section class="grid md:grid-cols-3 gap-20 md:w-[90%] w-[80%] mx-auto">
             {% for product in threeprod[:3] %}
             <div class="text-center flex flex-col justify-center md:flex-row gap-20 ">
 
@@ -259,11 +259,11 @@
             </div>
             {%endfor%}
         </section>
-        <section class="grid grid-cols-3 w-[90%] ml-[25%] justify-center gap-20 mx-auto mt-20">
+        <section class="flex flex-col   md:flex-row md:w-[90%]  justify-center gap-20 mx-auto mt-20">
             {% for product in twoprod %}
-            <div class="text-center flex flex-col justify-center md:flex-row">
+            <div class="text-center ">
 
-                <div class=" shadow-2xl rounded-3xl  w-[350px] mx-auto">
+                <div class=" shadow-2xl rounded-3xl w-[80%] mx-auto md:w-[330px] mx-auto">
                         <img src="{{ url_for('static', filename='media/' + product['image']) }}" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
                         <div class="p-6 bg-light rounded-[40px] ">
                             <h3 class="font-bold text-lg pb-3">{{ product['name'] }}</h3>
@@ -284,7 +284,7 @@
         
 
             <div class="ml-[5%] mt-20">
-              <a href="shop.html" class="text-black mt-6 border-b-2 border-beige hover:font-bold  transition duration-300  font-bold">Click for more Products <span class="font-bold text-beige">></span></a>
+              <a href="{{url_for('shop')}}" class="text-black mt-6 border-b-2 border-beige hover:font-bold  transition duration-300  font-bold">Click for more Products <span class="font-bold text-beige">></span></a>
             </div>
       </section>
       
