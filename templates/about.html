@@ -49,14 +49,14 @@
     <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
         <img src="../static/images/NUovalogo2.png" alt="" class="w-[79px] h-[30px]"> 
         <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
-            <a href="index.html" class="p-8  hover:text-darkgreen">HOME</a>
+            <a href="{{url_for('home')}}" class="p-8  hover:text-darkgreen">HOME</a>
             <div class="dropdown p-8">
-                <a href="shop.html" class=" hover:text-darkgreen">SHOP</a>
+                <a href="{{url_for('shop')}}" class=" hover:text-darkgreen">SHOP</a>
                 <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
-                    <a href="category1.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
-                    <a href="category2.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
-                    <a href="category3.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
-                    <a href="category4.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
+                    <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
+                    <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
+                    <a href="{{ url_for('shop', **dict(request.args, category=4)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
+                    <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
                 </div>
             </div>
             <a href="about.html" class="p-8 font-bold text-darkgreen">ABOUT US</a>
@@ -91,14 +91,14 @@
     <!-- this navbar is for samll screens -->
     <nav class="flex flex-col" id="navbar">
         <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
-            <a href="index.html" class="text-light p-3">HOME</a>
+            <a href="{{url_for('home')}}" class="text-light p-3">HOME</a>
             <div class="dropdown">
-                <a href="shop.html" class="font-bold text-light p-8">SHOP</a>
-                <div class="absolute hidden dropdown-menu bg-light text-beige shadow-md mt-1 rounded-md">
-                    <a href="category1.html" class="block px-4 py-2 hover:bg-lightbeige">Makeup</a>
-                    <a href="category2.html" class="block px-4 py-2 hover:bg-lightbeige">Skincare</a>
-                    <a href="category3.html" class="block px-4 py-2 hover:bg-lightbeige">Fragrance</a>
-                    <a href="category4.html" class="block px-4 py-2 hover:bg-lightbeige">Men's grooming</a>
+                <a href="{{url_for('shop')}}" class="font-bold text-light p-8">SHOP</a>
+                <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
+                    <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
+                    <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
+                    <a href="{{ url_for('shop', **dict(request.args, category=4)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
+                    <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
                 </div>
             </div>
             <a href="about.html" class="p-3 text-light font-bold">ABOUT US</a>
@@ -193,10 +193,10 @@
                   <div class=" md:flex md:gap-4  items-center text-center flex flex-col md:flex-row mt-10 md:mt-0  md:text-start">
                       <ul class="pb-2 ">
                         <li class="text-[24px] font-bold border-b-2 border-beige">Explore</li>
-                        <li class=" pt-3"> <a href="index.html">HOME</a></li>
-                        <li class="pt-1">  <a href="">SHOP</a></li>
-                        <li class="pt-1"> <a href="about.html">ABOUT US</a></li>
-                        <li class="pt-1"><a href="contactus.html">CONTACT US</a></li>
+                      <li class=" pt-3"> <a href="{{url_for('home')}}">HOME</a></li>
+                      <li class="pt-1">  <a href="{{url_for('shop')}}">SHOP</a></li>
+                      <li class="pt-1"> <a href="about.html">ABOUT US</a></li>
+                      <li class="pt-1"><a href="contactus.html">CONTACT US</a></li>i>
                       </ul>
                   </div>
         

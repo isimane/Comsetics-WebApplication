@@ -9,6 +9,7 @@ import sqlite3
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here' 
 app.config['UPLOAD_DIRECTORY'] = 'static/media/'
+# app.register_blueprint(shop_blueprint, url_prefix="")
 
 @app.route("/")
 def home():
@@ -122,9 +123,9 @@ def delete_product(id):
       con.commit()
       return redirect(url_for("productTable"))
   
+
 @app.route("/shop")
-def shop(): 
-    print(shop)  
+def shop():   
     category = request.args.get("category")
     with sqlite3.connect("db.db") as con:
         con.row_factory = sqlite3.Row
@@ -165,6 +166,5 @@ def product(id):
         product = cur.fetchone()
         return render_template("product.html", product=product)
     
-
 if __name__ == "__main__":
     app.run(debug=True)
