@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key_here' 
 app.config['UPLOAD_DIRECTORY'] = 'static/media/'
 
-@app.route("/home")
+@app.route("/")
 def home():
     with sqlite3.connect("db.db") as con:
         con.row_factory = sqlite3.Row
