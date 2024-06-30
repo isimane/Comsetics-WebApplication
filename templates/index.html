@@ -58,25 +58,21 @@
     <header class="w-[90%] mx-auto flex noAnimation items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
         <img src="../static/images/NUovalogo2.png" alt="" class="w-[79px] h-[30px]"> 
         <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
-            <a href="index.html" class="p-8 font-bold text-darkgreen ">HOME</a>
+            <a href="{{ url_for('home') }}" class="p-8 font-bold text-darkgreen ">HOME</a>
             <div class="dropdown p-8">
-                <a href="shop.html" class="hover:text-darkgreen ">SHOP</a>
+                <a href="{{ url_for('shop') }}"  class="hover:text-darkgreen p-8">SHOP</a>
                 <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
                     <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
                     <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
-                    <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
                     <a href="{{ url_for('shop', **dict(request.args, category=4)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
+                    <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
                 </div>
             </div>
             <a href="about.html" class="p-8 hover:text-darkgreen">ABOUT US</a>
             <a href="contactus.html" class="hover:text-darkgreen">CONTACT US</a>
         </nav>
         <div class="flex hidden md:flex items-center gap-4">
-            <button class="hover:text-darkgreen"> 
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-search cursor-pointer hover:bg-opacity-30" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                </svg>
-            </button>
+            
             <button>
                 <a href="login.html" class="hover:text-darkgreen">
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
@@ -103,24 +99,20 @@
     </header>
     <nav class="flex flex-col noAnimation" id="navbar">
         <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
-            <a href="index.html" class="text-light p-3">HOME</a>
+            <a href="{{ url_for('home') }}" class="text-light p-3">HOME</a>
             <div class="dropdown">
-                <a href="shop.html" class="font-bold text-light p-8">SHOP</a>
+                <a href="{{ url_for('shop') }}"  class="font-bold text-light p-8">SHOP</a>
                 <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
                     <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
                     <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
-                    <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
-                    <a href="{{ url_for('shop', **dict(request.args, category=4)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
+                    <a href=" {{ url_for('shop', **dict(request.args, category=4)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
+                    <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
                 </div>
             </div>
             <a href="about.html" class="p-3 text-light font-bold">ABOUT US</a>
             <a href="contactus.html" class="text-light pb-3">CONTACT US</a>
             <div class="flex block md:hidden items-center gap-4 mt-3">
-                <button>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-search cursor-pointer hover:bg-opacity-30 dark:text-light" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                    </svg>
-                </button>
+                
                 <button>
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person dark:text-light" viewBox="0 0 16 16">
                         <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
@@ -162,52 +154,52 @@
           <div class="flex flex-col md:flex-row gap-8  w-[75%] mx-auto">
                           <div class="block md:hidden">
                                 <div class="flex gap-8 w-full justify-center">
-                                      <button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
+                                      <a href="{{ url_for('shop', **dict(request.args, category=1)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
                                           <img src="{{ url_for('static', filename='images/makeupcategory 3.png') }}"  alt="Makeup" class="w-full object-cover ">
                                           <span class="pt-3 text-[18px] text-beige font-bold md:text-[20px]">Makeup</span>
-                                      </button>
+                                      </button></a>
                                       <!-- hadi m3awda juj mrat hit mabghatch t9ad :) -->
-                                        <button class=" items-center text-center hover:opacity-80 transition-opacity duration-300 ">
+                                        <a href="{{ url_for('shop', **dict(request.args, category=2)) }}"><button class=" items-center text-center hover:opacity-80 transition-opacity duration-300 ">
                                             <img src="{{ url_for('static', filename='images/skincarecategory .png') }}"  alt="Skincare" class=" object-cover w-full">
                                             <p class=" text-[18px]  text-beige font-bold md:text-[20px]">Skincare</p>
-                                        </button>
+                                        </button></a>
                                         
                                 </div> 
                           
                                 <div class="flex gap-8 w-full">
-                                      <button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
+                                      <a href="{{ url_for('shop', **dict(request.args, category=4)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
                                           <img src="{{ url_for('static', filename='images/fragrancecategory 2.png') }}" alt="Fragrance" class="w-full object-cover">
                                           <span class="mt-3 text-[18px]  text-beige font-bold md:text-[20px]">Fragrance</span>
-                                      </button>
+                                      </button></a>
                                       
-                                          <button class="items-center text-center hover:opacity-80 transition-opacity duration-300 ">
+                                          <a href="{{ url_for('shop', **dict(request.args, category=3)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300 ">
                                               <img src="{{ url_for('static', filename='images/men.png') }}" alt="Men's Grooming" class="w-full  object-cover ">
                                               
                                               <span class="mt-3 text-[16px] pt-6 text-beige font-bold md:text-[20px]">Men's Grooming</span>
-                                          </button>
+                                          </button></a>
                                 </div>
                           </div>
                           <div class="hidden md:block mx-auto">
                                   <div class="flex gap-8 w-full justify-center">
-                                    <button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
+                                    <a href="{{ url_for('shop', **dict(request.args, category=1)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
                                         <img src="{{ url_for('static', filename='images/makeupcategory 3.png') }}" alt="Makeup" class="w-full object-cover ">
                                         <span class="pt-3 text-[13px] text-beige font-bold md:text-[20px]">Makeup</span>
-                                    </button>
+                                    </button></a>
                                     <!-- hadi m3awda juj mrat hit mabghatch t9ad :) -->
-                                      <button class=" items-center text-center hover:opacity-80 transition-opacity duration-300 ">
+                                      <a href="{{ url_for('shop', **dict(request.args, category=2)) }}"><button class=" items-center text-center hover:opacity-80 transition-opacity duration-300 ">
                                           <img src="{{ url_for('static', filename='images/skincarecategory .png') }}" alt="Skincare" class=" object-cover w-full">
                                           <p class=" text-[13px]  text-beige font-bold md:text-[20px]">Skincare</p>
-                                      </button>
-                                        <button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
+                                      </button></a>
+                                        <a href="{{ url_for('shop', **dict(request.args, category=4)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
                                             <img src="{{ url_for('static', filename='images/fragrancecategory 2.png') }}" alt="Fragrance" class="w-full object-cover">
                                             <span class="mt-3 text-[13px]  text-beige font-bold md:text-[20px]">Fragrance</span>
-                                        </button>
+                                        </button></a>
                                         
-                                            <button class="items-center text-center hover:opacity-80 transition-opacity duration-300 ">
+                                            <a href="{{ url_for('shop', **dict(request.args, category=3)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300 ">
                                                 <img src="{{ url_for('static', filename='images/men.png') }}" alt="Men's Grooming" class="w-full  object-cover ">
                                                 
                                                 <span class="mt-3 text-[13px] pt-6 text-beige font-bold md:text-[20px]"> Men's Grooming</span>
-                                            </button>
+                                            </button></a>
                                     </div>
                           </div>
 
@@ -218,21 +210,21 @@
       <section class="w-[100%] mx-auto mt-20 bg-darkgreen pb-10 lg:pb-4 xl:pb-4" >
         <section class="xl:max-w-[1400px] xl:mx-auto ">
          <div class="my-9 block md:justify-end  md:hidden ">
-              <img src="../static/images/image 4 (1).png" alt="image4" class="w-full">
+            <img src="{{ url_for('static', filename='media/' + featured['image']) }}" alt="image4" class="w-full object-cover">
           </div>
           <section class="flex flex-col p-[10px] md:flex-row items-center md:py-[10px]  md:w-[90%] mx-auto">
            
               <div class="text-center md:text-left">
-                  <h2 class="text-light  font-fraun font-bold text-2xl md:text-5xl mb-4 md:w-[80%] pb-6 md:pb-4">
-                      NUOVA Revitalizing Handwash
+                  <h2 class="text-light  font-fraun font-bold text-2xl md:text-5xl mb-4 md:w-[90%] pb-6 md:pb-4">
+                    {{featured['name'] }}
                   </h2>
-                  <p class="md:w-[80%] text-light pb-6 md:pb-4">Discover <span class="font-bold">NUOVA</span> Revitalizing Handwash for clean, nourished hands. Its unique formula deeply cleanses while hydrating, leaving hands refreshed and smooth. Suitable for all skin types with a delightful fragrance.</p>
-                  <button class="bg-light text-darkgreen rounded-lg py-2 px-4 mt-4 font-bold hover:opacity-80 transition-opacity duration-300 ">
-                     <a href="shopnow.html"> Shop Now</a>
-                  </button>
+                  <p class="md:w-[80%] text-light pb-6 md:pb-4">Discover <span class="font-bold">NUOVA</span> {{ featured['description'] }}</p>
+                  <button class="bg-light text-darkgreen rounded-lg py-2 px-4 mt-4 font-bold hover:opacity-80 transition-opacity duration-300 "><a href="{{url_for('product', id=featured.id)}}"> Shop Now</a></button>
+                   
+                      
               </div>
               <div class="my-9 md:justify-end md:w-[70%] hidden md:block ">
-                  <img src="../static/images/image 4.png" alt="image4" class="w-full max-w-[550px] object-cover">
+                <img src="{{ url_for('static', filename='media/' + featured['image']) }}" alt="image4" class="w-full h-[330px] object-cover rounded-[70px]">
               </div>
             <section>
           </section>
@@ -244,82 +236,53 @@
           <div class="bg-beige w-24 h-1 mx-auto mb-10"></div>
         </div>
       </section>
-      <section class="xl:w-[1400px] xl:mx-auto">   
-            <div class=" w-[90%] mx-auto text-center mt-20 flex flex-col justify-center md:flex-row gap-10">
-            <div class=" shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-0">
-                    <img src="../static/images/cosmeticProductCard.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                    <div class="p-6 bg-light rounded-[40px]">
-                        <h3 class="font-bold text-lg">Hydra Boost Moisturizer</h3>
-                        <p class="text-darkgreen">A hydrating moisturizer that nourishes and revitalizes the skin, leaving it soft and supple.</p>
-                        <p class="font-bold mt-2">Price: $54</p>
-                        <button class=" px-4 py-2 mt-4 w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
-                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                        </svg>
-                        </button>
-                        <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
-                    </div>
-            </div>
-            <div class="shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-auto">
-                        <img src="../static/images/cosmeticProductCard2.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                        <div class="p-6 bg-light rounded-[40px]">
-                        <h3 class="font-bold text-lg">Revitalizing Night Cream</h3>
-                        <p class="text-darkgreen">A hydrating night cream with hyaluronic acid and vitamin E for overnight rejuvenation.</p>
-                        <p class="font-bold mt-2">Price: $45</p>
-                        <button class=" px-4 py-2 mt-4   w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
-                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
-                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                            </svg>
-                        </button>
-                        <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
-                        </div>
-            </div>
-            <div class="shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-0">
-                <img src="../static/images/cosmeticProductCard5.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                <div class="p-6 bg-light rounded-[40px]">
-                    <h3 class="font-bold text-lg">Nourishing Hair Mask</h3>
-                    <p class="text-darkgreen">A conditioning hair mask that repairs and strengthens damaged hair, enriched with argan oil and keratin.</p>
-                    <p class="font-bold mt-2">Price: $35</p>
-                    <button class=" px-4 py-2 mt-4   w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                        </svg>
-                    </button>
-                    <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
-                </div>
-                </div>
-            </div>
+      <section class="xl:w-[1400px] xl:mx-auto">  
+        <section class="grid grid-cols-3 gap-20 w-[90%] mx-auto">
+            {% for product in threeprod[:3] %}
+            <div class="text-center flex flex-col justify-center md:flex-row gap-20 ">
 
-            <div class="flex flex-col md:flex-row justify-center gap-10 w-[90%] mx-auto">
-            <div class="shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-0 text-center mt-10">
-                <img src="../static/images/cosmeticProductCard4.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                <div class="p-6 bg-light rounded-[40px]">
-                    <h3 class="font-bold text-lg">Nuova Velvet Matte Lipstick</h3>
-                    <p class="text-darkgreen">A long-lasting, velvety matte lipstick available in a variety of bold and neutral shades</p>
-                    <p class="font-bold mt-2">Price: $20</p>
-                    <button class=" px-4 py-2 mt-4  w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                        </svg>
-                    </button>
-                    <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
+                <div class=" shadow-2xl rounded-3xl ">
+                        <img src="{{ url_for('static', filename='media/' + product['image']) }}" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
+                        <div class="p-6 bg-light rounded-[40px]">
+                            <h3 class="font-bold text-lg pb-3">{{ product['name'] }}</h3>
+                            <p class="text-darkgreen pb-3">{{product['description'] }}</p>
+                            <p class="font-bold mt-2">{{ product['price'] }}$</p>
+                            <button class=" px-4 py-2 mt-4 w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                            </svg>
+                            </button>
+                            <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="{{url_for('product', id=product.id)}}"> Shop Now</a></button>
+                        </div>
+                      
                 </div>
             </div>
-            <div class="shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-0 text-center mt-10">
-                <img src="../static/images/cosmeticProductCard3.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                <div class="p-6 bg-light rounded-[40px]">
-                    <h3 class="font-bold text-lg">Dolce & Gabbana Light Blue </h3>
-                    <p class="text-darkgreen">A vibrant, fruity-floral fragrance with notes of Sicilian lemon, jasmine, and cedarwood.</p>
-                    <p class="font-bold mt-2">Price: $70</p>
-                    <button class=" px-4 py-2 mt-4  w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                        </svg>
-                    </button>
-                    <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
+            {%endfor%}
+        </section>
+        <section class="grid grid-cols-3 w-[90%] ml-[25%] justify-center gap-20 mx-auto mt-20">
+            {% for product in twoprod %}
+            <div class="text-center flex flex-col justify-center md:flex-row">
+
+                <div class=" shadow-2xl rounded-3xl  w-[350px] mx-auto">
+                        <img src="{{ url_for('static', filename='media/' + product['image']) }}" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
+                        <div class="p-6 bg-light rounded-[40px] ">
+                            <h3 class="font-bold text-lg pb-3">{{ product['name'] }}</h3>
+                            <p class="text-darkgreen pb-3">{{product['description'] }}</p>
+                            <p class="font-bold mt-2">{{ product['price'] }}$</p>
+                            <button class=" px-4 py-2 mt-4 w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                            </svg>
+                            </button>
+                            <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="{{url_for('product', id=product.id)}}"> Shop Now</a></button>
+                        </div>
+                      
                 </div>
             </div>
-            </div>
+            {%endfor%}
+        </section>          
+        
+
             <div class="ml-[5%] mt-20">
               <a href="shop.html" class="text-black mt-6 border-b-2 border-beige hover:font-bold  transition duration-300  font-bold">Click for more Products <span class="font-bold text-beige">></span></a>
             </div>

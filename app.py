@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key_here' 
 app.config['UPLOAD_DIRECTORY'] = 'static/media/'
 
-@app.route("/")
+@app.route("/home")
 def home():
     with sqlite3.connect("db.db") as con:
         con.row_factory = sqlite3.Row
@@ -22,7 +22,12 @@ def home():
             ORDER BY id DESC
         """)
         data = cur.fetchall()
-        return render_template("index.html", products=data)
+        products = [dict(row) for row in data]
+        featured = products[13] if products else None
+        three = products[:3] if products else []
+        two = products[3:5] if len(products) >= 5 else products[3:] if products else []
+        
+    return render_template("index.html", featured=featured, threeprod=three, twoprod=two)
 
 @app.route("/product_table")
 def productTable():
@@ -118,7 +123,8 @@ def delete_product(id):
       return redirect(url_for("productTable"))
   
 @app.route("/shop")
-def shop():   
+def shop(): 
+    print(shop)  
     category = request.args.get("category")
     with sqlite3.connect("db.db") as con:
         con.row_factory = sqlite3.Row
@@ -149,5 +155,16 @@ def shop():
 
         return render_template("shop.html", products=data, category=category)
     
+    
+@app.route('/product/<int:id>')
+def product(id):
+    with sqlite3.connect("db.db") as con:
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("SELECT * FROM products WHERE id =?", (id,))
+        product = cur.fetchone()
+        return render_template("product.html", product=product)
+    
+
 if __name__ == "__main__":
     app.run(debug=True)
