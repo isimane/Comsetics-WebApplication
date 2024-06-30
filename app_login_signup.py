@@ -34,7 +34,7 @@ def login():
             login_user(user)
             return redirect(url_for('index'))
         else:
-            flash('Login Unsuccessful. Please check email and password', 'danger')
+            flash('Login Unsuccessful. Please check email and password', category='danger')
     return render_template('login.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -50,10 +50,10 @@ def signup():
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user)
-            flash('Account created successfully! Please log in.', 'success')
+            flash('Account created successfully! Please log in.', category='success')
             return redirect(url_for('login'))
         else:
-            flash('Email address already exists', 'danger')
+            flash('Email address already exists', category='danger')
     return render_template('signup.html')
 
 @app.route('/logout')

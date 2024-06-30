@@ -25,6 +25,8 @@
                        lightbeige:"#EAE2CB",
                        lightgreen:"#cfdb98",
                        beige:"#c4b494",
+                       danger:"#bb2124",
+                       success:"#22bb33",
                      },
                    },
                  },
@@ -48,7 +50,7 @@
     {% if messages %}
     <ul>
       {% for message in messages %}
-        <li class="{{ message[1] }}">{{ message[0] }}</li>
+        <li class="alert-{{ message[1] }}">{{ message[0] }}</li>
       {% endfor %}
     </ul>
     {% endif %}
