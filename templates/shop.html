@@ -57,7 +57,7 @@
               <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
                   <a href="{{ url_for('home') }}" class="p-8 hover:text-darkgreen">HOME</a>
                   <div class="dropdown p-8">
-                    <a href="{{url_for('shop')}}" class="hover:text-darkgreen ">SHOP</a>
+                    <a href="{{ url_for('shop') }}" class="hover:text-darkgreen ">SHOP</a>
                     <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
                         <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
                         <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
@@ -98,7 +98,7 @@
               <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
                   <a href="{{ url_for('home') }}" class="text-light p-3">HOME</a>
                   <div class="dropdown p-8">
-                    <a href="{{url_for('shop')}}" class="hover:text-darkgreen ">SHOP</a>
+                    <a href="{{ url_for('shop') }}" class="hover:text-darkgreen ">SHOP</a>
                     <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
                         <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
                         <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
@@ -188,7 +188,7 @@
                     <ul class="pb-2 ">
                         <li class="text-[24px] font-bold border-b-2 border-beige">Explore</li>
                         <li class=" pt-3"> <a href="{{url_for('home')}}">HOME</a></li>
-                        <li class="pt-1">  <a href="{{url_for('shop')}}">SHOP</a></li>
+                        <li class="pt-1">  <a href="{{ url_for('shop') }}">SHOP</a></li>
                         <li class="pt-1"> <a href="about.html">ABOUT US</a></li>
                         <li class="pt-1"><a href="contactus.html">CONTACT US</a></li>
                     </ul>
