@@ -4,6 +4,8 @@ const unshowlist = document.getElementById("unshowlist")
 
 const noAnimationElements = document.querySelectorAll(".noAnimation");
 
+const alerts = document.querySelectorAll('.alert');
+
 const quantityInput = document.getElementById('quantity');
 const decreaseBtn = document.querySelector('.decrease');
 const increaseBtn = document.querySelector('.increase');
@@ -73,3 +75,12 @@ quantityInput.addEventListener('change', () => {
     quantityInput.value = 100;
     }
 })
+
+alerts.forEach(function(alert) {
+  setTimeout(function() {
+    alert.classList.add('fade-out');
+    setTimeout(function() {
+        alert.remove();
+    }, 1500);
+  }, 2000);
+});

@@ -50,23 +50,15 @@
                 </div>
                 {% endfor %}
                 <script>
-                    var alerts = document.querySelectorAll('.alert');
-                    alerts.forEach(function(alert) {
-                        setTimeout(function() {
-                            alert.classList.add('fade-out');
-                            setTimeout(function() {
-                                alert.remove();
-                            }, 1500);
-                        }, 2000);
-                    });
+                    
                 </script>      
             {% endif %}
         {% endwith %}
 
-        <h1 class="text-4xl font-bold mb-8 text-darkgreen font-fraun text-center">Product Management</h1>
+        <h1 class="text-4xl font-bold mb-8 text-darkgreen font-fraun text-center">Product Management Table</h1>
         
         <div class="mb-6">
-            <a href="{{ url_for('add_product') }}" class="inline-block bg-darkgreen text-light px-6 py-2 rounded-2xl hover:bg-opacity-90  duration-300">
+            <a href="{{ url_for('add_product') }}" class="inline-block bg-darkgreen text-light px-6 py-2 rounded-2xl hover:bg-opacity-80  duration-300">
                 Add New Product
             </a>
         </div>
@@ -74,7 +66,7 @@
         <div class="overflow-x-auto bg-light rounded-xl shadow-2xl">
             <table class="w-full table-auto">
                 <thead>
-                    <tr class="bg-beige bg-opacity-25 text-darkgreen">
+                    <tr class="bg-beige bg-opacity-65 text-light">
                         <th class="px-4 py-3 text-left">Image</th>
                         <th class="px-4 py-3 text-left">Name</th>
                         <th class="px-4 py-3 text-left">Category</th>
@@ -88,12 +80,12 @@
                     {% for product in products %}
                     <tr class="hover:bg-lightbeige hover:bg-opacity-25 transition-colors duration-300">
                         <td class="px-4 py-3">
-                            <img src="{{ url_for('static', filename='media/' + product['image']) }}" alt="{{ product.name }}" class="w-20 h-20 object-cover rounded-lg">
+                            <img src="{{ url_for('static', filename='media/' + product['image']) }}" alt="{{ product.image }}" class="w-72 h-32 object-cover rounded-xl">
                         </td>
                         <td class="px-4 py-3 font-medium">{{ product.name }}</td>
                         <td class="px-4 py-3 font-fraun text-darkgreen font-bold">{{ product.category_name }}</td>
                         <td class="px-4 py-3">
-                            <p class="truncate w-48 ">{{ product.description }}</p>
+                            <p class="truncate w-48 text-sm">{{ product.description }}</p>
                         </td>
                         <td class="px-4 py-3 font-bold">${{ product.price }}</td>
                         <td class="px-4 py-3">{{ product.quantity }}</td>

@@ -50,9 +50,9 @@
       <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
           <img src="../static/images/NUovalogo2.png" alt="" class="w-[79px] h-[30px]"> 
           <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
-              <a href="{{url_for('home')}}" class="p-8 hover:text-darkgreen">HOME</a>
+              <a href="{{url_for('home')}}" class="p-8  hover:text-darkgreen">HOME</a>
               <div class="dropdown p-8">
-                  <a href="{{ url_for('shop') }}" class="font-bold text-darkgreen ">SHOP</a>
+                  <a href="{{ url_for('shop') }}" class=" font-bold text-darkgreen ">SHOP</a>
                   <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
                     <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
                     <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
@@ -100,7 +100,7 @@
                     <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
                 </div>
               </div>
-              <a href="about.html" class="p-3 text-light font-bold">ABOUT US</a>
+              <a href="about.html" class="p-3 text-light ">ABOUT US</a>
               <a href="contactus.html" class="text-light pb-3">CONTACT US</a>
               <div class="flex block md:hidden items-center gap-4 mt-3">
                   <button>
