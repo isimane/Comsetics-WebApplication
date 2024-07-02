@@ -24,7 +24,7 @@ def home():
         """)
         data = cur.fetchall()
         products = [dict(row) for row in data]
-        featured = products[13] if products else None
+        featured = products[12] if products else None
         three = products[:3] if products else []
         two = products[3:5] if len(products) >= 5 else products[3:] if products else []
         
@@ -151,7 +151,7 @@ def shop():
          # get category name from db using the id
            categoryname = "SELECT name FROM categories WHERE id = ?"
            cur.execute(categoryname, (int(category),))
-           category_name = cur.fetchone()[0     ]
+           category_name = cur.fetchone()[0]
            category = category_name
 
         return render_template("shop.html", products=data, category=category)

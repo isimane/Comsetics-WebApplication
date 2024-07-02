@@ -8,6 +8,7 @@ const quantityInput = document.getElementById('quantity');
 const decreaseBtn = document.querySelector('.decrease');
 const increaseBtn = document.querySelector('.increase');
 
+let alerts = document.querySelectorAll('.alert');
 
 hamburgerlist.addEventListener("click",() =>{
     console.log(navbar.style.display);
@@ -73,3 +74,13 @@ quantityInput.addEventListener('change', () => {
     quantityInput.value = 100;
     }
 })
+
+alerts.forEach(function(alert) {
+  setTimeout(function() {
+    alert.classList.add('fade-out');
+    console.log(alert.style.opacity);
+    setTimeout(function() {
+      alert.remove();
+    }, 1500); 
+  }, 2000); 
+});
