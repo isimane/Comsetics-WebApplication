@@ -116,6 +116,9 @@
               </div>
           </div>
       </nav>
+
+
+      
       <!-- <main class="bg-light shadow-2xl rounded-3xl w-[80%] mx-auto">
         <form action="">
             <div class="w-[90%] mx-auto justify-center w-fit mt-10 py-20">
@@ -146,24 +149,24 @@
             </div>
         </form>
       </main> -->
-      <!-- <div class="max-w-md mx-auto bg-light p-8 rounded-3xl shadow-2xl">
+ <div class="max-w-md mx-auto bg-light p-8 rounded-3xl shadow-2xl">
         <h2 class="text-2xl font-bold mb-6 font-fraun text-darkgreen">Checkout</h2>
         <form>
           <div class="mb-4">
             <label for="name" class="block text-black font-pop text-sm font-bold mb-2">Full Name</label>
-            <input type="text" id="name" class="w-full px-3 py-2 border bg-light rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <input type="text" id="name" class="w-full px-3 py-2 border-beige border-1  bg-light rounded-lg " required>
           </div>
           <div class="mb-4">
             <label for="address" class="block text-black font-pop text-sm font-bold mb-2">Delivery Address</label>
-            <textarea id="address" class="w-full px-3 py-2 border bg-light rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3" required></textarea>
+            <textarea id="address" class="w-full px-3 py-2 border-beige   bg-light rounded-lg " rows="3" required></textarea>
           </div>
           <div class="mb-4">
             <label for="phone" class="block text-black font-pop text-sm font-bold mb-2">Phone Number</label>
-            <input type="tel" id="phone" class="w-full px-3 py-2 bg-light border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <input type="tel" id="phone" class="w-full px-3 py-2 bg-light border-beige border-1  rounded-lg " required>
           </div>
           <div class="mb-6">
             <label for="email" class="block text-black font-pop text-sm font-bold mb-2">Email Address</label>
-            <input type="email" id="email" class="w-full px-3 bg-light py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <input type="email" id="email" class="w-full px-3 bg-light py-2 border-beige border-1  rounded-lg " required>
           </div>
           <div class="mb-6">
             <p class="text-black font-pop text-sm font-bold mb-2">Payment Method</p>
@@ -172,133 +175,16 @@
               <label for="cod" class="text-black font-pop">Cash on Delivery</label>
             </div>
           </div>
-          <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <button type="submit" class="w-full bg-darkgreen text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 ">
             Place Order
           </button>
         </form>
-      </div> -->
-      <!-- <div class="min-h-screen bg-beige-100 flex items-center justify-center p-4">
+      </div>
+      <div class="min-h-screen bg-beige-100 flex items-center justify-center p-4">
         <div class="w-full max-w-4xl bg-white rounded-lg shadow-xl overflow-hidden">
           <div class="flex flex-col md:flex-row">
            
-            <div class="w-full md:w-2/3 p-8 md:p-12">
-              <h2 class="text-3xl font-light text-green-800 mb-8">Checkout</h2>
-              <form class="space-y-6">
-                <div>
-                  <label for="name" class="block text-gray-700 text-sm mb-2">Full Name</label>
-                  <input type="text" id="name" class="w-full px-4 py-2 bg-beige-50 border border-beige-200 rounded focus:outline-none focus:border-green-500" required>
-                </div>
-                <div>
-                  <label for="address" class="block text-gray-700 text-sm mb-2">Delivery Address</label>
-                  <textarea id="address" class="w-full px-4 py-2 bg-beige-50 border border-beige-200 rounded focus:outline-none focus:border-green-500" rows="3" required></textarea>
-                </div>
-                <div>
-                  <label for="phone" class="block text-gray-700 text-sm mb-2">Phone Number</label>
-                  <input type="tel" id="phone" class="w-full px-4 py-2 bg-beige-50 border border-beige-200 rounded focus:outline-none focus:border-green-500" required>
-                </div>
-                <div>
-                  <label for="email" class="block text-gray-700 text-sm mb-2">Email Address</label>
-                  <input type="email" id="email" class="w-full px-4 py-2 bg-beige-50 border border-beige-200 rounded focus:outline-none focus:border-green-500" required>
-                </div>
-                <div>
-                  <p class="text-gray-700 text-sm mb-2">Payment Method</p>
-                  <div class="flex items-center bg-beige-50 border border-beige-200 rounded px-4 py-2">
-                    <input type="radio" id="cod" name="payment" value="cod" class="form-radio text-green-600" checked>
-                    <label for="cod" class="ml-2 text-gray-700">Cash on Delivery</label>
-                  </div>
-                </div>
-                <button type="submit" class="w-full bg-green-700 text-white font-medium py-3 px-4 rounded hover:bg-green-800 transition duration-300 ease-in-out">
-                  Place Order
-                </button>
-              </form>
-            </div>
-            
-            <div class="w-full md:w-1/3 bg-beige-200 p-8 md:p-12">
-              <h3 class="text-2xl font-light text-green-800 mb-6">Order Summary</h3>
-              <div class="space-y-4">
-                <div class="flex justify-between">
-                  <span class="text-gray-600">Subtotal</span>
-                  <span class="font-medium">$XX.XX</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-600">Shipping</span>
-                  <span class="font-medium">$X.XX</span>
-                </div>
-                <div class="border-t border-beige-300 pt-4 mt-4">
-                  <div class="flex justify-between text-lg font-semibold">
-                    <span class="text-gray-800">Total</span>
-                    <span>$XX.XX</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <div class="min-h-screen bg-beige-100 flex">
-        <!-- Sidebar -->
-        <div class="w-64 bg-green-800 text-white p-6">
-          <h2 class="text-2xl font-semibold mb-6">Admin Dashboard</h2>
-          <nav>
-            <ul class="space-y-2">
-              <li><a href="#" class="block py-2 px-4 rounded hover:bg-green-700">Dashboard</a></li>
-              <li><a href="#" class="block py-2 px-4 rounded hover:bg-green-700">Users</a></li>
-              <li><a href="#" class="block py-2 px-4 rounded hover:bg-green-700">Products</a></li>
-              <li><a href="#" class="block py-2 px-4 rounded hover:bg-green-700">Orders</a></li>
-              <li><a href="#" class="block py-2 px-4 rounded hover:bg-green-700">Analytics</a></li>
-              <li><a href="#" class="block py-2 px-4 rounded bg-green-700">Profile</a></li>
-            </ul>
-          </nav>
-        </div>
-      
-        <!-- Main Content -->
-        <div class="flex-1 p-10">
-          <h1 class="text-3xl font-light text-green-800 mb-8">Admin Profile</h1>
-          
-          <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-            <div class="flex items-center mb-6">
-              <img src="https://via.placeholder.com/100" alt="Admin Avatar" class="w-20 h-20 rounded-full mr-4">
-              <div>
-                <h2 class="text-2xl font-semibold text-gray-800">John Doe</h2>
-                <p class="text-gray-600">Senior Administrator</p>
-              </div>
-            </div>
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <p class="text-gray-600">Email:</p>
-                <p class="font-medium">john.doe@example.com</p>
-              </div>
-              <div>
-                <p class="text-gray-600">Phone:</p>
-                <p class="font-medium">+1 (555) 123-4567</p>
-              </div>
-              <div>
-                <p class="text-gray-600">Last Login:</p>
-                <p class="font-medium">July 1, 2024, 09:30 AM</p>
-              </div>
-              <div>
-                <p class="text-gray-600">Account Status:</p>
-                <p class="font-medium text-green-600">Active</p>
-              </div>
-            </div>
-          </div>
-      
-          <h2 class="text-2xl font-light text-green-800 mb-4">Quick Access</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <a href="#" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
-              <h3 class="text-xl font-semibold text-gray-800 mb-2">User Management</h3>
-              <p class="text-gray-600">Manage user accounts and permissions</p>
-            </a>
-            <a href="#" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
-              <h3 class="text-xl font-semibold text-gray-800 mb-2">Product Catalog</h3>
-              <p class="text-gray-600">Update and organize product listings</p>
-            </a>
-            <a href="#" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
-              <h3 class="text-xl font-semibold text-gray-800 mb-2">Order Processing</h3>
-              <p class="text-gray-600">View and manage customer orders</p>
-            </a>
-          </div>
-        </div>
-      </div>
+           
+     
 </body>
 </html>
