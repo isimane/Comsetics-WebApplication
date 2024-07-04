@@ -33,6 +33,22 @@
                };
           </script>
           <style>
+
+
+            .list-unstyled {
+              text-align: center;
+            }
+
+            .danger {
+              background-color: #bb2124;
+              color: white
+            }
+
+            .success {
+              background-color: #22bb33;
+            }
+
+
            #navbar{
                 display:none;
             }
@@ -46,15 +62,19 @@
     </head>
 <body>
 
-  {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul>
-                {% for category, message in messages %}
-                    <li class="alert-{{ category }}">{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-  {% endwith %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <ul class="list-unstyled">
+    {% for category, message in messages %}
+      {% if category == 'success' %}
+        <li class="alert alert-success success">{{ message }}</li>
+      {% elif category == 'danger' %}
+        <li class="alert alert-danger danger">{{ message }}</li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  {% endif %}
+{% endwith %}
 
     <section class=" outline-none bg-light bg-cover bg-no-repeat bg-center bg-bottom pt-10 pb-20" style="background-image: url(../static/images/mask.jpg); ">
         <p class="text-3xl font-fraun text-light font-bold w-[70%] mx-auto text-center md:text-5xl md:w-[30%] md:leading-[90px]">Welcome To NUOVA!</p>

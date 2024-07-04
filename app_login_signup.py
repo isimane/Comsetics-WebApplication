@@ -26,9 +26,6 @@ login_manager.login_view = "login"
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -90,6 +87,7 @@ def accountclient():
 @login_required
 def logout():
     logout_user()
+    flash("You have been logged out successfully.", "success")
     return redirect(url_for("login"))
 
 if __name__ == "__main__":
