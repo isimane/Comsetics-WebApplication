@@ -163,7 +163,7 @@
     <main class="">
         
         <section class="flex flex-col md:flex-row items-center justify-between w-[90%] mx-auto mt-20 xl:max-w-[1400px] xl:mx-auto">
-            <h1 class="text-4xl text-beige font-fraun font-bold">Hello,  khadija !</h1>
+            <h1 class="text-4xl text-beige font-fraun font-bold">Hello,  {{ user.firstname }} !</h1>
             <button id="logoutButton" class="bg-darkgreen text-white px-6 py-1 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> Log out</button>
         </section>
         <section class="bg-lightbeige bg-opacity-30 shadow-2xl rounded-[50px] mx-[5%]  mt-20  py-10 w-[80%] md:w-[60%] mx-auto xl:max-w-[1400px] xl:mx-auto mb-20">
@@ -177,12 +177,12 @@
                                 </svg>
                             </button>
                         </div>
-                        <h2 class="items-center mr-3 text-2xl font-bold font-fraun mt-2">khadija</h2>
-                        <h3 class="text-darkgreen mt-2">khadija@gmail.com</h3>
+                        <h2 class="items-center mr-3 text-2xl font-bold font-fraun mt-2">{{ user.firstname }}</h2>
+                        <h3 class="text-darkgreen mt-2">{{ user.email }}</h3>
                     </div>
                     <div class="  mx-auto flex justify-between md:pl-20 w-[90%] mx-auto pl-5  md:w-[100%] md:text-start">
                         <div class=" ">
-                            <button class="font-pop font-bold border-b-2 w-fit border-beige mt-20 flex justify-center ">Edit Your Profile <span class="text-beige"> ></span></button>
+                            <button class="font-pop font-bold border-b-2 w-fit border-beige mt-20 flex justify-center ">Edit Your Profile <span class="text-beige"> </span></button>
                             <div class="pb-6  mt-10  md:mt-0 ">
                                 <form action="" class=" rounded-3xl mt-10  ">
                                     <input type="text" id="FirstName" placeholder="Edit Your FirstName" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%] md:w-[90%] mb-4 placeholder-darkgreen"><br>

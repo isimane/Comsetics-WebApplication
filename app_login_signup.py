@@ -50,7 +50,7 @@ def login():
             flash("Invalid email or password", "danger")
             return render_template("login.html")
     else:
-        return render_template("login.html")
+        return render_template("login.html", user=current_user)
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
@@ -73,15 +73,21 @@ def signup():
             flash("Please fill in all the fields", "danger")
     return render_template("signup.html")
 
+
+@app.route('/account')
+@login_required
+def account():
+    return render_template('accountclient.html', user=current_user)
+
 @app.route('/accountadmin')
 @login_required
 def accountadmin():
-    return render_template("accountadmin.html")
+    return render_template("accountadmin.html", user=current_user)
 
 @app.route('/accountclient')
 @login_required
 def accountclient():
-    return render_template("accountclient.html")
+    return render_template("accountclient.html", user=current_user)
 
 @app.route('/logout')
 @login_required
