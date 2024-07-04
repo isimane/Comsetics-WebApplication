@@ -163,7 +163,7 @@
     <main class="">
         
         <section class="flex flex-col md:flex-row items-center justify-between w-[90%] mx-auto mt-20 xl:max-w-[1400px] xl:mx-auto">
-            <h1 class="text-4xl text-beige font-fraun font-bold">Hello,  Admin !</h1>
+            <h1 class="text-4xl text-beige font-fraun font-bold">Hello, {{ user.firstname }} !</h1>
             <button id="logoutButton" class="bg-darkgreen text-white px-6 py-1 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> Log out</button>
         </section>
         <section class="bg-lightbeige bg-opacity-30 shadow-2xl rounded-[50px] mx-[5%]  mt-20  py-10 w-[80%] md:w-[60%] mx-auto xl:max-w-[1400px] xl:mx-auto mb-20">
@@ -179,8 +179,8 @@
                                 </svg>
                             </button>
                         </div>
-                        <h2 class="items-center mr-3 text-2xl font-bold font-fraun mt-2">Admin</h2>
-                        <h3 class="text-darkgreen mt-2">Admin@gmail.com</h3>
+                        <h2 class="items-center mr-3 text-2xl font-bold font-fraun mt-2">{{ user.firstname }} {{ user.lastname }}</h2>
+                        <h3 class="text-darkgreen mt-2">{{ user.email }}</h3>
                     </div>
                     <button type="submit" class="bg-darkgreen text-light font-pop py-2 px-5 rounded-lg text-[13px] hover:opacity-80 transition-opacity duration-300 mx-auto flex justify-center mt-10" >Edit your stock</button>
                     <div class="  mx-auto flex justify-between md:pl-20 w-[90%] mx-auto pl-5  md:w-[100%] md:text-start">
