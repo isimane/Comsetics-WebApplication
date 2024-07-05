@@ -4,7 +4,7 @@ const unshowlist = document.getElementById("unshowlist")
 
 const noAnimationElements = document.querySelectorAll(".noAnimation");
 
-const alerts = document.querySelectorAll('.alert');
+// const alerts = document.querySelectorAll('.alert');
 
 hamburgerlist.addEventListener("click",() =>{
     console.log(navbar.style.display);
@@ -78,14 +78,14 @@ function validateInput(input) {
   }
 }
 
-alerts.forEach(function(alert) {
-  setTimeout(function() {
-    alert.classList.add('fade-out');
-    setTimeout(function() {
-        alert.remove();
-    }, 1500);
-  }, 2000);
-});
+// alerts.forEach(function(alert) {
+//   setTimeout(function() {
+//     alert.classList.add('fade-out');
+//     setTimeout(function() {
+//         alert.remove();
+//     }, 1500);
+//   }, 2000);
+// });
 
 
 function addToCartBtns(){

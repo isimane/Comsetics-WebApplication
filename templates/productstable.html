@@ -35,27 +35,32 @@
     </style>
 </head>
 <body class="bg-light font-pop">
+    
     {% block content %}
     <div class="container mx-auto px-4 py-8">
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
-                <div class="alert bg-darkgreen text-light px-6 py-4 rounded-lg shadow-md mb-6 relative" role="alert" id="alert-{{ loop.index0 }}">
-                    <strong class="font-bold">{{ message }}</strong>
-                    <button class="absolute top-0 right-0 mt-4 mr-4 text-light hover:text-lightbeige transition-colors duration-300">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
+                <div class="alert bg-darkgreen text-center  bg-opacity-90 text-light px-6 py-3 rounded-3xl shadow-md relative" role="alert" id="alert-{{ loop.index0 }}">
+                    <p class="font-bold">{{ message }}</p>
                 </div>
                 {% endfor %}
                 <script>
-                    
+                    const alerts = document.querySelectorAll('.alert');
+                    alerts.forEach(function(alert) {
+                        setTimeout(function() {
+                            alert.classList.add('fade-out');
+                            setTimeout(function() {
+                                alert.remove();
+                            }, 1500);
+                        }, 2000);
+                    });
+
                 </script>      
             {% endif %}
         {% endwith %}
 
-        <h1 class="text-4xl font-bold mb-8 text-darkgreen font-fraun text-center">Product Management Table</h1>
+        <h1 class="text-4xl font-bold mb-8 mt-40 text-darkgreen font-fraun text-center">Product Management Table</h1>
         
         <div class="mb-6">
             <a href="{{ url_for('add_product') }}" class="inline-block bg-darkgreen text-light px-6 py-2 rounded-2xl hover:bg-opacity-80  duration-300">

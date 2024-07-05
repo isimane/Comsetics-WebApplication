@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect, url_for, f
 from werkzeug.utils import secure_filename
 import os
 import json
+
 # from cart import cart
 # from flask_wtf import FlaskForm
 # from wtforms import StringField, SubmitField, FileField
@@ -141,7 +142,7 @@ def edit_product(id):
       cur = con.cursor()
       cur.execute("SELECT * FROM products WHERE id =?", (id,))
       product=cur.fetchone()
-    
+      
     if request.method == "POST":
         name = request.form["ProductName"]
         description = request.form["ProductDescription"]
@@ -170,13 +171,14 @@ def edit_product(id):
             return render_template("editProduct.html",product_id = product_id, product=product, categories=categories)
  
 
-@app.route("/delete_product/<int:id>", methods=['GET'], endpoint='delete_product')
+@app.route("/delete_product/<int:id>", methods=['GET','POST'], endpoint='delete_product')
 def delete_product(id):
     product_id = int(id)
     with sqlite3.connect("db.db") as con:
       cur = con.cursor()
       cur.execute("DELETE FROM products WHERE id =?", (id,))
       con.commit()
+      flash('Book Deleted','warning')
       return redirect(url_for("productTable"))
   
 
@@ -245,6 +247,7 @@ def cart():
 
 @app.route("/checkout")
 def checkout():
+    
     return render_template("checkout.html")
 if __name__ == "__main__":
     app.run(debug=True)
