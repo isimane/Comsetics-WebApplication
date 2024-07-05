@@ -216,6 +216,9 @@
         });
 
 
+
+
+
         const editImageBtn = document.getElementById('edit-image-btn');
         const adminImage = document.getElementById('admin-image');
         const imageUploadInput = document.getElementById('image-upload');
@@ -233,6 +236,60 @@
             };
             reader.readAsDataURL(file);
         });
+
+
+
+
+
+
+
+
+        const form = document.querySelector('form');
+        const firstnameInput = document.getElementById('firstname');
+        const lastnameInput = document.getElementById('lastname');
+        const emailInput = document.getElementById('email');
+    
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const firstname = firstnameInput.value;
+            const lastname = lastnameInput.value;
+            const email = emailInput.value;
+        
+            // Send AJAX request to update user data
+            fetch('/update-user-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    firstname,
+                    lastname,
+                    email
+                })
+            })
+            .then(response => response.json())
+            .then((data) => {
+                if (data.success) {
+                    // Update the user data in the UI
+                    document.querySelector('.username').textContent = `${firstname} ${lastname}`;
+                    document.querySelector('.email').textContent = email;
+        
+                    // Redirect to the correct page based on account type
+                    const accountType = 'admin'; // replace this with the actual account type
+                    if (accountType === 'admin') {
+                        window.location.href = "{{ url_for('accountadmin') }}";
+                    } else if (accountType === 'client') {
+                        window.location.href = "{{ url_for('accountclient') }}";
+                    }
+                } else {
+                    alert('Error updating user data');
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
+    
 
 
     </script>

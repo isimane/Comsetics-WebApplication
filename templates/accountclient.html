@@ -186,9 +186,9 @@
                             <button class="font-pop font-bold border-b-2 w-fit border-beige mt-20 flex justify-center ">Edit Your Profile <span class="text-beige"> </span></button>
                             <div class="pb-6  mt-10  md:mt-0 ">
                                 <form action="" class=" rounded-3xl mt-10  ">
-                                    <input type="text" id="FirstName" placeholder="Edit Your FirstName" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%] md:w-[90%] mb-4 placeholder-darkgreen"><br>
-                                    <input type="text" id="LastName" placeholder="Edit Your LastName" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
-                                    <input type="email" id="Email" placeholder="Edit Your Email" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
+                                    <input type="text" id="firstname" placeholder="Edit Your First Name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%] md:w-[90%] mb-4 placeholder-darkgreen"><br>
+                                    <input type="text" id="lastname" placeholder="Edit Your Last Name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
+                                    <input type="email" id="email" placeholder="Edit Your Email" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
                                     <button type="submit" class="bg-darkgreen text-light font-pop py-2 px-5 rounded-lg mt-3 text-[13px] hover:opacity-80 transition-opacity duration-300">Save your changes</button>
                                 </form>
                             </div>
@@ -228,6 +228,55 @@
             };
             reader.readAsDataURL(file);
         });
+
+
+        const form = document.querySelector('form');
+        const firstnameInput = document.getElementById('firstname');
+        const lastnameInput = document.getElementById('lastname');
+        const emailInput = document.getElementById('email');
+    
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const firstname = firstnameInput.value;
+            const lastname = lastnameInput.value;
+            const email = emailInput.value;
+        
+            // Send AJAX request to update user data
+            fetch('/update-user-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    firstname,
+                    lastname,
+                    email
+                })
+            })
+            .then(response => response.json())
+            .then((data) => {
+                if (data.success) {
+                    // Update the user data in the UI
+                    document.querySelector('.username').textContent = `${firstname} ${lastname}`;
+                    document.querySelector('.email').textContent = email;
+        
+                    // Redirect to the correct page based on account type
+                    const accountType = 'client'; // replace this with the actual account type
+                    if (accountType === 'admin') {
+                        window.location.href = "{{ url_for('accountadmin') }}";
+                    } else if (accountType === 'client') {
+                        window.location.href = "{{ url_for('accountclient') }}";
+                    }
+                } else {
+                    alert('Error updating user data');
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
+
+
     </script>
 
 </body>

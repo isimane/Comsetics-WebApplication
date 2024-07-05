@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
+from flask import request, jsonify
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret_key_here"
@@ -72,6 +73,37 @@ def signup():
         else:
             flash("Please fill in all the fields", "danger")
     return render_template("signup.html")
+
+
+
+
+
+
+
+
+@app.route('/update-user-data', methods=['POST'])
+def update_user_data():
+    data = request.get_json()
+    firstname = data['firstname']
+    lastname = data['lastname']
+    email = data['email']
+
+    # Update user data in the database
+    user = db.session.get(User, current_user.id)
+    if user:
+        user.firstname = firstname
+        user.lastname = lastname
+        user.email = email
+        db.session.commit()
+
+    return jsonify({'success': True})
+
+
+
+
+
+
+
 
 
 @app.route('/account')
