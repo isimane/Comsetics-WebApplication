@@ -81,7 +81,7 @@
 
 
     <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
-        <img src="../static/images/NUovalogo2.png" alt="" class="w-[79px] h-[30px]"> 
+        <img src="{{  url_for('static', filename='images/NUovalogo2.png')  }}" alt="" class="w-[79px] h-[30px]"> 
         <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
             <a href="index.html" class="p-8  hover:text-darkgreen">HOME</a>
             <div class="dropdown p-8">
@@ -172,7 +172,7 @@
                     <div class=" text-center">
                         
                         <div class="flex justify-center mt-20 hover:opacity-80 transition-opacity duration-300">
-                            <img id="admin-image" src="../static/images/admin.png" alt="" class="object-cover w-[60px] h-[60px] cursor-pointer">
+                            <img id="admin-image" src="{{  url_for('static', filename='images/admin.png')  }}" alt="" class="object-cover w-[60px] h-[60px] cursor-pointer">
                             <button id="edit-image-btn" class="relative top-[20px] left-[-18px]">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-pencil-fill text-darkgreen " viewBox="0 0 16 16">
                                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
@@ -188,17 +188,17 @@
                         <div class=" ">
                             <button class="font-pop font-bold border-b-2 w-fit border-beige mt-20 flex justify-center ">Edit Your Profile <span class="text-beige"> </span></button>
                             <div class="pb-6  mt-10  md:mt-0 ">
-                                <form action="" class=" rounded-3xl mt-10  ">
-                                    <input type="text" id="firstname" placeholder="Edit Your First Name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%] md:w-[90%] mb-4 placeholder-darkgreen"><br>
-                                    <input type="text" id="lastname" placeholder="Edit Your Last Name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
-                                    <input type="email" id="email" placeholder="Edit Your Email" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
+                                <form action="{{ url_for('update_data', id=user.id) }}" method="POST" class=" rounded-3xl mt-10  ">
+                                    <input type="text" id="firstname" name="firstname" placeholder="Edit Your First Name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%] md:w-[90%] mb-4 placeholder-darkgreen"><br>
+                                    <input type="text" id="lastname" name="lastname" placeholder="Edit Your Last Name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
+                                    <input type="email" id="email" name="email" placeholder="Edit Your Email" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
                                     <button type="submit" class="bg-darkgreen text-light font-pop py-2 px-5 rounded-lg mt-3 text-[13px] hover:opacity-80 transition-opacity duration-300">Save your changes</button>
                                 </form>
                             </div>
                         </div>
                         <div>
                             <div class=" md:w-[200px] lg:w-[300px] my-20 hidden md:block">
-                                <img src="../static/images/accountpic.png" alt="" class="rounded-l-full object-cover">
+                                <img src="{{  url_for('static', filename='images/accountpic.png')  }}" alt="" class="rounded-l-full object-cover">
                               </div>
                         </div>
                         
@@ -208,7 +208,7 @@
 
     </main>
 
-    <script src="../static/js/main.js"></script> 
+    <script src="{{  url_for('static', filename='js/main.js')  }}"></script> 
 
     <script>
         document.getElementById('logoutButton').addEventListener('click', function() {
@@ -238,57 +238,6 @@
         });
 
 
-
-
-
-
-
-
-        const form = document.querySelector('form');
-        const firstnameInput = document.getElementById('firstname');
-        const lastnameInput = document.getElementById('lastname');
-        const emailInput = document.getElementById('email');
-    
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const firstname = firstnameInput.value;
-            const lastname = lastnameInput.value;
-            const email = emailInput.value;
-        
-            // Send AJAX request to update user data
-            fetch('/update-user-data', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    firstname,
-                    lastname,
-                    email
-                })
-            })
-            .then(response => response.json())
-            .then((data) => {
-                if (data.success) {
-                    // Update the user data in the UI
-                    document.querySelector('.username').textContent = `${firstname} ${lastname}`;
-                    document.querySelector('.email').textContent = email;
-        
-                    // Redirect to the correct page based on account type
-                    const accountType = 'admin'; // replace this with the actual account type
-                    if (accountType === 'admin') {
-                        window.location.href = "{{ url_for('accountadmin') }}";
-                    } else if (accountType === 'client') {
-                        window.location.href = "{{ url_for('accountclient') }}";
-                    }
-                } else {
-                    alert('Error updating user data');
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        });
     
 
 

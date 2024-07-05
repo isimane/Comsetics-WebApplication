@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, abort, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 from flask import request, jsonify
@@ -81,27 +81,46 @@ def signup():
 
 
 
-@app.route('/update-user-data', methods=['POST'])
-def update_user_data():
-    data = request.get_json()
-    firstname = data['firstname']
-    lastname = data['lastname']
-    email = data['email']
-
-    # Update user data in the database
-    user = db.session.get(User, current_user.id)
+@app.route('/update_data/<string:id>', methods=['POST', 'GET'])
+@login_required
+def update_data(id):
+    user = User.query.get(id)
     if user:
-        user.firstname = firstname
-        user.lastname = lastname
-        user.email = email
-        db.session.commit()
+        if user.role == 'client':
+            if request.method == 'POST':
+                firstname = request.form['firstname']
+                lastname = request.form['lastname']
+                email = request.form['email']
 
-    return jsonify({'success': True})
+                if not firstname or not lastname or not email:
+                    flash('Please fill in all fields')
+                    return render_template("accountclient.html", user=current_user)
+                user.firstname = firstname
+                user.lastname = lastname
+                user.email = email
+                db.session.commit()
+                flash('User Updated', 'success')
+                return redirect(url_for("accountclient"))
+            return render_template("accountclient.html", user=current_user)
+        elif user.role == 'admin':
+            if request.method == 'POST':
+                firstname = request.form['firstname']
+                lastname = request.form['lastname']
+                email = request.form['email']
 
-
-
-
-
+                if not firstname or not lastname or not email:
+                    flash('Please fill in all fields')
+                    return render_template("accountadmin.html", user=current_user)
+                user.firstname = firstname
+                user.lastname = lastname
+                user.email = email
+                db.session.commit()
+                flash('User Updated', 'success')
+                return redirect(url_for("accountadmin"))
+            return render_template("accountadmin.html", user=current_user)
+    else:
+        flash('User not found', 'danger')
+        return redirect(url_for("login"))  # or any other route you want to redirect to
 
 
 
