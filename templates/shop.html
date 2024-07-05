@@ -53,8 +53,8 @@
       <body class="bg-light">
         {% block content %}
           <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
-              <img src="../static/images/NUovalogo2.png" alt="" class="w-[79px] h-[30px]"> 
-              <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
+            <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
+            <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
                   <a href="{{ url_for('home') }}" class="p-8 hover:text-darkgreen">HOME</a>
                   <div class="dropdown p-8">
                     <a href="{{ url_for('shop') }}" class="font-bold text-darkgreen ">SHOP</a>
@@ -78,7 +78,7 @@
                       </a>
                   </button>
                   <button>
-                      <a href="cart.html" class="hover:text-darkgreen">
+                      <a href="{{ url_for('cart') }}" class="hover:text-darkgreen">
                           <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                               <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                           </svg>
@@ -116,9 +116,9 @@
                           </svg>
                       </button>
                       <button>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart dark:text-light" viewBox="0 0 16 16">
+                          <a href="{{ url_for('cart') }}"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart dark:text-light" viewBox="0 0 16 16">
                               <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                          </svg>
+                          </svg></a>
                       </button>
                   </div>
               </div>
@@ -166,7 +166,7 @@
         <section class="w-[90%] mx-auto xl:max-w-[1400px] xl:mx-auto">
           <section class=" flex flex-col justify-center items-center md:flex md:flex-row  md:justify-between mx-auto ">
             <div class=" items-center flex flex-col justify-center md:text-start md:items-start md:justify-between md:w-[40%] pt-10">
-              <img src="{{ url_for('static', filename='images/NUOVAlogo2(white).png') }}" alt="logo" class="w-[79px] h-[30px] ">
+              <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUOVAlogo2(white).png') }}" alt="logo" class="w-[79px] h-[30px] "></a>
                 
                     <h2 class="text-[24px] font-bold border-b-2 border-beige mt-3">About NUOVA</h2>
                       <p class="space-y-2 flex flex-col pt-3 items-center text-center md:text-start  ">Welcome to Nuova, where beauty meets innovation. Our mission is to empower individuals to embrace their unique beauty with confidence. With a commitment to quality and excellence, we offer a curated collection of cosmetics, skincare, and fragrances crafted to elevate your daily routine.</p>
@@ -181,17 +181,17 @@
                             <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
                           </svg>
                   
-                       </div>
+              </div>
             </div>
             
                 <div class=" md:flex md:gap-4  items-center text-center flex flex-col md:flex-row mt-10 md:mt-0  md:text-start">
                     <ul class="pb-2 ">
-                        <li class="text-[24px] font-bold border-b-2 border-beige">Explore</li>
-                        <li class=" pt-3"> <a href="{{url_for('home')}}">HOME</a></li>
-                        <li class="pt-1">  <a href="{{ url_for('shop') }}">SHOP</a></li>
-                        <li class="pt-1"> <a href="{{ url_for('about') }}">ABOUT US</a></li>
-                        <li class="pt-1"><a href="{{ url_for('contact') }}">CONTACT US</a></li>
-                      </ul>
+                      <li class="text-[24px] font-bold border-b-2 border-beige">Explore</li>
+                    <li class=" pt-3"> <a href="{{url_for('home')}}">HOME</a></li>
+                    <li class="pt-1">  <a href="{{ url_for('shop') }}">SHOP</a></li>
+                    <li class="pt-1"> <a href="{{ url_for('about') }}">ABOUT US</a></li>
+                    <li class="pt-1"><a href="{{ url_for('contact') }}">CONTACT US</a></li>
+                    </ul>
                 </div>
       
                   <div class=" items-center flex flex-col text-center  mt-10 md:mt-5">
@@ -201,7 +201,6 @@
                       <li><span class="font-bold">Phone : </span>  0645678923</li>
                       <li><span class="font-bold">Email : </span>  NUOVA@gmail.com</li>
                     </ul>
-                  
                   </div>
                   
             
@@ -210,7 +209,8 @@
         </section>
       
       </footer>
-    <script src="../static/js/main.js"></script> 
+      <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
     {%endblock%}
 </body>
 </html>

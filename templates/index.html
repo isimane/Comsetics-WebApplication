@@ -56,7 +56,7 @@
 <body class="bg-light ">
     {% block content %}
     <header class="w-[90%] mx-auto flex noAnimation items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
-        <img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> 
+        <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
         <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
             <a href="{{ url_for('home') }}" class="p-8 font-bold text-darkgreen ">HOME</a>
             <div class="dropdown p-8">
@@ -114,9 +114,9 @@
             <div class="flex block md:hidden items-center gap-4 mt-3">
                 
                 <button>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person dark:text-light" viewBox="0 0 16 16">
+                   <a href="{{ url_for('cart') }}"> <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person dark:text-light" viewBox="0 0 16 16">
                         <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
-                    </svg>
+                    </svg></a>
                 </button>
                 <button>
                     <a href="{{ url_for('cart') }}"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart dark:text-light" viewBox="0 0 16 16">
@@ -293,7 +293,7 @@
         <section class="w-[90%] mx-auto xl:max-w-[1400px] xl:mx-auto">
           <section class=" flex flex-col justify-center items-center md:flex md:flex-row  md:justify-between mx-auto ">
             <div class=" items-center flex flex-col justify-center md:text-start md:items-start md:justify-between md:w-[40%] pt-10">
-              <img src="../static/images/NUOVAlogo2(white).png" alt="logo" class="w-[79px] h-[30px] ">
+              <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUOVAlogo2(white).png') }}" alt="logo" class="w-[79px] h-[30px] "></a>
                 
                     <h2 class="text-[24px] font-bold border-b-2 border-beige mt-3">About NUOVA</h2>
                       <p class="space-y-2 flex flex-col pt-3 items-center text-center md:text-start  ">Welcome to Nuova, where beauty meets innovation. Our mission is to empower individuals to embrace their unique beauty with confidence. With a commitment to quality and excellence, we offer a curated collection of cosmetics, skincare, and fragrances crafted to elevate your daily routine.</p>
@@ -313,14 +313,14 @@
             
                 <div class=" md:flex md:gap-4  items-center text-center flex flex-col md:flex-row mt-10 md:mt-0  md:text-start">
                     <ul class="pb-2 ">
-                        <li class="text-[24px] font-bold border-b-2 border-beige">Explore</li>
-                        <li class=" pt-3"> <a href="{{url_for('home')}}">HOME</a></li>
-                        <li class="pt-1">  <a href="{{ url_for('shop') }}">SHOP</a></li>
-                        <li class="pt-1"> <a href="{{ url_for('about') }}">ABOUT US</a></li>
-                        <li class="pt-1"><a href="{{ url_for('contact') }}">CONTACT US</a></li>
-                      </ul>
+                      <li class="text-[24px] font-bold border-b-2 border-beige">Explore</li>
+                    <li class=" pt-3"> <a href="{{url_for('home')}}">HOME</a></li>
+                    <li class="pt-1">  <a href="{{ url_for('shop') }}">SHOP</a></li>
+                    <li class="pt-1"> <a href="{{ url_for('about') }}">ABOUT US</a></li>
+                    <li class="pt-1"><a href="{{ url_for('contact') }}">CONTACT US</a></li>
+                    </ul>
                 </div>
-
+      
                   <div class=" items-center flex flex-col text-center  mt-10 md:mt-5">
                     <h3 class="text-[24px] font-bold border-b-2 border-beige  mb-1 text-center   md:text-start md:text-start">Customer Service</h3>
                     <p class="md:w-[195px] text-center pt-2 md:text-start">Have questions or need assistance? Our dedicated customer service team is here to help. Contact us:</p>
@@ -328,17 +328,17 @@
                       <li><span class="font-bold">Phone : </span>  0645678923</li>
                       <li><span class="font-bold">Email : </span>  NUOVA@gmail.com</li>
                     </ul>
-                  
                   </div>
                   
             
           </section>
           <p class="pt-9 text-center md:text-start">Nuova Beauty © 2024 Nuova. All rights reserved.</p>
         </section>
-
+      
       </footer>
 
-    <script src="../static/js/main.js"></script>
+      <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
     {% endblock %}
 </body>
 </html>

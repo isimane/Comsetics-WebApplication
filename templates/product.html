@@ -49,8 +49,8 @@
   <body class="bg-light">
 
       <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
-          <img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> 
-          <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
+        <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
+        <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
               <a href="{{url_for('home')}}" class="p-8  hover:text-darkgreen">HOME</a>
               <div class="dropdown p-8">
                   <a href="{{ url_for('shop') }}" class=" font-bold text-darkgreen ">SHOP</a>
@@ -172,6 +172,9 @@
                 </section>
         </div> -->
     </main>
+    <footer class="bg-darkgreen">
+        <a href="{{ url_for('home') }}"><p class="p-4 text-center text-light font-semibold ">Nuova Beauty © 2024 Nuova. All rights reserved.</p></a>
+    </footer>
     <!-- <script src="../static/js/main.js"></script> -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <!-- <script src="{{ url_for('static', filename='js/cart.js') }}"></script> -->

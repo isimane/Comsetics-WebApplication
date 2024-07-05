@@ -181,20 +181,6 @@ def delete_product(id):
   
 
 
-@app.route("/cookie", methods=['POST'])
-def cookie():
-    data = request.json
-    response = make_response(jsonify({"message": "Your cookie is added"}))
-    response.set_cookie('cart_data', json.dumps(data))
-    return response
-
-@app.route("/view_cookie", methods=['GET'])
-def view_cookie():
-    cart_data = request.cookies.get('cart_data')
-    if cart_data: 
-        return jsonify(json.loads(cart_data))
-    else:
-        return jsonify({"message": "No cart data found"})
 
 
 @app.route("/add_to_cart", methods=['POST'])
@@ -229,10 +215,34 @@ def add_cart():
     # })
     
     return jsonify({"success": False, "message": "Item added to cart"}), 200
-@app.route("/cart")
+@app.route('/cart', methods=['GET'])
 def cart():
-    global cart_items
-    return render_template("cart.html", cart_items=cart_items)
+    cart_items = request.cookies.get('cart_items', '[]')
+    cart_items_list = json.loads(cart_items)
+    
+    cart_details = []
+    total = 0
+    
+    with sqlite3.connect("db.db") as con:
+        cur = con.cursor()
+        for item in cart_items_list:
+            cur.execute("SELECT name, price, image FROM products WHERE id = ?", (item['id'],))
+            product = cur.fetchone()
+            if product:
+                name, price, image = product
+                subtotal = price * item['quantity']
+                cart_details.append({
+                    'id': item['id'],
+                    'name': name,
+                    'price': price,
+                    'image': url_for('static', filename=f'media/{image}'),
+                    'quantity': item['quantity'],
+                    'subtotal': subtotal
+                })
+                total += subtotal
+    
+    return render_template("cart.html", cart_items=cart_details, total=total)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
