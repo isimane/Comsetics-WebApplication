@@ -124,14 +124,11 @@
                     <img src="{{ url_for('static', filename='media/' + product['image']) }}" alt="" class="h-[400px] w-full object-cover   md:rounded-l-3xl shadow-2xl ">
                 </section>
                 <section class="w-[100%] mx-auto ">
-                    <div class="text-center bg-light shadow-2xl  md:rounded-r-3xl md:rounded-b-0 md:py-5 pt-2 lg:pt-10  h-[400px] ">
+                    <div class="text-center bg-light shadow-2xl  md:rounded-r-3xl md:rounded-b-0 md:py-12 pt-2 lg:pt-20  h-[400px] ">
                         <h1 class="font-bold font-pop md:w-[90%] lg:w-[100%] text-2xl text-center">{{ product.name }}</h1>
                         <p class="text-darkgreen text-center mt-3  lg:w-[80%] mx-auto">{{ product.description }}</p>
                         <p class="font-bold my-3">{{ product.price }}$</p>
-                        <button class="addToCartBtn px-4 py-2 my-3 w-[90%] mx-auto items-center flex flex-row justify-center" data-product-id="{{ product.id }}" data-product-quantity="{{ product.quantity }}" data-product-price="{{ product.price }}" data-product-name="{{ product.name }}" >Add to Cart
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                        </svg></button>
+                        
                         <p class="font-bold text-[12px]">choose you quantity:</p>
                         <div class="flex items-center justify-center my-4">
                             <button class="decrease w-8 h-6 bg-beige bg-opacity-65  rounded-l-lg text-light  font-bold  focus:outline-none">-</button>
@@ -140,7 +137,11 @@
                         </div>
                           
                           
-                        <button class="bg-darkgreen px-[80px]  md:px-[80px]  lg:px-[100px] py-2 text-light rounded-xl  hover:opacity-80 transition-opacity duration-300">shop now </button>
+                        <button class="addToCartBtn bg-darkgreen items-center text-[12px] md:text-[14px] px-[40px] md:px-[80px] mx-auto flex justify-center md:px-[80px]   py-2 text-light rounded-xl  hover:opacity-80 transition-opacity duration-300">Add to cart 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-light bi bi-cart" viewBox="0 0 16 16">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                                </svg>
+                        </button>
                     </div>
                     
                 </section>
@@ -172,7 +173,7 @@
                 </section>
         </div> -->
     </main>
-    <footer class="bg-darkgreen">
+    <footer class="bg-darkgreen mt-20">
         <a href="{{ url_for('home') }}"><p class="p-4 text-center text-light font-semibold ">Nuova Beauty © 2024 Nuova. All rights reserved.</p></a>
     </footer>
     <!-- <script src="../static/js/main.js"></script> -->

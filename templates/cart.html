@@ -127,18 +127,19 @@
             
             
               <div class="bg-light mt-10 flex items-center justify-center w-[50%] mx-auto font-pop xl:max-w-[1440px] xl:mx-auto">
-                <div class="bg-light p-8 rounded-2xl shadow-lg  w-full">
+                <div class="bg-light p-8 rounded-2xl shadow-xl w-full">
                   <h2 class="text-2xl font-fraun font-bold text-3xl text-darkgreen mb-6">Your Cart</h2>
                   
                   <div class="cart_items space-y-4">
                     {% if cart_items %}
                         {% for item in cart_items %}
-                            <div class="flex items-center space-x-4 bg-lightbeige bg-opacity-30 p-4 rounded-2xl cart-item" data-product-id="{{ item['id'] }}">
-                                <div class="flex-grow">
+                            <div class="flex flex-col text-center md:flex-row text-start items-center space-x-4 bg-lightbeige bg-opacity-30 p-4 rounded-2xl cart-item" data-product-id="{{ item['id'] }}">
+                                <a href="{{ url_for('product', id=item['id']) }}" class="cursor-pointer"><div class="flex-grow">
                                     <img src="{{ item['image'] }}" class="h-20 w-24 object-cover rounded-lg" alt="cartProduct">
                                     <h3 class="font-semibold text-darkgreen mt-2">{{ item['name'] }}</h3>
                                     <p class="font-semibold text-[12px]">${{ item['price'] }}</p>
                                     <p class="text-sm text-gray-600">Quantity: {{ item['quantity'] }}</p>
+                                </a>
                                 </div>
                                 <div class="text-right md:mt-20">
                                     <span class="font-bold text-beige">${{ item['subtotal'] }}</span><br>
@@ -156,17 +157,15 @@
                           
                           <span class="font-bold text-beige">${{ total }}</span>
                         </div>
-                        <button class="w-full bg-darkgreen text-light  py-2 rounded rounded-xl hover:opacity-80 transition-opacity duration-300">
-                          Proceed to Checkout
-                        </button>
+                        <a href="{{ url_for('checkout') }}"><button class="w-full bg-darkgreen text-light  py-2 rounded rounded-xl hover:opacity-80 transition-opacity duration-300">Proceed to Checkout</button></a>
                       </div>
                     </div>
                   </div>
                 </div>   
               </div>
-              <footer class="bg-darkgreen">
-                <a href="{{ url_for('home') }}"><p class="p-4 text-center text-light font-semibold ">Nuova Beauty © 2024 Nuova. All rights reserved.</p></a>
-            </footer>
+              <footer class="bg-darkgreen mt-20">
+                    <a href="{{ url_for('home') }}"><p class="p-4 text-center text-light font-semibold ">Nuova Beauty © 2024 Nuova. All rights reserved.</p></a>
+              </footer>
               <script src="{{ url_for('static', filename='js/main.js') }}"></script>
               <!-- <script src="{{ url_for('static', filename='js/cart.js') }}"></script> -->
 

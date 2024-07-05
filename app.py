@@ -243,6 +243,8 @@ def cart():
     
     return render_template("cart.html", cart_items=cart_details, total=total)
 
-
+@app.route("/checkout")
+def checkout():
+    return render_template("checkout.html")
 if __name__ == "__main__":
     app.run(debug=True)
