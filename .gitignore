@@ -3,3 +3,5 @@ venv
 env
 myenv
 .venv
+__pycache__
+media
