@@ -172,22 +172,26 @@
         <div class="max-w-5xl mx-auto bg-light p-8 shadow-lg rounded-3xl  my-10">
             <h2 class="text-3xl font-bold mb-6 font-fraun text-darkgreen">Checkout</h2>
             <div class="flex flex-col md:flex-row gap-8">
-                <form class="flex-grow">
+                <form class="flex-grow" method="post" action="{{ url_for('checkout') }}">
                     <div class="mb-4">
-                        <label for="name" class="block font-pop text-sm font-semibold mb-2">Full Name</label>
-                        <input type="text" id="name" class="w-full px-3 py-2 text-darkgreen outline-none bg-lightbeige bg-opacity-30 rounded-lg" required>
+                        <label for="name" class="block font-pop text-sm font-semibold mb-2">First Name</label>
+                        <input type="text" id="name" name="firstname" class="w-full px-3 py-2 text-darkgreen outline-none bg-lightbeige bg-opacity-30 rounded-lg" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="name" class="block font-pop text-sm font-semibold mb-2">Last Name</label>
+                        <input type="text" id="name" name="lastname" class="w-full px-3 py-2 text-darkgreen outline-none bg-lightbeige bg-opacity-30 rounded-lg" required>
                     </div>
                     <div class="mb-4">
                         <label for="address" class="block font-pop text-sm font-semibold mb-2">Delivery Address</label>
-                        <textarea id="address" class="w-full px-3 py-2 border-beige outline-none text-darkgreen bg-lightbeige bg-opacity-30 rounded-lg" rows="3" required></textarea>
+                        <textarea id="address" name="address" class="w-full px-3 py-2 border-beige outline-none text-darkgreen bg-lightbeige bg-opacity-30 rounded-lg" rows="3" required></textarea>
                     </div>
                     <div class="mb-4">
                         <label for="phone" class="block font-pop text-sm font-semibold mb-2">Phone Number</label>
-                        <input type="tel" id="phone" class="w-full px-3 py-2 bg-lightbeige outline-none text-darkgreen bg-opacity-30 border-beige border-1 rounded-lg" required>
+                        <input type="tel" id="phone" name="phone" class="w-full px-3 py-2 bg-lightbeige outline-none text-darkgreen bg-opacity-30 border-beige border-1 rounded-lg" required>
                     </div>
                     <div class="mb-6">
-                        <label for="email" class="block font-pop text-sm font-semibold mb-2">Email Address</label>
-                        <input type="email" id="email" class="w-full px-3 bg-lightbeige text-darkgreen outline-none bg-opacity-30 py-2 border-beige border-1 rounded-lg" required>
+                        <label for="email"  class="block font-pop text-sm font-semibold mb-2">Email Address</label>
+                        <input type="email" name="email" id="email" class="w-full px-3 bg-lightbeige text-darkgreen outline-none bg-opacity-30 py-2 border-beige border-1 rounded-lg" required>
                     </div>
                     <div class="mb-6">
                         <p class="font-pop text-sm font-semibold mb-2">Payment Method</p>
@@ -196,25 +200,23 @@
                             <label for="cod" class="font-pop">Cash on Delivery</label>
                         </div>
                     </div>
+                    <button type="submit" class="w-full bg-darkgreen mt-6 text-light py-2 px-4 rounded-xl hover:opacity-80 transition-opacity duration-300">
+                        Place Order
+                    </button>
                 </form>
                 
                 <div class="w-full md:w-64 bg-lightbeige bg-opacity-30 p-4 rounded-lg h-fit mt-7">
                     <h3 class="text-xl font-bold mb-3 font-fraun text-darkgreen">Order Summary</h3>
-                    <div class="flex justify-between mt-10 mb-7">
-                        <span class="font-pop text-sm">Subtotal:</span>
-                        <span class="font-pop text-sm">$XX.XX</span>
+                    <!-- <div class="flex justify-between mt-10 mb-7">
+                        <span class="font-pop text-sm">subtotal</span>                       
+                        <span class="font-pop text-sm">${{ subtotal }}</span>
                     </div>
-                    <div class="flex justify-between mb-2 my-7">
-                        <span class="font-pop text-sm">Shipping:</span>
-                        <span class="font-pop text-sm">$X.XX</span>
-                    </div>
+                     -->
                     <div class="flex justify-between font-semibold mb-4 my-7">
                         <span class="font-pop text-sm">Total:</span>
-                        <span class="font-pop text-sm">$XX.XX</span>
+                        <span class="font-pop text-sm">${{ total }}</span>
                     </div>
-                    <button type="submit" class="w-full bg-darkgreen mt-6 text-light py-2 px-4 rounded-xl hover:opacity-80 transition-opacity duration-300">
-                        Place Order
-                    </button>
+                    
                 </div>
             </div>
         </div>

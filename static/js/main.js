@@ -94,6 +94,7 @@ function addToCartBtns(){
       button.addEventListener("click", ()=>{
         console.log('clicked');
         const productId = button.getAttribute('data-product-id');
+        // console.log(productId)
         let productQuantity;
         if (document.getElementById('product_quantity_' + productId)) {
           productQuantity = document.getElementById('product_quantity_' + productId).value;
@@ -105,6 +106,7 @@ function addToCartBtns(){
           id: parseInt(productId),
           quantity: parseInt(productQuantity),
         };
+
         
         fetch('/add_to_cart', {
           method: 'POST',
