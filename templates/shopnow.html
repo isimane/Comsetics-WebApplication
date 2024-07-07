@@ -52,7 +52,7 @@
           <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
               <a href="{{url_for('home')}}" class="p-8 hover:text-darkgreen">HOME</a>
               <div class="dropdown p-8">
-                  <a href="{{url_for('shop')}}" class="font-bold text-darkgreen ">SHOP</a>
+                  <a href="{{ url_for('shop') }}" class="font-bold text-darkgreen ">SHOP</a>
                   <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
                     <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
                     <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
@@ -92,7 +92,7 @@
           <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
               <a href="{{url_for('home')}}" class="text-light p-3">HOME</a>
               <div class="dropdown">
-                  <a href="{{url_for('shop')}}" class="font-bold text-light p-8">SHOP</a>
+                  <a href="{{ url_for('shop') }}" class="font-bold text-light p-8">SHOP</a>
                   <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
                     <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
                     <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
@@ -116,7 +116,10 @@
               </div>
           </div>
       </nav>
-      <main class="bg-light shadow-2xl rounded-3xl w-[80%] mx-auto">
+
+
+      
+      <!-- <main class="bg-light shadow-2xl rounded-3xl w-[80%] mx-auto">
         <form action="">
             <div class="w-[90%] mx-auto justify-center w-fit mt-10 py-20">
                 <div class="flex gap-20 items-center  ">
@@ -145,7 +148,43 @@
               
             </div>
         </form>
-      </main>
-    
+      </main> -->
+ <div class="max-w-md mx-auto bg-light p-8 rounded-3xl shadow-2xl">
+        <h2 class="text-2xl font-bold mb-6 font-fraun text-darkgreen">Checkout</h2>
+        <form>
+          <div class="mb-4">
+            <label for="name" class="block text-black font-pop text-sm font-bold mb-2">Full Name</label>
+            <input type="text" id="name" class="w-full px-3 py-2 border-beige border-1  bg-light rounded-lg " required>
+          </div>
+          <div class="mb-4">
+            <label for="address" class="block text-black font-pop text-sm font-bold mb-2">Delivery Address</label>
+            <textarea id="address" class="w-full px-3 py-2 border-beige   bg-light rounded-lg " rows="3" required></textarea>
+          </div>
+          <div class="mb-4">
+            <label for="phone" class="block text-black font-pop text-sm font-bold mb-2">Phone Number</label>
+            <input type="tel" id="phone" class="w-full px-3 py-2 bg-light border-beige border-1  rounded-lg " required>
+          </div>
+          <div class="mb-6">
+            <label for="email" class="block text-black font-pop text-sm font-bold mb-2">Email Address</label>
+            <input type="email" id="email" class="w-full px-3 bg-light py-2 border-beige border-1  rounded-lg " required>
+          </div>
+          <div class="mb-6">
+            <p class="text-black font-pop text-sm font-bold mb-2">Payment Method</p>
+            <div class="flex items-center">
+              <input type="radio" id="cod" name="payment" value="cod" class="mr-2" checked>
+              <label for="cod" class="text-black font-pop">Cash on Delivery</label>
+            </div>
+          </div>
+          <button type="submit" class="w-full bg-darkgreen text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 ">
+            Place Order
+          </button>
+        </form>
+      </div>
+      <div class="min-h-screen bg-beige-100 flex items-center justify-center p-4">
+        <div class="w-full max-w-4xl bg-white rounded-lg shadow-xl overflow-hidden">
+          <div class="flex flex-col md:flex-row">
+           
+           
+     
 </body>
 </html>
