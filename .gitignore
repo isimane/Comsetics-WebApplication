@@ -1,4 +1,8 @@
 myProjectFlask
 venv
+.venv
+.vscode
 env
 myenv
+__pycache__
+media
