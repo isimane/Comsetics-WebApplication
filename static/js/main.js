@@ -1,8 +1,10 @@
 const hamburgerlist = document.getElementById("burgerlist");
+const noAnimationElements = document.querySelectorAll(".noAnimation");
+
 const navbar = document.getElementById("navbar");
 const unshowlist = document.getElementById("unshowlist")
 
-const noAnimationElements = document.querySelectorAll(".noAnimation");
+
 
 // const alerts = document.querySelectorAll('.alert');
 

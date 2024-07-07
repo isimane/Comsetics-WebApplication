@@ -55,7 +55,7 @@
 </head>
 <body class="bg-light ">
     {% block content %}
-    <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
+    <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px] noAnimation">
         <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
         <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
             <a href="{{ url_for('home') }}" class="p-8 font-bold text-darkgreen">HOME</a>
@@ -98,8 +98,7 @@
             </svg>
         </button>
     </header>
-    <!-- this navbar is for samll screens -->
-    <nav class="flex flex-col" id="navbar">
+    <nav class="flex flex-col noAnimation" id="navbar">
         <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
             <a href="{{ url_for('home') }}" class="text-light font-bold p-3">HOME</a>
             <div class="dropdown">
@@ -130,7 +129,7 @@
       <main class=" mt-20  ">
 
         <!-- section1 -->
-        <section class="w-[90%] mx-auto flex  flex-col md:flex-row items-center xl:max-w-[1400px] xl:mx-auto ">
+        <section class="w-[90%] mx-auto flex noAnimation flex-col md:flex-row items-center xl:max-w-[1400px] xl:mx-auto ">
             <div class="text-center md:text-left">
                 <h1 class="text-darkgreen font-fraun font-bold text-3xl md:text-5xl mb-4 md:w-[80%] pb-6 md:pb-4">
                     Let NUOVA Help You Look Your Best.
@@ -147,12 +146,12 @@
         </section>
 
         <!-- section2 -->
-        <section class="mt-20 text-center xl:max-w-[1400px] xl:mx-auto ">
+        <section class="mt-20 text-center noAnimation xl:max-w-[1400px] xl:mx-auto ">
           <h2 class="text-2xl md:text-3xl font-bold mb-4">Shop By Category</h2>
           <div class="bg-beige w-24 h-1 mx-auto mb-10"></div>
 
         <!-- CategoryProductsSEction -->
-          <div class="flex flex-col md:flex-row gap-8  w-[75%] mx-auto">
+          <div class="flex flex-col md:flex-row gap-8  w-[75%] mx-auto noAnimation ">
                           <div class="block md:hidden">
                                 <div class="flex gap-8 w-full justify-center">
                                       <a href="{{ url_for('shop', **dict(request.args, category=1)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
@@ -208,7 +207,7 @@
       </section>
 
       <!-- section3 -->
-      <section class="w-[100%] mx-auto mt-20 bg-darkgreen pb-10 lg:pb-4 xl:pb-4" >
+      <section class="w-[100%] mx-auto noAnimation mt-20 bg-darkgreen pb-10 lg:pb-4 xl:pb-4" >
         <section class="xl:max-w-[1400px] xl:mx-auto ">
          <div class="my-9 block md:justify-end  md:hidden ">
             <img src="{{ url_for('static', filename='media/' + featured['image']) }}" alt="image4" class="w-full object-cover">
@@ -237,7 +236,7 @@
           <div class="bg-beige w-24 h-1 mx-auto mb-10"></div>
         </div>
       </section>
-      <section class="xl:w-[1400px] xl:mx-auto">  
+      <section class="xl:w-[1400px] xl:mx-auto noAnimation">  
         <section class="grid md:grid-cols-3 gap-20 md:w-[90%] w-[80%] mx-auto">
             {% for product in threeprod[:3] %}
             <div class="text-center flex flex-col justify-center md:flex-row gap-20 ">
@@ -285,12 +284,12 @@
         
 
             <div class="ml-[5%] mt-20">
-              <a href="{{ url_for('shop') }}" class="text-black mt-6 border-b-2 border-beige hover:font-bold  transition duration-300  font-bold">Click for more Products <span class="font-bold text-beige">></span></a>
+              <a href="{{ url_for('shop') }}" class="text-black mt-6 border-b-2 border-beige hover:font-bold  transition duration-300 noAnimation  font-bold">Click for more Products <span class="font-bold text-beige">></span></a>
             </div>
       </section>
       
 
-      <footer class="bg-darkgreen mt-20 md:block pb-3 text-light items-center">
+      <footer class="bg-darkgreen mt-20 noAnimation md:block pb-3 text-light items-center">
         <section class="w-[90%] mx-auto xl:max-w-[1400px] xl:mx-auto">
           <section class=" flex flex-col justify-center items-center md:flex md:flex-row  md:justify-between mx-auto ">
             <div class=" items-center flex flex-col justify-center md:text-start md:items-start md:justify-between md:w-[40%] pt-10">

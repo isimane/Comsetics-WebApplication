@@ -60,6 +60,14 @@
             .dropdown:hover .dropdown-menu {
                 display: block;
             }
+            .animateScroll {
+        animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+        }
     </style>
 </head>
 <body class="bg-light">
@@ -80,7 +88,7 @@
 {% endwith %}
 
 
-    <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
+    <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px] noAnimation">
         <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
         <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
             <a href="index.html" class="p-8  hover:text-darkgreen">HOME</a>
@@ -96,7 +104,7 @@
             <a href="about.html" class="p-8 hover:text-darkgreen">ABOUT US</a>
             <a href="contactus.html" class="hover:text-darkgreen">CONTACT US</a>
         </nav>
-        <div class="flex hidden md:flex items-center gap-4">
+        <div class="flex hidden md:flex items-center gap-4 noAnimation">
            
             <button>
                 <a href="login.html" class="hover:text-darkgreen">
@@ -123,7 +131,7 @@
         </button>
     </header>
     <!-- this navbar is for samll screens -->
-    <nav class="flex flex-col" id="navbar">
+    <nav class="flex flex-col noAnimation" id="navbar">
         <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
             <a href="index.html" class="text-light p-3">HOME</a>
             <div class="dropdown">
@@ -152,13 +160,13 @@
             </div>
         </div>
     </nav>
-    <main class="">
+    <main class="noAnimation">
         
-        <section class="flex flex-col md:flex-row items-center justify-between w-[90%] mx-auto mt-20 xl:max-w-[1400px] xl:mx-auto">
+        <section class="flex flex-col md:flex-row items-center justify-between w-[90%] mx-auto mt-20 xl:max-w-[1400px] xl:mx-auto noAnimation">
             <h1 class="text-4xl text-beige font-fraun font-bold">Hello,  {{ user.firstname }} !</h1>
             <button id="logoutButton" class="bg-darkgreen text-white px-6 py-1 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> Log out</button>
         </section>
-        <section class="bg-lightbeige bg-opacity-30 shadow-2xl rounded-[50px] mx-[5%]  mt-20  py-10 w-[80%] md:w-[60%] mx-auto xl:max-w-[1400px] xl:mx-auto mb-20">
+        <section class="bg-lightbeige bg-opacity-30 shadow-2xl rounded-[50px] mx-[5%]  mt-20  py-10 w-[80%] md:w-[60%] mx-auto xl:max-w-[1400px] xl:mx-auto mb-20 noAnimation">
                 <div class="">
                     <div class=" text-center">
                         <div class="flex justify-center mt-20 hover:opacity-80 transition-opacity duration-300">
