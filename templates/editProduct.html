@@ -47,7 +47,7 @@
     </head>
     <body class="bg-light">
         <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
-            <img src="../static/images/NUovalogo2.png" alt="" class="w-[79px] h-[30px]"> 
+            <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
             <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
                 <a href="index.html" class="p-8  hover:text-darkgreen">HOME</a>
                 <div class="dropdown p-8">
@@ -76,7 +76,7 @@
                     </a>
                 </button>
                 <button>
-                    <a href="cart.html" class="hover:text-darkgreen">
+                    <a href="{{ url_for('cart') }}" class="hover:text-darkgreen">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                             <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                         </svg>
@@ -128,23 +128,36 @@
         </nav>
         <main class="mb-10">
             <div class="pb-6 mt-10 w-[80%] md:w-[80%] md:mt-0 mx-auto xl:max-w-[1400px] xl:mx-auto">
-                <form action="" class="bg-lightbeige bg-opacity-30 shadow-2xl rounded-[50px] px-12  mt-10 md:w-[60%] mx-auto py-10  xl:max-w-[1400px] xl:mx-auto mb-20">
-                  <label for="ProductName" class="text-darkgreen font-bold ">Product Name </label><br>
-                  <input type="text" id="ProductName" placeholder="Change your product's name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen  placeholder-opacity-65"><br>
-                  <label for="ProductImage" class="text-darkgreen font-bold ">Product Image </label><br>
-                  <input type="file" id="ProductImage"placeholder="choose your product's image" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen pl file-opacity-25 file:border-0 file:bg-beige file:rounded-lg  file:shadow-xl  file:text-[14px]  file:text-light file:cursor-pointer file:hover:opacity-80 file:transition-opacity file:duration-300 "><br>
-                  <label for="ProductDescription" class="text-darkgreen font-bold ">Product
-                    Description </label><br>
-                  <input type="text" id="ProductDescription" placeholder="Change your product's description" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
-                  <label for="ProductPrice" class="text-darkgreen font-bold ">Product
-                    Price </label><br>
-                  <input type="text" id="ProductPrice" placeholder="Change your product's price" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
-                  <label for="ProductQuantity" class="text-darkgreen font-bold ">Product
-                    Quantity </label><br>
-                  <input type="text" id="ProductQuantity" placeholder="Change your product's quantity" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
-                  <button type="submit" class="bg-darkgreen text-[13px] text-light font-pop py-1 px-5 rounded-lg mt-3 hover:opacity-80 transition-opacity duration-300">Save your changes</button>
+                <form method="POST" enctype="multipart/form-data"  action='{{url_for("edit_product", id=product_id)}}' class="bg-lightbeige bg-opacity-30 shadow-2xl rounded-[50px] px-12  mt-10 md:w-[60%] mx-auto py-10  xl:max-w-[1400px] xl:mx-auto mb-20">
+                    <label for="ProductName" class="text-darkgreen font-bold " >Product Name </label><br>
+                    <input type="text" id="ProductName" name="ProductName"  value="{{ product[2] }}" required placeholder="Change your product's name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen  placeholder-opacity-65"><br>
+                    <label for="ProductImage" class="text-darkgreen font-bold ">Product Image </label><br>
+                    <img src="{{ url_for('static', filename='media/' + product[1]) }}" alt="Current image" class=" w-[150px] h-[150px] object-cover mb-4 rounded-lg">
+                    <input type="file" id="ProductImage" name="ProductImage"   value="{{ product[1] }}" placeholder="choose your product's image" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen pl file-opacity-25 file:border-0 file:bg-beige file:rounded-lg  file:shadow-xl  file:text-[14px]  file:text-light file:cursor-pointer file:hover:opacity-80 file:transition-opacity file:duration-300 "><br>
+                    <label for="ProductDescription" class="text-darkgreen font-bold ">Product
+                      Description </label><br>
+                    <textarea id="ProductDescription" name="ProductDescription" required placeholder="Change your product's description" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65">{{ product[6]}}</textarea><br>
+                    <label for="ProductPrice" class="text-darkgreen font-bold ">Product
+                      Price </label><br>
+                    <input type="number" id="ProductPrice" name="ProductPrice"  value="{{ product[4] }}" required placeholder="Change your product price" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
+                    <label for="ProductQuantity" class="text-darkgreen font-bold ">Product
+                      Quantity </label><br>
+                    <input type="number" id="ProductQuantity" name="ProductQuantity"  value="{{ product[5] }}" required placeholder="Change your product's quantity" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
+                    <label for="ProductCategory" class="text-darkgreen font-bold ">Product
+                      Category </label><br>
+                      <select name="ProductCategory" id="ProductCategory" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65">
+                        {% for category in categories %}
+                            {% if category[0] == product[3] %}
+                                <option value="{{ category[0] }}" selected>{{ category[1] }}</option>
+                            {% else %}
+                                <option value="{{ category[0] }}">{{ category[1] }}</option>
+                            {% endif %}
+                        {% endfor %}
+                      </select>
+                    <button type="submit" class="bg-darkgreen text-[13px] text-light font-pop py-1 px-5 rounded-lg mt-3 hover:opacity-80 transition-opacity duration-300">Save your changes</button>
                 </form>
-              </div> 
+            </div>
+            
         </main>
     <script src="../static/js/main.js"></script>
 </body>
