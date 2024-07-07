@@ -224,6 +224,8 @@ def add_cart():
     # })
     
     return jsonify({"success": False, "message": "Item added to cart"}), 200
+
+#//////CART CHECKOUT ORDERS////
 @app.route('/cart', methods=['GET'])
 def cart():
     cart_items = request.cookies.get('cart_items', '[]')
@@ -252,28 +254,23 @@ def cart():
     
     return render_template("cart.html", cart_items=cart_details, total=total)
 
-from flask import flash, redirect, url_for, request, render_template, make_response
-import sqlite3
-import json
 
 @app.route('/checkout', methods=['GET', 'POST'])
-# @login_required
+# @loginrequired
 def checkout():
-    print("Checkout function called")
     print(f"Request method: {request.method}")
     
     if request.method == 'POST':
         print("POST request received")
         print(f"Form data: {request.form}")
         
-        try:
-            firstname = request.form["firstname"]
-            lastname = request.form["lastname"]
-            address = request.form["address"]
-            phone = request.form["phone"]
-            email = request.form["email"]
-            
-            with sqlite3.connect("db.db") as con:
+        firstname = request.form["firstname"]
+        lastname = request.form["lastname"]
+        address = request.form["address"]
+        phone = request.form["phone"]
+        email = request.form["email"]
+        
+        with sqlite3.connect("db.db") as con:
                 cur = con.cursor()
                 cur.execute("SELECT id FROM user WHERE email=?", (email,))
                 result = cur.fetchone()
@@ -303,21 +300,16 @@ def checkout():
                 for item in cart_items_list:
                     cur.execute("INSERT INTO order_item (order_id, product_id, quantity) VALUES (?,?,?)",
                                 (order_id, item['id'], item['quantity']))
-                
-                con.commit() 
-                print(f"Order {order_id} inserted successfully")
-            
-            response = make_response(redirect(url_for('thankyou', order_id=order_id)))
-            response.set_cookie('cart_items', '[]', expires=0)
-            print("Redirecting to thank you page")
-            return response
+
+                    con.commit() 
+                    print(f"Order {order_id} inserted successfully")
         
-        except Exception as e:
-            print(f"An error occurred: {str(e)}")
-            flash("An error occurred while processing your order. Please try again.", "error")
-            return redirect(url_for('checkout'))
+        response = make_response(redirect(url_for('thankyou', order_id=order_id)))
+        response.set_cookie('cart_items', '[]', expires=0)
+        print("Redirecting to thank you page")
+        return response
     
-    else:  # GET request
+    else: 
         print("GET request received")
         cart_items = request.cookies.get('cart_items', '[]')
         cart_items_list = json.loads(cart_items)
@@ -332,39 +324,85 @@ def checkout():
         
         print(f"Rendering checkout template with total: {total}")
         return render_template("checkout.html", total=total, cart_items=cart_items_list)
+    
+    
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
 
 
 @app.route('/thankyou/<int:order_id>')
 def thankyou(order_id):
-    return render_template('thankyou.html', order_id=order_id)
-#  if request.method =='POST':
-#         firstname = request.form["firstname"]
-#         lastname = request.form["lastname"]
-#         address = request.form["address"]
-#         phone = request.form["phone"]
-#         email = request.form["email"]
-#         with sqlite3.connect("db.db") as con:
-#             cur =con.cursor()
-#             cur.execute("SELECT id FROM user WHERE email=?",(email,))
-#             result =cur.fetchone()
-#             if result:
-#                 user_id = result[0]
-#             else:
-#                 return"User not found"
-# @app.route("/orders")
-# def orders():
-#     with sqlite3.connect("db.db") as con:
-#         con.row_factory = sqlite3.Row  # This allows accessing columns by name
-#         cur = con.cursor()
-#         cur.execute("""
-#             SELECT orders.id, orders.order_amount, orders.order_date, users.email 
-#             FROM orders 
-#             JOIN users ON orders.user_id = users.id 
-#             ORDER BY orders.order_date DESC
-#         """)
-#         orders = cur.fetchall()
+    customer = "Customer" 
+    with sqlite3.connect("db.db") as con:
+        cur = con.cursor()
+        cur.execute("SELECT user_id FROM orders WHERE order_id = ?", (order_id,))
+        result = cur.fetchone()
+        
+        if result:
+            user_id = result[0]
+            cur.execute("SELECT firstname FROM user WHERE id = ?", (user_id,))
+            user_result = cur.fetchone()
+            if user_result:
+                customer = user_result[0]  
     
-#     return render_template("orders.html", orders=orders)
+    return render_template('thankyou.html', order_id=order_id, customer=customer)
+
+
+@app.route('/yourorders')
+def yourorders():
+    with sqlite3.connect("db.db") as con:
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        
+       
+        cur.execute("""
+            SELECT o.order_id, o.user_id, o.total_amount, 
+                   u.email, u.firstname, u.lastname
+            FROM orders o
+            JOIN user u ON o.user_id = u.id
+        """)
+        orders = [dict(order) for order in cur.fetchall()]
+   
+        for order in orders:
+        
+            cur.execute("""
+                SELECT oi.order_item_id, oi.product_id, oi.quantity, 
+                       p.image, p.name as product_name, p.price
+                FROM order_item oi
+                JOIN products p ON oi.product_id = p.id
+                WHERE oi.order_id = ?
+            """, (order['order_id'],))
+            order['order_items'] = [dict(item) for item in cur.fetchall()]
+
+    return render_template("yourorders.html", orders=orders)
+@app.route('/orders')
+def orders():
+    with sqlite3.connect("db.db") as con:
+        con.row_factory = sqlite3.Row
+        cur = con.cursor()
+        cur.execute("""
+            SELECT  o.order_id, o.user_id, o.total_amount, 
+                   u.email, u.firstname, u.lastname
+            FROM orders o
+            JOIN user u ON o.user_id = u.id
+            ORDER BY o.order_id DESC
+        """)
+        orders = [dict(order) for order in cur.fetchall()]
+   
+        for order in orders:
+            cur.execute("""
+                SELECT oi.order_item_id, oi.product_id, oi.quantity, 
+                       p.image, p.name as product_name, p.price
+                FROM order_item oi
+                JOIN products p ON oi.product_id = p.id
+                WHERE oi.order_id = ?
+            """, (order['order_id'],))
+            order['order_items'] = [dict(item) for item in cur.fetchall()]
+
+    return render_template("orders.html", orders=orders)
 
 if __name__ == "__main__":
     app.run(debug=True)
