@@ -31,6 +31,23 @@
            };
       </script>
       <style>
+
+
+        .list-unstyled {
+            text-align: center;
+          }
+
+          .danger {
+            background-color: #bb2124;
+            color: white
+          }
+
+          .success {
+            background-color: #22bb33;
+          }
+
+
+
             #navbar {
                 display: none;
             }
@@ -46,6 +63,23 @@
     </style>
 </head>
 <body class="bg-light">
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class="list-unstyled">
+      {% for category, message in messages %}
+        {% if category == 'success' %}
+          <li class="alert alert-success success">{{ message }}</li>
+        {% elif category == 'danger' %}
+          <li class="alert alert-danger danger">{{ message }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {% endif %}
+{% endwith %}
+
+
     <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
         <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
         <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
@@ -125,8 +159,8 @@
     <main class="">
         
         <section class="flex flex-col md:flex-row items-center justify-between w-[90%] mx-auto mt-20 xl:max-w-[1400px] xl:mx-auto">
-            <h1 class="text-4xl text-beige font-fraun font-bold">Hello,  Admin !</h1>
-            <button class="bg-darkgreen text-white px-6 py-1 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> Log out</button>
+            <h1 class="text-4xl text-beige font-fraun font-bold">Hello, {{ user.firstname }} !</h1>
+            <button id="logoutButton" class="bg-darkgreen text-white px-6 py-1 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> Log out</button>
         </section>
         <section class="bg-lightbeige bg-opacity-30 shadow-2xl rounded-[50px] mx-[5%]  mt-20  py-10 w-[80%] md:w-[60%] mx-auto xl:max-w-[1400px] xl:mx-auto mb-20">
                 <div class="">
@@ -134,32 +168,33 @@
                     <div class=" text-center">
                         
                         <div class="flex justify-center mt-20 hover:opacity-80 transition-opacity duration-300">
-                            <img src="../static/images/admin.png" alt="" class="object-cover w-[60px] h-[60px] cursor-pointer">
-                            <button class="relative top-[20px] left-[-18px]">
+                            <img id="admin-image" src="{{  url_for('static', filename='images/admin.png')  }}" alt="" class="object-cover w-[60px] h-[60px] cursor-pointer">
+                            <button id="edit-image-btn" class="relative top-[20px] left-[-18px]">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-pencil-fill text-darkgreen " viewBox="0 0 16 16">
                                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
                                 </svg>
                             </button>
+                            <input type="file" id="image-upload" style="display: none;">
                         </div>
-                        <h2 class="items-center mr-3 text-2xl font-bold font-fraun mt-2">Admin</h2>
-                        <h3 class="text-darkgreen mt-2">Admin@gmail.com</h3>
+                        <h2 class="items-center mr-3 text-2xl font-bold font-fraun mt-2">{{ user.firstname }} {{ user.lastname }}</h2>
+                        <h3 class="text-darkgreen mt-2">{{ user.email }}</h3>
                     </div>
                     <button type="submit" class="bg-darkgreen text-light font-pop py-2 px-5 rounded-lg text-[13px] hover:opacity-80 transition-opacity duration-300 mx-auto flex justify-center mt-10" >Edit your stock</button>
                     <div class="  mx-auto flex justify-between md:pl-20 w-[90%] mx-auto pl-5  md:w-[100%] md:text-start">
                         <div class=" ">
-                            <button class="font-pop font-bold border-b-2 w-fit border-beige mt-20 flex justify-center ">Edit Your Profile <span class="text-beige"> ></span></button>
+                            <button class="font-pop font-bold border-b-2 w-fit border-beige mt-20 flex justify-center ">Edit Your Profile <span class="text-beige"> </span></button>
                             <div class="pb-6  mt-10  md:mt-0 ">
-                                <form action="" class=" rounded-3xl mt-10  ">
-                                    <input type="text" id="FirstName" placeholder="Edit Your FirstName" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%] md:w-[90%] mb-4 placeholder-darkgreen"><br>
-                                    <input type="text" id="LastName" placeholder="Edit Your LastName" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
-                                    <input type="email" id="Email" placeholder="Edit Your Email" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
+                                <form action="{{ url_for('update_data', id=user.id) }}" method="POST" class=" rounded-3xl mt-10  ">
+                                    <input type="text" id="firstname" name="firstname" placeholder="Edit Your First Name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%] md:w-[90%] mb-4 placeholder-darkgreen"><br>
+                                    <input type="text" id="lastname" name="lastname" placeholder="Edit Your Last Name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
+                                    <input type="email" id="email" name="email" placeholder="Edit Your Email" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
                                     <button type="submit" class="bg-darkgreen text-light font-pop py-2 px-5 rounded-lg mt-3 text-[13px] hover:opacity-80 transition-opacity duration-300">Save your changes</button>
                                 </form>
                             </div>
                         </div>
                         <div>
                             <div class=" md:w-[200px] lg:w-[300px] my-20 hidden md:block">
-                                <img src="../static/images/accountpic.png" alt="" class="rounded-l-full object-cover">
+                                <img src="{{  url_for('static', filename='images/accountpic.png')  }}" alt="" class="rounded-l-full object-cover">
                               </div>
                         </div>
                         
@@ -169,8 +204,40 @@
 
     </main>
 
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{  url_for('static', filename='js/main.js')  }}"></script> 
 
+    <script>
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            window.location.href = "{{ url_for('logout') }}";
+        });
+
+
+
+
+
+        const editImageBtn = document.getElementById('edit-image-btn');
+        const adminImage = document.getElementById('admin-image');
+        const imageUploadInput = document.getElementById('image-upload');
+        
+        editImageBtn.addEventListener('click', () => {
+            imageUploadInput.click();
+        });
+        
+        imageUploadInput.addEventListener('change', (e) => {
+            const file = imageUploadInput.files[0];
+            const reader = new FileReader();
+            reader.onload = () => {
+                const imageDataUrl = reader.result;
+                adminImage.src = imageDataUrl;
+            };
+            reader.readAsDataURL(file);
+        });
+
+
+    
+
+
+    </script>
 
 </body>
 </html>
