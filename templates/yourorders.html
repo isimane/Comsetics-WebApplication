@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">    
+        <title>CosmeticWebsite</title>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                 theme: {
+                   extend: {
+                     // grayscale: {
+                     //     50: '50%',
+                    
+                     fontFamily: { 
+                           pop: ["Poppins", "sans-serif"], 
+                           fraun:["Fraunces", "sans-serif"],
+                       },
+                     colors: { 
+                       darkgreen:"#677E52",
+                       light: "#fcf5eb", // hada bach khdemt lbackground
+                       lightbeige:"#EAE2CB",
+                       lightgreen:"#cfdb98",
+                       beige:"#c4b494",
+                     },
+                   },
+                 },
+               };
+        </script>
+        <style>
+            #navbar {
+                display: none;
+            }
+            #burgerlist {
+                display: block;
+            }
+            #unshowlist {
+                display: none;
+            }
+            .dropdown:hover .dropdown-menu {
+                display: block;
+            }
+      </style>
+  </head>
+<body class="bg-light">
+    <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
+        <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
+        <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
+            <a href="{{url_for('home')}}" class="p-8  hover:text-darkgreen">HOME</a>
+            <div class="dropdown p-8">
+                <a href="{{ url_for('shop') }}" class=" font-bold text-darkgreen ">SHOP</a>
+                <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
+                  <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
+                  <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
+                  <a href="{{ url_for('shop', **dict(request.args, category=4)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
+                  <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
+              </div>
+            </div>
+            <a href="{{ url_for('about') }}" class="p-8 hover:text-darkgreen">ABOUT US</a>
+            <a href="{{ url_for('contact') }}" class="hover:text-darkgreen">CONTACT US</a>
+        </nav>
+        <div class="flex hidden md:flex items-center gap-4">
+            <button>
+                <a href="login.html" class="hover:text-darkgreen">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person text-darkgreen" viewBox="0 0 16 16">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                    </svg>
+                </a>
+            </button>
+            <button>
+                <a href="{{ url_for('cart') }}" class="hover:text-darkgreen">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                    </svg>
+                </a>
+            </button>
+        </div>
+        <button class="block md:hidden">
+            <svg id="burgerlist" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+            </svg>
+            <svg id="unshowlist" xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+            </svg>
+        </button>
+    </header>
+    <nav class="flex flex-col" id="navbar">
+        <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
+            <a href="{{url_for('home')}}" class="text-light p-3">HOME</a>
+            <div class="dropdown">
+                <a href="{{ url_for('shop') }}" class="font-bold text-light p-8">SHOP</a>
+                <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
+                  <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
+                  <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
+                  <a href="{{ url_for('shop', **dict(request.args, category=4)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
+                  <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
+              </div>
+            </div>
+            <a href="{{ url_for('about') }}" class="p-3 text-light ">ABOUT US</a>
+            <a href="{{ url_for('contact') }}" class="text-light pb-3">CONTACT US</a>
+            <div class="flex block md:hidden items-center gap-4 mt-3">
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person dark:text-light" viewBox="0 0 16 16">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                    </svg>
+                </button>
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart dark:text-light" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <div class=" font-pop p-8 mb-10">
+        <div class="w-[90%] mx-auto md:w-[60%] xl:max-w-3xl mx-auto  rounded-2xl shadow-xl p-6">
+            <h1 class="text-3xl font-fraun text-darkgreen mb-6 font-bold">Your Orders</h1>
+            
+            {% for order in orders %}
+            <div class="mb-12 border-b pb-6">
+                <h2 class="text-xl font-pop font-bold text-beige mb-4">Order #{{order.order_id}}</h2>
+                <div class="mb-6 mt-4 ">
+                    <h3 class="text-lg font-pop text-darkgreen font-semibold  mb-2">Items</h3>
+                    {% for item in order.order_items %}
+                    <div class="border-t  border-lightbeige py-2  {% if not loop.last %}border-b{% endif %}">
+                        <!-- class -->
+                        <div class="flex flex-col md:flex-row justify-between items-center mb-2">
+                            <div class="flex flex-col text-center md:flex-row md:text-start items-center">
+                                <img src="{{ url_for('static', filename='media/' + item.image) }}" alt="{{ item.product_name }}" class="w-20 h-20 object-cover mr-4 rounded-lg">
+                                <div>
+                                    <h4 class="font-semibold">{{ item.product_name }}</h4>
+                                    <p class="text-sm text-beige">Quantity: {{ item.quantity }}</p>
+                                    <p class="text-sm text-beige">Price: ${{ item.price }}</p>
+                                </div>
+                            </div>
+                            <p class="font-semibold">${{ item.price * item.quantity }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="mb-2">
+                    <div class="flex flex-col md:flex-row justify-between items-center md:text-lg text-sm font-bold">
+                        <p>Order Total:</p>
+                        <p>${{ order.total_amount }}</p>
+                    </div>
+                </div>
+                
+                <!-- <div class="mb-6">
+                    <h3 class="text-lg font-fraun text-beige mb-2">Customer Information</h3>
+                    <p>Name: {{ order.firstname }}</p>
+                    <p>Email: {{ order.email }}</p>
+                </div>
+                
+                <div class="flex justify-between">
+                    <button class="bg-lightgreen hover:bg-darkgreen text-white font-bold py-2 px-4 rounded transition duration-300">
+                        Track Order
+                    </button>
+                    <button class="bg-beige hover:bg-darkgreen text-white font-bold py-2 px-4 rounded transition duration-300">
+                        Contact Support
+                    </button>
+                </div> -->
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer class="bg-darkgreen mt-20">
+        <a href="{{ url_for('home') }}"><p class="p-4 text-center text-light font-semibold ">Nuova Beauty © 2024 Nuova. All rights reserved.</p></a>
+    </footer>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

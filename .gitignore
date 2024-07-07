@@ -1,7 +1,9 @@
 myProjectFlask
 venv
+.venv
+.vscode
 env
 myenv
-.venv
 __pycache__
 media
+db.db

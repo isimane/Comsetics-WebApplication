@@ -47,27 +47,22 @@
     </head>
     <body class="bg-light">
         <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
-            <img src="../static/images/NUovalogo2.png" alt="" class="w-[79px] h-[30px]"> 
-            <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
-                <a href="index.html" class="p-8  hover:text-darkgreen">HOME</a>
+          <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
+          <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
+                <a href="{{url_for('home')}}" class="p-8  hover:text-darkgreen">HOME</a>
                 <div class="dropdown p-8">
-                    <a href="shop.html" class=" hover:text-darkgreen">SHOP</a>
+                    <a href="{{ url_for('shop') }}" class=" hover:text-darkgreen">SHOP</a>
                     <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
-                        <a href="category1.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
-                        <a href="category2.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
-                        <a href="category3.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
-                        <a href="category4.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
-                    </div>
+                      <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
+                      <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
+                      <a href="{{ url_for('shop', **dict(request.args, category=4)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
+                      <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
+                  </div>
                 </div>
-                <a href="about.html" class="p-8 hover:text-darkgreen">ABOUT US</a>
-                <a href="contactus.html" class=" font-bold text-darkgreen">CONTACT US</a>
+                <a href="{{ url_for('about') }}" class="p-8 hover:text-darkgreen">ABOUT US</a>
+                <a href="{{ url_for('contact') }}" class=" font-bold text-darkgreen">CONTACT US</a>
             </nav>
             <div class="flex hidden md:flex items-center gap-4">
-                <button class="hover:text-darkgreen">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-search cursor-pointer hover:bg-opacity-30" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                    </svg>
-                </button>
                 <button>
                     <a href="login.html" class="hover:text-darkgreen">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
@@ -76,7 +71,7 @@
                     </a>
                 </button>
                 <button>
-                    <a href="cart.html" class="hover:text-darkgreen">
+                    <a href="{{ url_for('cart') }}" class="hover:text-darkgreen">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                             <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                         </svg>
@@ -95,28 +90,23 @@
         <!-- this navbar is for samll screens -->
         <nav class="flex flex-col" id="navbar">
             <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
-                <a href="index.html" class="text-light p-3">HOME</a>
+                <a href="{{url_for('home')}}" class="text-light p-3">HOME</a>
                 <div class="dropdown">
-                    <a href="shop.html" class=" text-light p-8">SHOP</a>
-                    <div class="absolute hidden dropdown-menu bg-light text-beige shadow-md mt-1 rounded-md">
-                        <a href="category1.html" class="block px-4 py-2 hover:bg-lightbeige">Makeup</a>
-                        <a href="category2.html" class="block px-4 py-2 hover:bg-lightbeige">Skincare</a>
-                        <a href="category3.html" class="block px-4 py-2 hover:bg-lightbeige">Fragrance</a>
-                        <a href="category4.html" class="block px-4 py-2 hover:bg-lightbeige">Men's grooming</a>
+                    <a href="{{ url_for('shop') }}" class=" text-light p-8">SHOP</a>
+                    <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
+                      <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
+                      <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
+                      <a href="{{ url_for('shop', **dict(request.args, category=4)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
+                      <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
                     </div>
                 </div>
-                <a href="about.html" class="p-3 text-light ">ABOUT US</a>
-                <a href="contactus.html" class="text-light font-bold pb-3">CONTACT US</a>
+                <a href="{{ url_for('about') }}" class="p-3 text-light ">ABOUT US</a>
+                <a href="{{ url_for('contact') }}" class="text-light font-bold pb-3">CONTACT US</a>
                 <div class="flex block md:hidden items-center gap-4 mt-3">
                     <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-search cursor-pointer hover:bg-opacity-30 dark:text-light" viewBox="0 0 16 16">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                        </svg>
-                    </button>
-                    <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person dark:text-light" viewBox="0 0 16 16">
+                        <a href="{{ url_for('cart') }}"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person dark:text-light" viewBox="0 0 16 16">
                             <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
-                        </svg>
+                        </svg></a>
                     </button>
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart dark:text-light" viewBox="0 0 16 16">
@@ -135,21 +125,21 @@
               <p class="font-pop text-[18px] sm:text-center mt-3 md:text-left w-[100%]">At Nuova, we value our customers and are always here to help with any questions, feedback, or concerns you may have. Whether you need assistance with a product, want to learn more about our brand, or have any other inquiries, please feel free to get in touch with us.</p>
             </div>
             <div>
-              <img src="../static/images/formpic 1.png" alt="" class="max-h-[400px] md:max-w-[500px]  md:max-h-[400px] object-cover mt-20 md:mt-10">
+              <img src="{{ url_for('static', filename='images/formpic 1.png') }}" alt="" class="max-h-[400px] md:max-w-[500px]  md:max-h-[400px] object-cover mt-20 md:mt-10">
             </div>
           </div>
           
           <div class="pb-6 w-[90%] mt-10 md:w-[40%] md:mt-0 ">
             <form action="" class="bg-[#D2C5AA] bg-opacity-10  mx-auto rounded-3xl p-7 md:w-[80%]">
               <label for="FirstName" class="text-darkgreen font-bold mb-2">First Name </label><br>
-              <input type="text" id="FirstName" class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4"><br>
-              <label for="LastName" class="text-darkgreen font-bold mb-2">Last Name </label><br>
-              <input type="text" id="LastName" class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4"><br>
+              <input type="text" id="FirstName" required  class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4"><br>
+              <label for="LastName" required class="text-darkgreen font-bold mb-2">Last Name </label><br>
+              <input type="text" required id="LastName" class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4"><br>
               <label for="Email" class="text-darkgreen font-bold  mb-2">Email </label><br>
-              <input type="email" id="Email" class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4"><br>
+              <input type="email" required id="Email" class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4"><br>
               <label for="message" class="text-darkgreen font-bold  mb-2">Your Message </label><br>
               <textarea type="text"id="message" class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] "></textarea><br>
-              <button type="submit" class="bg-darkgreen text-light font-pop py-1 px-5 rounded-lg mt-3">Submit</button>
+              <button type="submit" class="bg-darkgreen text-light font-pop py-1 px-5 rounded-lg mt-3 hover:opacity-80 transition-opacity duration-300">Submit</button>
             </form>
           </div>
         </section>
@@ -159,7 +149,7 @@
         <section class="w-[90%] mx-auto xl:max-w-[1400px] xl:mx-auto">
           <section class=" flex flex-col justify-center items-center md:flex md:flex-row  md:justify-between mx-auto ">
             <div class=" items-center flex flex-col justify-center md:text-start md:items-start md:justify-between md:w-[40%] pt-10">
-              <img src="../static/images/NUOVAlogo2(white).png" alt="logo" class="w-[79px] h-[30px] ">
+              <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUOVAlogo2(white).png') }}" alt="logo" class="w-[79px] h-[30px] "></a>
                 
                     <h2 class="text-[24px] font-bold border-b-2 border-beige mt-3">About NUOVA</h2>
                       <p class="space-y-2 flex flex-col pt-3 items-center text-center md:text-start  ">Welcome to Nuova, where beauty meets innovation. Our mission is to empower individuals to embrace their unique beauty with confidence. With a commitment to quality and excellence, we offer a curated collection of cosmetics, skincare, and fragrances crafted to elevate your daily routine.</p>
@@ -180,17 +170,13 @@
                 <div class=" md:flex md:gap-4  items-center text-center flex flex-col md:flex-row mt-10 md:mt-0  md:text-start">
                     <ul class="pb-2 ">
                       <li class="text-[24px] font-bold border-b-2 border-beige">Explore</li>
-                      <li class=" pt-3"> <a href="index.html">HOME</a></li>
-                      <li class="pt-1">  <a href="shop.html">SHOP</a></li>
-                      <li class="pt-1"> <a href="about.html">ABOUT US</a></li>
-                      <li class="pt-1"><a href="contactus.html">CONTACT US</a></li>
-                    
-              
-              
-                
+                    <li class=" pt-3"> <a href="{{url_for('home')}}">HOME</a></li>
+                    <li class="pt-1">  <a href="{{ url_for('shop') }}">SHOP</a></li>
+                    <li class="pt-1"> <a href="{{ url_for('about') }}">ABOUT US</a></li>
+                    <li class="pt-1"><a href="{{ url_for('contact') }}">CONTACT US</a></li>
                     </ul>
                 </div>
-
+      
                   <div class=" items-center flex flex-col text-center  mt-10 md:mt-5">
                     <h3 class="text-[24px] font-bold border-b-2 border-beige  mb-1 text-center   md:text-start md:text-start">Customer Service</h3>
                     <p class="md:w-[195px] text-center pt-2 md:text-start">Have questions or need assistance? Our dedicated customer service team is here to help. Contact us:</p>
@@ -198,15 +184,15 @@
                       <li><span class="font-bold">Phone : </span>  0645678923</li>
                       <li><span class="font-bold">Email : </span>  NUOVA@gmail.com</li>
                     </ul>
-                  
                   </div>
                   
             
           </section>
           <p class="pt-9 text-center md:text-start">Nuova Beauty © 2024 Nuova. All rights reserved.</p>
         </section>
-
+      
       </footer>
-<script src="../static/js/main.js"></script>   
+      <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
 </body>
 </html>

@@ -1,0 +1,103 @@
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">    
+            <title>CosmeticWebsite</title>
+            <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+            <script src="https://cdn.tailwindcss.com"></script>
+            <script>
+                tailwind.config = {
+                     theme: {
+                       extend: {
+                         // grayscale: {
+                         //     50: '50%',
+                        
+                         fontFamily: { 
+                               pop: ["Poppins", "sans-serif"], 
+                               fraun:["Fraunces", "sans-serif"],
+                           },
+                         colors: { 
+                           darkgreen:"#677E52",
+                           light: "#fcf5eb", // hada bach khdemt lbackground
+                           lightbeige:"#EAE2CB",
+                           lightgreen:"#cfdb98",
+                           beige:"#c4b494",
+                         },
+                       },
+                     },
+                   };
+            </script>
+            <style>
+                #navbar {
+                    display: none;
+                }
+                #burgerlist {
+                    display: block;
+                }
+                #unshowlist {
+                    display: none;
+                }
+                .dropdown:hover .dropdown-menu {
+                    display: block;
+                }
+          </style>
+      </head>
+    <body class="bg-light">
+        <div class=" font-pop p-8 mb-10">
+            <div class="w-[90%] mx-auto md:w-[60%] xl:max-w-3xl mx-auto  rounded-2xl shadow-xl p-6">
+                <h1 class="text-3xl font-fraun text-darkgreen mb-6 font-bold">Users  Orders</h1>
+                <p>Total number of orders: {{ orders|length }}</p>
+                {% for order in orders %}
+                <div class="mb-12 border-b pb-6">
+                    <h2 class="text-xl font-pop font-bold text-beige mb-4">Order #{{order.order_id}}</h2>
+                    <div class="mb-6 mt-4 ">
+                        <h3 class="text-lg font-pop text-darkgreen font-semibold  mb-2">Items</h3>
+                        {% for item in order.order_items %}
+                        <div class="border-t  border-lightbeige py-2 ">
+                            <!-- class {% if not loop.last %}border-b{% endif %} -->
+                            <div class="flex flex-col md:flex-row justify-between items-center mb-2">
+                                <div class="flex flex-col text-center md:flex-row md:text-start items-center">
+                                    <img src="{{ url_for('static', filename='media/' + item.image) }}" alt="{{ item.product_name }}" class="w-20 h-20 object-cover mr-4 rounded-lg">
+                                    <div>
+                                        <h4 class="font-semibold">{{ item.product_name }}</h4>
+                                        <p class="text-sm text-beige">Quantity: {{ item.quantity }}</p>
+                                        <p class="text-sm text-beige">Price: ${{ item.price }}</p>
+                                    </div>
+                                </div>
+                                <p class="font-semibold">${{ item.price * item.quantity }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="mb-2">
+                        <div class="flex flex-col md:flex-row justify-between items-center md:text-lg text-sm font-bold">
+                            <p>Order Total:</p>
+                            <p>${{ order.total_amount }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6 text-center md:text-start">
+                        <h3 class="text-md md:text-lg  font-fraun text-beige mb-2">Customer Information</h3>
+                        <p class="text-[12px] md:text-[16px]">Name: {{ order.firstname }}</p>
+                        <p class="text-[12px] md:text-[16px]">Email: {{ order.email }}</p>
+                    </div>
+                    
+                    <!-- <div class="flex justify-between">
+                        <button class="bg-lightgreen hover:bg-darkgreen text-white font-bold py-2 px-4 rounded transition duration-300">
+                            Track Order
+                        </button>
+                        <button class="bg-beige hover:bg-darkgreen text-white font-bold py-2 px-4 rounded transition duration-300">
+                            Contact Support
+                        </button>
+                    </div> -->
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+    </html>
