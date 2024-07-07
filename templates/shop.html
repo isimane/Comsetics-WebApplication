@@ -53,11 +53,11 @@
       <body class="bg-light">
         {% block content %}
           <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
-              <img src="../static/images/NUovalogo2.png" alt="" class="w-[79px] h-[30px]"> 
-              <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
+            <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
+            <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
                   <a href="{{ url_for('home') }}" class="p-8 hover:text-darkgreen">HOME</a>
                   <div class="dropdown p-8">
-                    <a href="{{ url_for('shop') }}" class="hover:text-darkgreen ">SHOP</a>
+                    <a href="{{ url_for('shop') }}" class="font-bold text-darkgreen ">SHOP</a>
                     <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
                         <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
                         <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
@@ -65,8 +65,8 @@
                         <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
                     </div>
                 </div>
-                  <a href="about.html" class="p-8 hover:text-darkgreen">ABOUT US</a>
-                  <a href="contactus.html" class="hover:text-darkgreen">CONTACT US</a>
+                  <a href="{{ url_for('home') }}" class="p-8 hover:text-darkgreen">ABOUT US</a>
+                  <a href="{{ url_for('contact') }}" class="hover:text-darkgreen">CONTACT US</a>
               </nav>
               <div class="flex hidden md:flex items-center gap-4">
                   
@@ -78,7 +78,7 @@
                       </a>
                   </button>
                   <button>
-                      <a href="cart.html" class="hover:text-darkgreen">
+                      <a href="{{ url_for('cart') }}" class="hover:text-darkgreen">
                           <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                               <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                           </svg>
@@ -97,8 +97,8 @@
           <nav class="flex flex-col" id="navbar">
               <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
                   <a href="{{ url_for('home') }}" class="text-light p-3">HOME</a>
-                  <div class="dropdown p-8">
-                    <a href="{{ url_for('shop') }}" class="hover:text-darkgreen ">SHOP</a>
+                  <div class="dropdown px-8">
+                    <a href="{{ url_for('shop') }}" class="font-bold text-light">SHOP</a>
                     <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
                         <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
                         <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
@@ -106,8 +106,8 @@
                         <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
                     </div>
                 </div>
-                  <a href="about.html" class="p-3 text-light font-bold">ABOUT US</a>
-                  <a href="contactus.html" class="text-light pb-3">CONTACT US</a>
+                  <a href="{{ url_for('about') }}" class="p-3 text-light  ">ABOUT US</a>
+                  <a href="{{ url_for('contact') }}" class="text-light p-3">CONTACT US</a>
                   <div class="flex block md:hidden items-center gap-4 mt-3">
                       
                       <button>
@@ -116,9 +116,9 @@
                           </svg>
                       </button>
                       <button>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart dark:text-light" viewBox="0 0 16 16">
+                          <a href="{{ url_for('cart') }}"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart dark:text-light" viewBox="0 0 16 16">
                               <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                          </svg>
+                          </svg></a>
                       </button>
                   </div>
               </div>
@@ -147,7 +147,7 @@
                                 <h3 class="font-bold text-lg pb-3">{{ product.name }}</h3>
                                 <p class="text-darkgreen pb-3">{{ product.description }}</p>
                                 <p class="font-bold mt-2">{{ product.price }}$</p>
-                                <button class=" px-4 py-2 mt-4 w-[90%] mx-auto items-center flex flex-row justify-center">Add to Cart
+                                <button class="addToCartBtn px-4 py-2 hover:font-bold mt-4 w-[90%] mx-auto items-center flex flex-row justify-center" data-product-id="{{ product.id }}" data-product-quantity="{{ product.quantity }}">Add to Cart
                                 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
                                     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                                 </svg>
@@ -166,7 +166,7 @@
         <section class="w-[90%] mx-auto xl:max-w-[1400px] xl:mx-auto">
           <section class=" flex flex-col justify-center items-center md:flex md:flex-row  md:justify-between mx-auto ">
             <div class=" items-center flex flex-col justify-center md:text-start md:items-start md:justify-between md:w-[40%] pt-10">
-              <img src="../static/images/NUOVAlogo2(white).png" alt="logo" class="w-[79px] h-[30px] ">
+              <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUOVAlogo2(white).png') }}" alt="logo" class="w-[79px] h-[30px] "></a>
                 
                     <h2 class="text-[24px] font-bold border-b-2 border-beige mt-3">About NUOVA</h2>
                       <p class="space-y-2 flex flex-col pt-3 items-center text-center md:text-start  ">Welcome to Nuova, where beauty meets innovation. Our mission is to empower individuals to embrace their unique beauty with confidence. With a commitment to quality and excellence, we offer a curated collection of cosmetics, skincare, and fragrances crafted to elevate your daily routine.</p>
@@ -186,11 +186,11 @@
             
                 <div class=" md:flex md:gap-4  items-center text-center flex flex-col md:flex-row mt-10 md:mt-0  md:text-start">
                     <ul class="pb-2 ">
-                        <li class="text-[24px] font-bold border-b-2 border-beige">Explore</li>
-                        <li class=" pt-3"> <a href="{{url_for('home')}}">HOME</a></li>
-                        <li class="pt-1">  <a href="{{ url_for('shop') }}">SHOP</a></li>
-                        <li class="pt-1"> <a href="about.html">ABOUT US</a></li>
-                        <li class="pt-1"><a href="contactus.html">CONTACT US</a></li>
+                      <li class="text-[24px] font-bold border-b-2 border-beige">Explore</li>
+                    <li class=" pt-3"> <a href="{{url_for('home')}}">HOME</a></li>
+                    <li class="pt-1">  <a href="{{ url_for('shop') }}">SHOP</a></li>
+                    <li class="pt-1"> <a href="{{ url_for('about') }}">ABOUT US</a></li>
+                    <li class="pt-1"><a href="{{ url_for('contact') }}">CONTACT US</a></li>
                     </ul>
                 </div>
       
@@ -201,7 +201,6 @@
                       <li><span class="font-bold">Phone : </span>  0645678923</li>
                       <li><span class="font-bold">Email : </span>  NUOVA@gmail.com</li>
                     </ul>
-                  
                   </div>
                   
             
@@ -210,7 +209,8 @@
         </section>
       
       </footer>
-    <script src="../static/js/main.js"></script> 
+      <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
     {%endblock%}
 </body>
 </html>

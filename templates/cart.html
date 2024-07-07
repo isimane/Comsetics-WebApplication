@@ -12,6 +12,7 @@
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">    
             <title>CosmeticWebsite</title>
+            <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
             <script src="https://cdn.tailwindcss.com"></script>
             <script>
                 tailwind.config = {
@@ -52,20 +53,20 @@
         </head>
         <body class="bg-light">
             <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
-                <img src="../static/images/NUovalogo2.png" alt="" class="w-[79px] h-[30px]"> 
+                <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
                 <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
-                    <a href="index.html" class="p-8  hover:text-darkgreen">HOME</a>
+                    <a href="{{ url_for('home') }}" class="p-8  hover:text-darkgreen">HOME</a>
                     <div class="dropdown p-8">
-                        <a href="shop.html" class=" hover:text-darkgreen">SHOP</a>
+                        <a href="{{ url_for('shop') }}" class=" hover:text-darkgreen">SHOP</a>
                         <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
-                            <a href="category1.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
-                            <a href="category2.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
-                            <a href="category3.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
-                            <a href="category4.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
+                          <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
+                          <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
+                          <a href="{{ url_for('shop', **dict(request.args, category=4)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
+                          <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
                         </div>
                     </div>
-                    <a href="about.html" class="p-8 hover:text-darkgreen">ABOUT US</a>
-                    <a href="contactus.html" class="hover:text-darkgreen">CONTACT US</a>
+                    <a href="{{ url_for('about') }}" class="p-8 hover:text-darkgreen">ABOUT US</a>
+                    <a href="{{ url_for('contact') }}" class="hover:text-darkgreen">CONTACT US</a>
                 </nav>
                 <div class="flex hidden md:flex items-center gap-4">
                     
@@ -78,7 +79,7 @@
                         </a>
                     </button>
                     <button>
-                        <a href="cart.html" class="hover:text-darkgreen">
+                        <a href="{{ url_for('cart') }}" class="hover:text-darkgreen">
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart text-darkgreen" viewBox="0 0 16 16">
                                 <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                             </svg>
@@ -97,18 +98,18 @@
             <!-- this navbar is for samll screens -->
             <nav class="flex flex-col" id="navbar">
                 <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
-                    <a href="index.html" class="text-light p-3">HOME</a>
+                    <a href="{{ url_for('home') }}" class="text-light p-3">HOME</a>
                     <div class="dropdown">
-                        <a href="shop.html" class="text-light p-8">SHOP</a>
-                        <div class="absolute hidden dropdown-menu bg-light text-beige shadow-md mt-1 rounded-md">
-                            <a href="category1.html" class="block px-4 py-2 hover:bg-lightbeige">Makeup</a>
-                            <a href="category2.html" class="block px-4 py-2 hover:bg-lightbeige">Skincare</a>
-                            <a href="category3.html" class="block px-4 py-2 hover:bg-lightbeige">Fragrance</a>
-                            <a href="category4.html" class="block px-4 py-2 hover:bg-lightbeige">Men's grooming</a>
+                        <a href="{{ url_for('shop') }}" class="text-light p-8">SHOP</a>
+                        <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
+                          <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
+                          <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
+                          <a href="{{ url_for('shop', **dict(request.args, category=4)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
+                          <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
                         </div>
                     </div>
-                    <a href="about.html" class="p-3 text-light font-bold">ABOUT US</a>
-                    <a href="contactus.html" class="text-light pb-3">CONTACT US</a>
+                    <a href="{{ url_for('about') }}" class="p-3 text-light font-bold">ABOUT US</a>
+                    <a href="{{ url_for('contact') }}" class="text-light pb-3">CONTACT US</a>
                     <div class="flex block md:hidden items-center gap-4 mt-3">
                         <button>
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person dark:text-light" viewBox="0 0 16 16">
@@ -120,54 +121,54 @@
                                 <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                             </svg>
                         </button>
-                    </div>
+                     </div>
                 </div>
             </nav>
-        <main class="mb-20">
-            <section class="px-4 md:px-16 py-8 w-fit text-center md:text-left mt-20">
-                <h2 class="text-2xl font-fraun font-bold text-beige border-b-2 border-beige ">Your Cart Items:</h2>
-              </section>
-              <section>
-                <div class=" w-[90%] mx-auto text-center mt-20 flex flex-col justify-center md:flex-row gap-10">
-                    <div class=" shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-0">
-                            <img src="../static/images/cosmeticProductCard.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                            <div class="p-6 bg-light rounded-[40px]">
-                                <h3 class="font-bold text-lg">Hydra Boost Moisturizer</h3>
-                                <p class="text-darkgreen">A hydrating moisturizer that nourishes and revitalizes the skin, leaving it soft and supple.</p>
-                                <p class="font-bold mt-2">Price: $54</p>
-                                <button class=" px-4 py-2 mt-4 w-[90%] mx-auto items-center flex flex-row justify-center hover:text-beige hover:font-bold">remove from your cart
-                                
-                                </button>
-                                <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
-                            </div>
-                    </div>
-                    <div class="shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-auto">
-                                <img src="../static/images/cosmeticProductCard2.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                                <div class="p-6 bg-light rounded-[40px]">
-                                <h3 class="font-bold text-lg">Revitalizing Night Cream</h3>
-                                <p class="text-darkgreen">A hydrating night cream with hyaluronic acid and vitamin E for overnight rejuvenation.</p>
-                                <p class="font-bold mt-2">Price: $45</p>
-                                <button class=" px-4 py-2 mt-4 w-[90%] mx-auto items-center flex flex-row justify-center hover:text-beige hover:font-bold">remove from your cart
-                                    <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
-                                </div>
-                    </div>
-                    <div class="shadow-2xl rounded-3xl w-[80%] md:w-[30%] mx-auto md:mx-0">
-                        <img src="../static/images/cosmeticProductCard5.jpg" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
-                        <div class="p-6 bg-light rounded-[40px]">
-                            <h3 class="font-bold text-lg">Nourishing Hair Mask</h3>
-                            <p class="text-darkgreen">A conditioning hair mask that repairs and strengthens damaged hair, enriched with argan oil.</p>
-                            <p class="font-bold mt-2">Price: $35</p>
-                            <button class=" px-4 py-2 mt-4 w-[90%] mx-auto items-center flex flex-row justify-center hover:text-beige hover:font-bold ">remove from your cart
-                                <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="shopnow.html"> Shop Now</a></button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                        
-              </section>
-         </main>
-        </main>
             
-        <script src="../static/js/main.js"></script> 
+            
+              <div class="bg-light mt-10 flex items-center justify-center w-[50%] mx-auto font-pop xl:max-w-[1440px] xl:mx-auto">
+                <div class="bg-light p-8 rounded-2xl shadow-xl w-full">
+                  <h2 class="text-2xl font-fraun font-bold text-3xl text-darkgreen mb-6">Your Cart</h2>
+                  
+                  <div class="cart_items space-y-4">
+                    {% if cart_items %}
+                        {% for item in cart_items %}
+                            <div class="flex flex-col text-center md:flex-row text-start items-center space-x-4 bg-lightbeige bg-opacity-30 p-4 rounded-2xl cart-item" data-product-id="{{ item['id'] }}">
+                                <a href="{{ url_for('product', id=item['id']) }}" class="cursor-pointer"><div class="flex-grow">
+                                    <img src="{{ item['image'] }}" class="h-20 w-24 object-cover rounded-lg" alt="cartProduct">
+                                    <h3 class="font-semibold text-darkgreen mt-2">{{ item['name'] }}</h3>
+                                    <p class="font-semibold text-[12px]">${{ item['price'] }}</p>
+                                    <p class="text-sm text-gray-600">Quantity: {{ item['quantity'] }}</p>
+                                </a>
+                                </div>
+                                <div class="text-right md:mt-20">
+                                    <span class="font-bold text-beige">${{ item['subtotal'] }}</span><br>
+                                    <!-- <button class="text-sm hover:opacity-65 transition-opacity duration-300 remove-from-cart" data-product-id="{{ item['id'] }}">Remove from cart</button> -->
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>Your cart is empty.</p>
+                    {% endif %}
+                </div>
+                      <div class="cart_total mt-8 border-t pt-4">
+                        <div class="flex justify-between items-center mb-4">
+                          <span class="font-semibold">Total:</span>
+                          
+                          <span class="font-bold text-beige">${{ total }}</span>
+                        </div>
+                        <a href="{{ url_for('checkout') }}"><button class="w-full bg-darkgreen text-light  py-2 rounded rounded-xl hover:opacity-80 transition-opacity duration-300">Proceed to Checkout</button></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>   
+              </div>
+              <footer class="bg-darkgreen mt-20">
+                    <a href="{{ url_for('home') }}"><p class="p-4 text-center text-light font-semibold ">Nuova Beauty © 2024 Nuova. All rights reserved.</p></a>
+              </footer>
+              <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+              <!-- <script src="{{ url_for('static', filename='js/cart.js') }}"></script> -->
+
+        <!-- <script src="../static/js/main.js"></script>  -->
     </body>
 </html>
