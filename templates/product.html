@@ -74,9 +74,12 @@
               </button>
               <button>
                   <a href="{{ url_for('cart') }}" class="hover:text-darkgreen">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                      </svg>
+                    <div id="cart-icon" data-count="0" class="flex items-center ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                        </svg>
+                        <span class="cart-count bg-red-900  text-[8px] rounded-full px-[3.5px] text-white relative top-[7px] left-[-7px]">0</span>
+                    </div>
                   </a>
               </button>
           </div>
@@ -119,7 +122,7 @@
       </nav>
       <main class="mx-auto mt-20 flex flex-col md:flex-row w-[85%]  md:w-[65%] lg:w-[70%]  bg-light pb-20 ">
        <!-- lg and medium -->
-       <div class="flex flex-col md:flex-row  ">
+       <div class="flex flex-col md:flex-row  noAnimation">
                 <section class="bg-light w-[100%] mx-auto">
                     <img src="{{ url_for('static', filename='media/' + product['image']) }}" alt="" class="h-[400px] w-full object-cover   md:rounded-l-3xl shadow-2xl ">
                 </section>

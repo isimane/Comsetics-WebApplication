@@ -90,50 +90,72 @@ function validateInput(input) {
 // });
 
 
-function addToCartBtns(){
+function addToCartBtns() {
   const addToCart = document.getElementsByClassName('addToCartBtn');
-  for(let button of addToCart){
-      button.addEventListener("click", ()=>{
-        console.log('clicked');
-        const productId = button.getAttribute('data-product-id');
-        // console.log(productId)
-        let productQuantity;
-        if (document.getElementById('product_quantity_' + productId)) {
-          productQuantity = document.getElementById('product_quantity_' + productId).value;
-        } else {
-          productQuantity = 1;
-        }
-        // JSON
-        const payload = {
-          id: parseInt(productId),
-          quantity: parseInt(productQuantity),
-        };
-
-        
-        fetch('/add_to_cart', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload)
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            alert('your item is in your cart')
-          } else {
-            alert('something went wrong')
-          }
+  for (let button of addToCart) {
+    button.addEventListener("click", () => {
+      console.log('Add to cart clicked');
+      const productId = button.getAttribute('data-product-id');
+      let productQuantity;
+      if (document.getElementById('product_quantity_' + productId)) {
+        productQuantity = document.getElementById('product_quantity_' + productId).value;
+      } else {
+        productQuantity = 1;
+      }
       
+      const payload = {
+        id: parseInt(productId),
+        quantity: parseInt(productQuantity),
+      };
+
+      fetch('/add_to_cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Server response:', data);
+        if (data.success) {
+          updateCartIcon(data.cartCount);
+        }
+        console.log('Item added to cart successfully');
       })
       .catch((error) => {
-        alert('something went wrong')
+        console.error('Error:', error);
       });
-      
-  })
+    });
+  }
 }
+
+function updateCartIcon(count) {
+  const cartCountElement = document.getElementById('cart-count');
+  if (cartCountElement) {
+    cartCountElement.textContent = count;
+  }
+  
+  const cartIcon = document.getElementById('cart-icon');
+  if (cartIcon) {
+    cartIcon.setAttribute('data-count', count);
+  }
 }
-addToCartBtns()
+
+// Function to initialize the cart count
+function initializeCartCount() {
+  fetch('/get_cart_count')
+    .then(response => response.json())
+    .then(data => {
+      updateCartIcon(data.cartCount);
+    })
+    .catch(error => console.error('Error initializing cart count:', error));
+}
+
+  addToCartBtns();
+  initializeCartCount();
+  updateCartIcon(count);
+
 
 
 

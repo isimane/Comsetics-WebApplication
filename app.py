@@ -1,10 +1,10 @@
-from flask import Flask, render_template, url_for, request, redirect, url_for, flash, session,jsonify, make_response
+from flask import Flask, render_template, abort, url_for, request, redirect, url_for, flash, session,jsonify, make_response
 from werkzeug.utils import secure_filename
 import os
 import json
 import sys
 from app_login_signup import *
-from flask import Flask, abort, render_template, request, redirect, url_for, flash
+# from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 from flask import request, jsonify
@@ -197,7 +197,7 @@ def delete_product(id):
 
 
 
-
+#//////CART CHECKOUT ORDERS////
 @app.route("/add_to_cart", methods=['POST'])
 def add_cart():
     data = request.get_json()
@@ -219,8 +219,14 @@ def add_cart():
         
     if not alreadyExists:
         cart_items_list.append(data)
-
-    response = jsonify({"success": True})
+        
+    total_quantity = sum(item['quantity'] for item in cart_items_list)
+    
+    response = jsonify ({    
+            "success": True,
+            "cartCount": total_quantity 
+                       
+    })
     response.set_cookie('cart_items', json.dumps(cart_items_list))  # Update cart_items cookie
     return response
     
@@ -231,7 +237,16 @@ def add_cart():
     
     return jsonify({"success": False, "message": "Item added to cart"}), 200
 
-#//////CART CHECKOUT ORDERS////
+@app.route("/get_cart_count")
+def get_cart_count():
+    cart_items = request.cookies.get('cart_items')
+    if not cart_items:
+        return jsonify({"cartCount": 0})
+    
+    cart_items_list = json.loads(cart_items)
+    total_quantity = sum(item['quantity'] for item in cart_items_list)
+    return jsonify({"cartCount": total_quantity})
+
 @app.route('/cart', methods=['GET'])
 def cart():
     cart_items = request.cookies.get('cart_items', '[]')
@@ -401,6 +416,10 @@ def orders():
             order['order_items'] = [dict(item) for item in cur.fetchall()]
 
     return render_template("orders.html", orders=orders)
+
+@app.errorhandler(404)
+def error_handler(error):
+    return render_template("pageNotFound.html")
 #SIMANE
 
 #KARADA
@@ -422,9 +441,6 @@ login_manager.login_view = "login"
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.route('/')
-def index():
-    return render_template('index.html')
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -508,7 +524,7 @@ def update_data(id):
             return render_template("accountadmin.html", user=current_user)
     else:
         flash('User not found', 'danger')
-        return redirect(url_for("login"))  # or any other route you want to redirect to
+        return redirect(url_for("login")) 
 
 
 
