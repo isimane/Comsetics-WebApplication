@@ -179,7 +179,9 @@
                         <h2 class="items-center mr-3 text-2xl font-bold font-fraun mt-2">{{ user.firstname }} {{ user.lastname }}</h2>
                         <h3 class="text-darkgreen mt-2">{{ user.email }}</h3>
                     </div>
-                    <button type="submit" class="bg-darkgreen text-light font-pop py-2 px-5 rounded-lg text-[13px] hover:opacity-80 transition-opacity duration-300 mx-auto flex justify-center mt-10" >Edit your stock</button>
+                    <a href="{{ url_for('productTable') }}">
+                        <button type="submit" class="bg-darkgreen text-light font-pop py-2 px-5 rounded-lg text-[13px] hover:opacity-80 transition-opacity duration-300 mx-auto flex justify-center mt-10" >Edit your stock</button>
+                    </a>
                     <div class="  mx-auto flex justify-between md:pl-20 w-[90%] mx-auto pl-5  md:w-[100%] md:text-start">
                         <div class=" ">
                             <button class="font-pop font-bold border-b-2 w-fit border-beige mt-20 flex justify-center ">Edit Your Profile <span class="text-beige"> </span></button>
