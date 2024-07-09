@@ -404,15 +404,14 @@ def orders():
 #SIMANE
 
 #KARADA
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.db"
-db = SQLAlchemy(app)
-class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(100), nullable=False)
-    lastname = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
-    password = db.Column(db.String(100), nullable=False)
-    role = db.Column(db.String(100), nullable=False, default="client")
+class User(UserMixin):
+    def __init__(self, id, firstname, lastname, email, password, role):
+        self.id = id
+        self.firstname = firstname
+        self.lastname = lastname
+        self.email = email
+        self.password = password
+        self.role = role
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -420,7 +419,13 @@ login_manager.login_view = "login"
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    with sqlite3.connect("db.db") as con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM users WHERE id=?", (user_id,))
+        user_data = cur.fetchone()
+        if user_data:
+            return User(*user_data)
+        return None
 
 @app.route('/')
 def index():
@@ -434,17 +439,25 @@ def login():
         if not email or not password:
             flash("Please provide both email and password", "danger")
             return redirect(url_for("login"))
-        user = User.query.filter_by(email=email).first()
-        if user and user.password == password:
-            login_user(user)
-            flash("Logged in successfully!", "success")
-            if user.role == "admin":
-                return redirect(url_for("accountadmin"))
-            elif user.role == "client":
-                return redirect(url_for("accountclient"))
-        else:
-            flash("Invalid email or password", "danger")
-            return render_template("login.html")
+        with sqlite3.connect("db.db") as con:
+            cur = con.cursor()
+            cur.execute("SELECT * FROM users WHERE email=?", (email,))
+            user_data = cur.fetchone()
+            if user_data:
+                user = User(*user_data)
+                if user.password == password:
+                    login_user(user)
+                    flash("Logged in successfully!", "success")
+                    if user.role == "admin":
+                        return redirect(url_for("accountadmin"))
+                    elif user.role == "client":
+                        return redirect(url_for("accountclient"))
+                else:
+                    flash("Invalid email or password", "danger")
+                    return render_template("login.html")
+            else:
+                flash("Invalid email or password", "danger")
+                return render_template("login.html")
     else:
         return render_template("login.html", user=current_user)
 
@@ -456,15 +469,17 @@ def signup():
         email = request.form.get("email")
         password = request.form.get("password")
         if firstname and lastname and email and password:
-            existing_user = User.query.filter_by(email=email).first()
-            if existing_user:
-                flash("Email already exists.", "danger")
-            else:
-                user = User(firstname=firstname, lastname=lastname, email=email, password=password, role="client")
-                db.session.add(user)
-                db.session.commit()
-                flash("Account created successfully!", "success")
-                return redirect(url_for("accountclient"))
+            with sqlite3.connect("db.db") as con:
+                cur = con.cursor()
+                cur.execute("SELECT * FROM users WHERE email=?", (email,))
+                if cur.fetchone():
+                    flash("Email already exists.", "danger")
+                else:
+                    cur.execute("INSERT INTO users (firstname, lastname, email, password, role) VALUES (?, ?, ?, ?, ?)",
+                                (firstname, lastname, email, password, "client"))
+                    con.commit()
+                    flash("Account created successfully!", "success")
+                    return redirect(url_for("accountclient"))
         else:
             flash("Please fill in all the fields", "danger")
     return render_template("signup.html")
@@ -472,45 +487,46 @@ def signup():
 @app.route('/update_data/<string:id>', methods=['POST', 'GET'])
 @login_required
 def update_data(id):
-    user = User.query.get(id)
-    if user:
-        if user.role == 'client':
-            if request.method == 'POST':
-                firstname = request.form['firstname']
-                lastname = request.form['lastname']
-                email = request.form['email']
+    with sqlite3.connect("db.db") as con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM users WHERE id=?", (id,))
+        user_data = cur.fetchone()
+        if user_data:
+            user = User(*user_data)
+            if user.role == 'client':
+                if request.method == 'POST':
+                    firstname = request.form['firstname']
+                    lastname = request.form['lastname']
+                    email = request.form['email']
 
-                if not firstname or not lastname or not email:
-                    flash('Please fill in all fields')
-                    return render_template("accountclient.html", user=current_user)
-                user.firstname = firstname
-                user.lastname = lastname
-                user.email = email
-                db.session.commit()
-                flash('User Updated', 'success')
-                return redirect(url_for("accountclient"))
-            return render_template("accountclient.html", user=current_user)
-        elif user.role == 'admin':
-            if request.method == 'POST':
-                firstname = request.form['firstname']
-                lastname = request.form['lastname']
-                email = request.form['email']
+                    if not firstname or not lastname or not email:
+                        flash('Please fill in all fields')
+                        return render_template("accountclient.html", user=current_user)
+                    cur.execute("UPDATE users SET firstname=?, lastname=?, email=? WHERE id=?",
+                                (firstname, lastname, email, id))
+                    con.commit()
+                    flash('User Updated', 'success')
+                    return redirect(url_for("accountclient"))
+                return render_template("accountclient.html", user=current_user)
+            elif user.role == 'admin':
+                if request.method == 'POST':
+                    firstname = request.form['firstname']
+                    lastname = request.form['lastname']
+                    email = request.form['email']
 
-                if not firstname or not lastname or not email:
-                    flash('Please fill in all fields')
-                    return render_template("accountadmin.html", user=current_user)
-                user.firstname = firstname
-                user.lastname = lastname
-                user.email = email
-                db.session.commit()
-                flash('User Updated', 'success')
-                return redirect(url_for("accountadmin"))
-            return render_template("accountadmin.html", user=current_user)
-    else:
-        flash('User not found', 'danger')
-        return redirect(url_for("login"))  # or any other route you want to redirect to
-
-
+                    if not firstname or not lastname or not email:
+                        flash('Please fill in all fields')
+                        return render_template("accountadmin.html", user=current_user)
+                    cur.execute("UPDATE users SET firstname=?, lastname=?, email=? WHERE id=?",
+                                (firstname, lastname, email, id))
+                    con.commit()
+                    flash('User Updated', 'success')
+                    return redirect(url_for("accountadmin"))
+                return render_template("accountadmin.html", user=current_user)
+        else:
+            flash('User not found', 'danger')
+            return redirect(url_for("login"))  # or any other route you want to redirect to
+        
 
 
 @app.route('/account')
