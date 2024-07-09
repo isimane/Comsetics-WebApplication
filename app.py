@@ -1,11 +1,16 @@
-from flask import Flask, render_template, url_for, request, redirect, url_for, flash, session,jsonify, make_response
+from flask import Flask, render_template, abort, url_for, request, redirect, url_for, flash, session,jsonify, make_response
 from werkzeug.utils import secure_filename
 import os
 import json
 import sys
-from flask import Flask, abort, render_template, request, redirect, url_for, flash
+
+# from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask import request, jsonify
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+import joblib
 
 # from cart import cart
 # from flask_wtf import FlaskForm
@@ -24,6 +29,7 @@ app.config['UPLOAD_DIRECTORY'] = 'static/media/'
 # app.register_blueprint(shop_blueprint, url_prefix="")
 # cart=cart()
 print("Flask app is starting")
+
 #SIMANE
 @app.route("/")
 def home():
@@ -195,7 +201,7 @@ def delete_product(id):
 
 
 
-
+#//////CART CHECKOUT ORDERS////
 @app.route("/add_to_cart", methods=['POST'])
 def add_cart():
     data = request.get_json()
@@ -217,8 +223,14 @@ def add_cart():
         
     if not alreadyExists:
         cart_items_list.append(data)
-
-    response = jsonify({"success": True})
+        
+    total_quantity = sum(item['quantity'] for item in cart_items_list)
+    
+    response = jsonify ({    
+            "success": True,
+            "cartCount": total_quantity 
+                       
+    })
     response.set_cookie('cart_items', json.dumps(cart_items_list))  # Update cart_items cookie
     return response
     
@@ -229,7 +241,16 @@ def add_cart():
     
     return jsonify({"success": False, "message": "Item added to cart"}), 200
 
-#//////CART CHECKOUT ORDERS////
+@app.route("/get_cart_count")
+def get_cart_count():
+    cart_items = request.cookies.get('cart_items')
+    if not cart_items:
+        return jsonify({"cartCount": 0})
+    
+    cart_items_list = json.loads(cart_items)
+    total_quantity = sum(item['quantity'] for item in cart_items_list)
+    return jsonify({"cartCount": total_quantity})
+
 @app.route('/cart', methods=['GET'])
 def cart():
     cart_items = request.cookies.get('cart_items', '[]')
@@ -399,9 +420,20 @@ def orders():
             order['order_items'] = [dict(item) for item in cur.fetchall()]
 
     return render_template("orders.html", orders=orders)
+# pagenotfound
+@app.errorhandler(404)
+def error_handler(error):
+    return render_template("pageNotFound.html")
 #SIMANE
 
 #KARADA
+from flask import Flask, abort, render_template, request, redirect, url_for, flash
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+import sqlite3
+
+app = Flask(__name__)
+app.config["SECRET_KEY"] = "secret_key_here"
+
 class User(UserMixin):
     def __init__(self, id, firstname, lastname, email, password, role):
         self.id = id
@@ -425,9 +457,7 @@ def load_user(user_id):
             return User(*user_data)
         return None
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -526,7 +556,6 @@ def update_data(id):
             return redirect(url_for("login"))  # or any other route you want to redirect to
         
 
-
 @app.route('/account')
 @login_required
 def account():
@@ -549,6 +578,53 @@ def logout():
     flash("You have been logged out successfully.", "success")
     return redirect(url_for("login"))
 
+
+
+
+
+# KAMAL///////
+file_path = 'cosmetics.csv'
+cosmetics_data = pd.read_csv(file_path)
+cosmetics_data['Label'] = cosmetics_data['Label'].astype('category').cat.codes
+cosmetics_data['Brand'] = cosmetics_data['Brand'].astype('category').cat.codes
+
+
+X = cosmetics_data[['Price', 'Combination', 'Dry', 'Normal', 'Oily', 'Sensitive']]
+y = cosmetics_data['Label']
+
+
+model_path = 'cosmetics_model.pkl'
+if not os.path.exists(model_path):
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    clf = DecisionTreeClassifier()
+    clf.fit(X_train, y_train)
+    joblib.dump(clf, model_path)
+else:
+    clf = joblib.load(model_path)
+
+@app.route('/formAI')
+def formAI():
+    return render_template('formAI.html')
+
+@app.route('/recommend', methods=['POST'])
+def recommend():
+    try:
+        price = float(request.form['price'])
+        skin_type = request.form['skin_type']
+
+        combination = 1 if skin_type == 'combination' else 0
+        dry = 1 if skin_type == 'dry' else 0
+        normal = 1 if skin_type == 'normal' else 0
+        oily = 1 if skin_type == 'oily' else 0
+        sensitive = 1 if skin_type == 'sensitive' else 0
+
+        customer_features = [price, combination, dry, normal, oily, sensitive]
+        product_label = clf.predict([customer_features])[0]
+        recommended_product = cosmetics_data[cosmetics_data['Label'] == product_label].iloc[0]
+
+        return render_template('resultAI.html', product=recommended_product)
+    except Exception as e:
+        return str(e)
 if __name__ == "__main__":
     app.run(debug=True)
     

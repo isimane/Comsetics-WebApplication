@@ -48,11 +48,19 @@
               .dropdown:hover .dropdown-menu {
                   display: block;
               }
+              .animateScroll {
+        animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+        }
           </style>
       </head>
       <body class="bg-light">
         {% block content %}
-          <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
+          <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px] noAnimation">
             <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
             <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
                   <a href="{{ url_for('home') }}" class="p-8 hover:text-darkgreen">HOME</a>
@@ -94,7 +102,7 @@
                   </svg>
               </button>
           </header>
-          <nav class="flex flex-col" id="navbar">
+          <nav class="flex flex-col noAnimation" id="navbar">
               <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
                   <a href="{{ url_for('home') }}" class="text-light p-3">HOME</a>
                   <div class="dropdown px-8">
@@ -123,10 +131,10 @@
                   </div>
               </div>
           </nav>
-     <main class="flex flex-col items-center py-16 bg-light w-[90%] mx-auto mt-10 xl:max-w-[1440px] xl:mx-auto">
+     <main class="flex flex-col items-center py-16 bg-light w-[90%] mx-auto mt-10 xl:max-w-[1440px] xl:mx-auto noAnimation">
 
-        <h1 class="text-3xl font-fraun font-bold text-center inline-block  md:w-[50%] w-[70%] text-center text-darkgreen">Welcome to the Nuova Shop</h1>
-        <p class="text-center max-w-xl text-dark mt-4 mb-1">Discover our wide range of premium beauty products designed to enhance your natural beauty and elevate your daily routine. From skincare essentials to luxurious fragrances, find everything you need to look and feel your best.</p>
+        <h1 class="text-3xl font-fraun font-bold text-center inline-block  md:w-[50%] w-[70%] text-center text-darkgreen ">Welcome to the Nuova Shop</h1>
+        <p class="text-center max-w-xl text-dark mt-4 mb-1 ">Discover our wide range of premium beauty products designed to enhance your natural beauty and elevate your daily routine. From skincare essentials to luxurious fragrances, find everything you need to look and feel your best.</p>
        
         <section class="px-4 md:px-16 py-8 w-fit text-center mt-10 md:text-left">
             <h2 class="text-2xl md:text-3xl my-10 font-fraun font-bold text-beige  flex justify-start  text-left">
@@ -139,7 +147,7 @@
         </section>
         <section class="grid md:grid-cols-3 gap-10 md:w-[90%] w-[80%]  mx-auto">
             {% for product in products %}
-                <div class="text-center flex flex-col justify-center md:flex-row gap-20 ">
+                <div class="text-center flex flex-col justify-center md:flex-row gap-20 noAnimation">
 
                     <div class=" shadow-2xl rounded-3xl ">
                             <img src="{{ url_for('static', filename='media/' + product['image']) }}" alt="Hydra Boost Moisturizer" class="w-full h-[200px] object-cover rounded-t-[40px]">
@@ -162,7 +170,7 @@
         </section>
             
     </main>
-    <footer class="bg-darkgreen mt-20 md:block pb-3 text-light items-center">
+    <footer class="bg-darkgreen mt-20 md:block pb-3 text-light items-center noAnimation">
         <section class="w-[90%] mx-auto xl:max-w-[1400px] xl:mx-auto">
           <section class=" flex flex-col justify-center items-center md:flex md:flex-row  md:justify-between mx-auto ">
             <div class=" items-center flex flex-col justify-center md:text-start md:items-start md:justify-between md:w-[40%] pt-10">

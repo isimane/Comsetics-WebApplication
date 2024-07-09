@@ -43,6 +43,14 @@
         .dropdown:hover .dropdown-menu {
             display: block;
         }
+        .animateScroll {
+        animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+        }
     </style>
 </head>
 <body class="bg-light">
@@ -89,7 +97,7 @@
         </button>
     </header>
     <!-- this navbar is for samll screens -->
-    <nav class="flex flex-col" id="navbar">
+    <nav class="flex flex-col noAnimation" id="navbar">
         <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
             <a href="{{url_for('home')}}" class="text-light p-3">HOME</a>
             <div class="dropdown">
@@ -124,19 +132,19 @@
     </nav>
 
        <main class="container mt-20 w-[90%] mx-auto xl:max-w-[1440px] xl:mx-auto">
-        <section>
+        <section class="mt-20 noAnimation">
             <h1 class="w-[90%] mx-auto text-darkgreen font-fraun font-bold text-2xl md:text-4xl text-center">Welcome to NUOVA</h1>
             <p class="text-[16px] md:text-[18px] text-center md:w-[70%] mx-auto xl:w-[60%] xl:mx-auto mt-9
             ">At Nuova, we believe that beauty is more than skin deep. It’s about feeling confident, embracing your individuality, and expressing yourself in your own unique way. Our mission is to empower you with the tools and products to enhance your natural beauty and inspire confidence every day.</p>
             <img src="{{ url_for('static', filename='images/Group 33.png') }}" alt="" class="md:w-[50%] md:mx-auto mt-10">
         </section>
-        <section class="mt-20">
+        <section class="mt-20 noAnimation">
             <h1 class="w-[90%] mx-auto text-darkgreen text-center font-fraun font-bold text-2xl md:text-4xl text-center">Our Story</h1>
             <p class="text-[16px] md:text-[18px] text-center md:w-[70%] mx-auto xl:w-[60%] xl:mx-auto mt-9
             ">Nuova was founded with a passion for beauty and a commitment to excellence. What started as a dream to create high-quality, accessible beauty products has grown into a trusted brand known for innovation, integrity, and a deep understanding of what makes our customers feel beautiful. From our humble beginnings, we have remained dedicated to bringing you the best in cosmetics and skincare.
             </p>
         </section>
-        <section class="mt-20">
+        <section class="mt-20 noAnimation">
             <h1 class="w-[90%] mx-auto text-darkgreen font-fraun font-bold text-2xl md:text-4xl text-center">Quality and Innovation</h1>
             <p class="text-[16px] md:text-[18px] text-center md:w-[70%] mx-auto xl:w-[60%] xl:mx-auto mt-9
             ">Quality is at the heart of everything we do. Our products are formulated with care, using only the best ingredients that are both effective and gentle on your skin. We continually strive to innovate and stay ahead of the latest beauty trends, ensuring that our products deliver outstanding results.
@@ -144,12 +152,12 @@
         </section>
         
        </main>
-       <section class="bg-beige mt-20  ">
-        <section class=" xl:max-w-[1440px] xl:mx-auto flex flex-col md:flex-row">
+       <section class="bg-beige mt-20 noAnimation ">
+        <section class=" xl:max-w-[1440px] xl:mx-auto flex flex-col md:flex-row noAnimation">
             <div class="w-[50%] ">
                 <img src="{{ url_for('static', filename='images/mask 1.png') }}" alt="" class="hidden md:block md:max-w-[500px]  md:max-h-[400px] object-cover">
             </div>
-            <div class="p-7 md:p-10 lg:p-20">
+            <div class="p-7 md:p-10 lg:p-20 noAnimation">
                 <h1 class="text-center text-2xl font-fraun text-light md:text-4xl font-bold  md:text-start">Our Products</h1>
                 <p class="text-center text-[16px] md:text-[18px]  md:text-start text-light pt-5 md:w-[80%]">Each product in the Nuova collection is meticulously crafted using the finest ingredients and the latest scientific advancements. We offer a wide range of cosmetics, skincare, and fragrances designed to meet the diverse needs of our customers. Whether you’re looking for a radiant foundation, a nourishing hair mask, or a captivating fragrance, Nuova has something for everyone.</p>
             </div>
@@ -168,7 +176,7 @@
                 </div>  
         </section>
 
-        <footer class="bg-darkgreen mt-20 md:block pb-3 text-light items-center">
+        <footer class="bg-darkgreen mt-20 md:block pb-3 text-light items-center noAnimation">
           <section class="w-[90%] mx-auto xl:max-w-[1400px] xl:mx-auto">
             <section class=" flex flex-col justify-center items-center md:flex md:flex-row  md:justify-between mx-auto ">
               <div class=" items-center flex flex-col justify-center md:text-start md:items-start md:justify-between md:w-[40%] pt-10">

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">    
+        <title>CosmeticWebsite</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                 theme: {
+                   extend: {
+                     // grayscale: {
+                     //     50: '50%',
+                    
+                     fontFamily: { 
+                           pop: ["Poppins", "sans-serif"], 
+                           fraun:["Fraunces", "sans-serif"],
+                       },
+                     colors: { 
+                       darkgreen:"#677E52",
+                       light: "#fcf5eb", // hada bach khdemt lbackground
+                       lightbeige:"#EAE2CB",
+                       lightgreen:"#cfdb98",
+                       beige:"#c4b494",
+                     },
+                   },
+                 },
+               };
+          </script>
+           <style>
+                #navbar {
+                    display: none;
+                }
+                #burgerlist {
+                    display: block;
+                }
+                #unshowlist {
+                    display: none;
+                }
+                .dropdown:hover .dropdown-menu {
+                    display: block;
+                }
+                .animateScroll {
+                    animation: fadeIn 1s ease-in-out;
+                    }
+            
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+        </style>
+    </head>
+<body class="bg-light">
+    <main class="w-[90%] md:w-[70%] mx-auto text-center mt-32 noAnimation">
+        <h1 class="text-[100px] text-darkgreen font-pop ">404</h1>
+        <h2 class="text-3xl my-5 text-beige font-fraun font-bold">Oops! Page Not Found</h2>
+        <p class="mb-5 font-pop">Sorry the page you are looking for doesn't exist</p>
+    </main>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
