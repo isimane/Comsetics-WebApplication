@@ -93,8 +93,8 @@
                     <a href="category4.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
                 </div>
             </div>
-            <a href="about.html" class="p-8 hover:text-darkgreen">ABOUT US</a>
-            <a href="contactus.html" class="hover:text-darkgreen">CONTACT US</a>
+            <a href="{{ url_for('about') }}" class="p-8 hover:text-darkgreen">ABOUT US</a>
+            <a href="{{ url_for('contact') }}" class="hover:text-darkgreen">CONTACT US</a>
         </nav>
         <div class="flex hidden md:flex items-center gap-4">
            
@@ -135,8 +135,8 @@
                     <a href="category4.html" class="block px-4 py-2 hover:bg-lightbeige">Men's grooming</a>
                 </div>
             </div>
-            <a href="about.html" class="p-3 text-light font-bold">ABOUT US</a>
-            <a href="contactus.html" class="text-light pb-3">CONTACT US</a>
+            <a href="{{ url_for('about') }}" class="p-3 text-light font-bold">ABOUT US</a>
+            <a href="{{ url_for('contact') }}" class="text-light pb-3">CONTACT US</a>
             <div class="flex block md:hidden items-center gap-4 mt-3">
                 
                 <button>

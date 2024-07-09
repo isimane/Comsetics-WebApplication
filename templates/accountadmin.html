@@ -83,7 +83,7 @@
     <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
         <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
         <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
-            <a href="index.html" class="p-8  hover:text-darkgreen">HOME</a>
+            <a href="{{ url_for('home') }}" class="p-8  hover:text-darkgreen">HOME</a>
             <div class="dropdown p-8">
                 <a href="shop.html" class=" hover:text-darkgreen">SHOP</a>
                 <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
@@ -93,8 +93,8 @@
                     <a href="category4.html" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
                 </div>
             </div>
-            <a href="about.html" class="p-8 hover:text-darkgreen">ABOUT US</a>
-            <a href="contactus.html" class="hover:text-darkgreen">CONTACT US</a>
+            <a href="{{ url_for('about') }}" class="p-8 hover:text-darkgreen">ABOUT US</a>
+            <a href="{{ url_for('contact') }}" class="hover:text-darkgreen">CONTACT US</a>
         </nav>
         <div class="flex hidden md:flex items-center gap-4">
            
@@ -125,7 +125,7 @@
     <!-- this navbar is for samll screens -->
     <nav class="flex flex-col" id="navbar">
         <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
-            <a href="index.html" class="text-light p-3">HOME</a>
+            <a href="{{ url_for('home') }}" class="text-light p-3">HOME</a>
             <div class="dropdown">
                 <a href="shop.html" class="font-bold text-light p-8">SHOP</a>
                 <div class="absolute hidden dropdown-menu bg-light text-beige shadow-md mt-1 rounded-md">
@@ -135,8 +135,8 @@
                     <a href="category4.html" class="block px-4 py-2 hover:bg-lightbeige">Men's grooming</a>
                 </div>
             </div>
-            <a href="about.html" class="p-3 text-light font-bold">ABOUT US</a>
-            <a href="contactus.html" class="text-light pb-3">CONTACT US</a>
+            <a href="{{ url_for('about') }}" class="p-3 text-light font-bold">ABOUT US</a>
+            <a href="{{ url_for('contact') }}" class="text-light pb-3">CONTACT US</a>
             <div class="flex block md:hidden items-center gap-4 mt-3">
                 <button>
                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-search cursor-pointer hover:bg-opacity-30 dark:text-light" viewBox="0 0 16 16">
