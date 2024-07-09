@@ -22,7 +22,7 @@ login_manager.login_view = "login"
 def load_user(user_id):
     with sqlite3.connect("db.db") as con:
         cur = con.cursor()
-        cur.execute("SELECT * FROM users WHERE id=?", (user_id,))
+        cur.execute("SELECT * FROM user WHERE id=?", (user_id,))
         user_data = cur.fetchone()
         if user_data:
             return User(*user_data)
@@ -42,7 +42,7 @@ def login():
             return redirect(url_for("login"))
         with sqlite3.connect("db.db") as con:
             cur = con.cursor()
-            cur.execute("SELECT * FROM users WHERE email=?", (email,))
+            cur.execute("SELECT * FROM user WHERE email=?", (email,))
             user_data = cur.fetchone()
             if user_data:
                 user = User(*user_data)
@@ -72,11 +72,11 @@ def signup():
         if firstname and lastname and email and password:
             with sqlite3.connect("db.db") as con:
                 cur = con.cursor()
-                cur.execute("SELECT * FROM users WHERE email=?", (email,))
+                cur.execute("SELECT * FROM user WHERE email=?", (email,))
                 if cur.fetchone():
                     flash("Email already exists.", "danger")
                 else:
-                    cur.execute("INSERT INTO users (firstname, lastname, email, password, role) VALUES (?, ?, ?, ?, ?)",
+                    cur.execute("INSERT INTO user (firstname, lastname, email, password, role) VALUES (?, ?, ?, ?, ?)",
                                 (firstname, lastname, email, password, "client"))
                     con.commit()
                     flash("Account created successfully!", "success")
@@ -90,7 +90,7 @@ def signup():
 def update_data(id):
     with sqlite3.connect("db.db") as con:
         cur = con.cursor()
-        cur.execute("SELECT * FROM users WHERE id=?", (id,))
+        cur.execute("SELECT * FROM user WHERE id=?", (id,))
         user_data = cur.fetchone()
         if user_data:
             user = User(*user_data)
@@ -103,7 +103,7 @@ def update_data(id):
                     if not firstname or not lastname or not email:
                         flash('Please fill in all fields')
                         return render_template("accountclient.html", user=current_user)
-                    cur.execute("UPDATE users SET firstname=?, lastname=?, email=? WHERE id=?",
+                    cur.execute("UPDATE user SET firstname=?, lastname=?, email=? WHERE id=?",
                                 (firstname, lastname, email, id))
                     con.commit()
                     flash('User Updated', 'success')
@@ -118,7 +118,7 @@ def update_data(id):
                     if not firstname or not lastname or not email:
                         flash('Please fill in all fields')
                         return render_template("accountadmin.html", user=current_user)
-                    cur.execute("UPDATE users SET firstname=?, lastname=?, email=? WHERE id=?",
+                    cur.execute("UPDATE user SET firstname=?, lastname=?, email=? WHERE id=?",
                                 (firstname, lastname, email, id))
                     con.commit()
                     flash('User Updated', 'success')
