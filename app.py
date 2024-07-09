@@ -3,10 +3,8 @@ from werkzeug.utils import secure_filename
 import os
 import json
 import sys
-from app_login_signup import *
 from flask import Flask, abort, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from flask_sqlalchemy import SQLAlchemy
 from flask import request, jsonify
 
 # from cart import cart
