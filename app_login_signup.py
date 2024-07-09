@@ -20,7 +20,7 @@ login_manager.login_view = "login"
 
 @login_manager.user_loader
 def load_user(user_id):
-    with sqlite3.connect("db.db") as con:
+    with sqlite3.connect("instance\db.db") as con:
         cur = con.cursor()
         cur.execute("SELECT * FROM user WHERE id=?", (user_id,))
         user_data = cur.fetchone()
@@ -40,7 +40,7 @@ def login():
         if not email or not password:
             flash("Please provide both email and password", "danger")
             return redirect(url_for("login"))
-        with sqlite3.connect("db.db") as con:
+        with sqlite3.connect("instance\db.db") as con:
             cur = con.cursor()
             cur.execute("SELECT * FROM user WHERE email=?", (email,))
             user_data = cur.fetchone()
@@ -70,7 +70,7 @@ def signup():
         email = request.form.get("email")
         password = request.form.get("password")
         if firstname and lastname and email and password:
-            with sqlite3.connect("db.db") as con:
+            with sqlite3.connect("instance\db.db") as con:
                 cur = con.cursor()
                 cur.execute("SELECT * FROM user WHERE email=?", (email,))
                 if cur.fetchone():
@@ -88,7 +88,7 @@ def signup():
 @app.route('/update_data/<string:id>', methods=['POST', 'GET'])
 @login_required
 def update_data(id):
-    with sqlite3.connect("db.db") as con:
+    with sqlite3.connect("instance\db.db") as con:
         cur = con.cursor()
         cur.execute("SELECT * FROM user WHERE id=?", (id,))
         user_data = cur.fetchone()
