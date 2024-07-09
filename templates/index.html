@@ -83,11 +83,14 @@
                 </a>
             </button>
             <button>
-                <a href="{{ url_for('cart') }}" class="hover:text-darkgreen">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart " viewBox="0 0 16 16">
+              <a href="{{ url_for('cart') }}" class="hover:text-darkgreen">
+                <div id="cart-icon" data-count="0" class="flex items-center ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                     </svg>
-                </a>
+                    <span class="cart-count bg-red-900  text-[8px] rounded-full px-[3.5px] text-white relative top-[7px] left-[-7px]">0</span>
+                </div>
+              </a>
             </button>
         </div>
         <button class="block md:hidden">
@@ -127,110 +130,112 @@
              </div>
         </div>
     </nav>
-      <main class=" mt-20  ">
+        <main class=" mt-20  ">
 
-        <!-- section1 -->
-        <section class="w-[90%] mx-auto flex noAnimation flex-col md:flex-row items-center xl:max-w-[1400px] xl:mx-auto ">
-            <div class="text-center md:text-left">
-                <h1 class="text-darkgreen font-fraun font-bold text-3xl md:text-5xl mb-4 md:w-[80%] pb-6 md:pb-4">
-                    Let NUOVA Help You Look Your Best.
-                </h1>
-                <p class="md:w-[80%] pb-6 md:pb-4">Discover <span class="font-bold">NUOVA</span>, where beauty innovation meets luxury.
-                    Our eco-friendly, high-quality cosmetics enhance your natural glow. Explore our range and experience the future of beauty today.</p>
-                <a href="{{ url_for('about') }}"><button class="bg-darkgreen text-light rounded-lg py-2 px-4 mt-4 font-bold  hover:opacity-80 transition-opacity duration-300">
-                    Learn more about us
-                </button></a>
-            </div>
-            <div class="pb-6 my-9 flex md:justify-end  w-[50%] w-full ">
-                <img src="{{ url_for('static', filename='images/Group 5 (1).png') }}" alt="introimages">
-            </div>
-        </section>
+          <!-- section1 -->
+          <section class="w-[90%] mx-auto flex noAnimation flex-col md:flex-row items-center xl:max-w-[1400px] xl:mx-auto ">
+              <div class="text-center md:text-left">
+                  <h1 class="text-darkgreen font-fraun font-bold text-3xl md:text-5xl mb-4 md:w-[80%] pb-6 md:pb-4">
+                      Let NUOVA Help You Look Your Best.
+                  </h1>
+                  <p class="md:w-[80%] pb-6 md:pb-4">Discover <span class="font-bold">NUOVA</span>, where beauty innovation meets luxury.
+                      Our eco-friendly, high-quality cosmetics enhance your natural glow. Explore our range and experience the future of beauty today.</p>
+                  <a href="{{ url_for('about') }}"><button class="bg-darkgreen text-light rounded-lg py-2 px-4 mt-4 font-bold  hover:opacity-80 transition-opacity duration-300">
+                      Learn more about us
+                  </button></a>
+              </div>
+              <div class="pb-6 my-9 flex md:justify-end  w-[50%] w-full ">
+                  <img src="{{ url_for('static', filename='images/Group 5 (1).png') }}" alt="introimages">
+              </div>
+          </section>
 
-        <!-- section2 -->
-        <section class="mt-20 text-center noAnimation xl:max-w-[1400px] xl:mx-auto ">
-          <h2 class="text-2xl md:text-3xl font-bold mb-4">Shop By Category</h2>
-          <div class="bg-beige w-24 h-1 mx-auto mb-10"></div>
+          <!-- section2 -->
+          <section class="mt-20 text-center noAnimation xl:max-w-[1400px] xl:mx-auto ">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Shop By Category</h2>
+            <div class="bg-beige w-24 h-1 mx-auto mb-10"></div>
 
-        <!-- CategoryProductsSEction -->
-          <div class="flex flex-col md:flex-row gap-8  w-[75%] mx-auto noAnimation ">
-                          <div class="block md:hidden">
-                                <div class="flex gap-8 w-full justify-center">
-                                      <a href="{{ url_for('shop', **dict(request.args, category=1)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
-                                          <img src="{{ url_for('static', filename='images/makeupcategory 3.png') }}"  alt="Makeup" class="w-full object-cover ">
-                                          <span class="pt-3 text-[18px] text-beige font-bold md:text-[20px]">Makeup</span>
-                                      </button></a>
-                                      <!-- hadi m3awda juj mrat hit mabghatch t9ad :) -->
-                                        <a href="{{ url_for('shop', **dict(request.args, category=2)) }}"><button class=" items-center text-center hover:opacity-80 transition-opacity duration-300 ">
-                                            <img src="{{ url_for('static', filename='images/skincarecategory .png') }}"  alt="Skincare" class=" object-cover w-full">
-                                            <p class=" text-[18px]  text-beige font-bold md:text-[20px]">Skincare</p>
-                                        </button></a>
-                                        
-                                </div> 
-                          
-                                <div class="flex gap-8 w-full">
-                                      <a href="{{ url_for('shop', **dict(request.args, category=4)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
-                                          <img src="{{ url_for('static', filename='images/fragrancecategory 2.png') }}" alt="Fragrance" class="w-full object-cover">
-                                          <span class="mt-3 text-[18px]  text-beige font-bold md:text-[20px]">Fragrance</span>
-                                      </button></a>
-                                      
-                                          <a href="{{ url_for('shop', **dict(request.args, category=3)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300 ">
-                                              <img src="{{ url_for('static', filename='images/men.png') }}" alt="Men's Grooming" class="w-full  object-cover ">
-                                              
-                                              <span class="mt-3 text-[16px] pt-6 text-beige font-bold md:text-[20px]">Men's Grooming</span>
-                                          </button></a>
-                                </div>
-                          </div>
-                          <div class="hidden md:block mx-auto">
+          <!-- CategoryProductsSEction -->
+            <div class="flex flex-col md:flex-row gap-8  w-[75%] mx-auto noAnimation ">
+                            <div class="block md:hidden">
                                   <div class="flex gap-8 w-full justify-center">
-                                    <a href="{{ url_for('shop', **dict(request.args, category=1)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
-                                        <img src="{{ url_for('static', filename='images/makeupcategory 3.png') }}" alt="Makeup" class="w-full object-cover ">
-                                        <span class="pt-3 text-[13px] text-beige font-bold md:text-[20px]">Makeup</span>
-                                    </button></a>
-                                    <!-- hadi m3awda juj mrat hit mabghatch t9ad :) -->
-                                      <a href="{{ url_for('shop', **dict(request.args, category=2)) }}"><button class=" items-center text-center hover:opacity-80 transition-opacity duration-300 ">
-                                          <img src="{{ url_for('static', filename='images/skincarecategory .png') }}" alt="Skincare" class=" object-cover w-full">
-                                          <p class=" text-[13px]  text-beige font-bold md:text-[20px]">Skincare</p>
-                                      </button></a>
+                                        <a href="{{ url_for('shop', **dict(request.args, category=1)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
+                                            <img src="{{ url_for('static', filename='images/makeupcategory 3.png') }}"  alt="Makeup" class="w-full object-cover ">
+                                            <span class="pt-3 text-[18px] text-beige font-bold md:text-[20px]">Makeup</span>
+                                        </button></a>
+                                        <!-- hadi m3awda juj mrat hit mabghatch t9ad :) -->
+                                          <a href="{{ url_for('shop', **dict(request.args, category=2)) }}"><button class=" items-center text-center hover:opacity-80 transition-opacity duration-300 ">
+                                              <img src="{{ url_for('static', filename='images/skincarecategory .png') }}"  alt="Skincare" class=" object-cover w-full">
+                                              <p class=" text-[18px]  text-beige font-bold md:text-[20px]">Skincare</p>
+                                          </button></a>
+                                          
+                                  </div> 
+                            
+                                  <div class="flex gap-8 w-full">
                                         <a href="{{ url_for('shop', **dict(request.args, category=4)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
                                             <img src="{{ url_for('static', filename='images/fragrancecategory 2.png') }}" alt="Fragrance" class="w-full object-cover">
-                                            <span class="mt-3 text-[13px]  text-beige font-bold md:text-[20px]">Fragrance</span>
+                                            <span class="mt-3 text-[18px]  text-beige font-bold md:text-[20px]">Fragrance</span>
                                         </button></a>
                                         
                                             <a href="{{ url_for('shop', **dict(request.args, category=3)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300 ">
                                                 <img src="{{ url_for('static', filename='images/men.png') }}" alt="Men's Grooming" class="w-full  object-cover ">
                                                 
-                                                <span class="mt-3 text-[13px] pt-6 text-beige font-bold md:text-[20px]"> Men's Grooming</span>
+                                                <span class="mt-3 text-[16px] pt-6 text-beige font-bold md:text-[20px]">Men's Grooming</span>
                                             </button></a>
-                                    </div>
-                          </div>
+                                  </div>
+                            </div>
+                            <div class="hidden md:block mx-auto">
+                                    <div class="flex gap-8 w-full justify-center">
+                                      <a href="{{ url_for('shop', **dict(request.args, category=1)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
+                                          <img src="{{ url_for('static', filename='images/makeupcategory 3.png') }}" alt="Makeup" class="w-full object-cover ">
+                                          <span class="pt-3 text-[13px] text-beige font-bold md:text-[20px]">Makeup</span>
+                                      </button></a>
+                                      <!-- hadi m3awda juj mrat hit mabghatch t9ad :) -->
+                                        <a href="{{ url_for('shop', **dict(request.args, category=2)) }}"><button class=" items-center text-center hover:opacity-80 transition-opacity duration-300 ">
+                                            <img src="{{ url_for('static', filename='images/skincarecategory .png') }}" alt="Skincare" class=" object-cover w-full">
+                                            <p class=" text-[13px]  text-beige font-bold md:text-[20px]">Skincare</p>
+                                        </button></a>
+                                          <a href="{{ url_for('shop', **dict(request.args, category=4)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300">
+                                              <img src="{{ url_for('static', filename='images/fragrancecategory 2.png') }}" alt="Fragrance" class="w-full object-cover">
+                                              <span class="mt-3 text-[13px]  text-beige font-bold md:text-[20px]">Fragrance</span>
+                                          </button></a>
+                                          
+                                              <a href="{{ url_for('shop', **dict(request.args, category=3)) }}"><button class="items-center text-center hover:opacity-80 transition-opacity duration-300 ">
+                                                  <img src="{{ url_for('static', filename='images/men.png') }}" alt="Men's Grooming" class="w-full  object-cover ">
+                                                  
+                                                  <span class="mt-3 text-[13px] pt-6 text-beige font-bold md:text-[20px]"> Men's Grooming</span>
+                                              </button></a>
+                                      </div>
+                            </div>
 
-          </div>    
-      </section>
+            </div>    
+        </section>
 
-      <!-- section3 -->
-      <section class="w-[100%] mx-auto noAnimation mt-20 bg-darkgreen pb-10 lg:pb-4 xl:pb-4" >
-        <section class="xl:max-w-[1400px] xl:mx-auto ">
-         <div class="my-9 block md:justify-end  md:hidden ">
-            <img src="{{ url_for('static', filename='media/' + featured['image']) }}" alt="image4" class="w-full object-cover">
-          </div>
-          <section class="flex flex-col p-[10px] md:flex-row items-center md:py-[10px]  md:w-[90%] mx-auto">
-           
-              <div class="text-center md:text-left">
-                  <h2 class="text-light  font-fraun font-bold text-2xl md:text-5xl mb-4 md:w-[90%] pb-6 md:pb-4">
-                    {{featured['name'] }}
-                  </h2>
-                  <p class="md:w-[80%] text-light pb-6 md:pb-4">Discover <span class="font-bold">NUOVA</span> {{ featured['description'] }}</p>
-                  <button class="bg-light text-darkgreen rounded-lg py-2 px-4 mt-4 font-bold hover:opacity-80 transition-opacity duration-300 "><a href="{{url_for('product', id=featured.id)}}"> Shop Now</a></button>
-                   
-                      
-              </div>
-              <div class="my-9 md:justify-end md:w-[70%] hidden md:block ">
-                <img src="{{ url_for('static', filename='media/' + featured['image']) }}" alt="image4" class="w-full h-[330px] object-cover rounded-[70px]">
-              </div>
-            <section>
-          </section>
-      </section>
-</main>
+        <!-- section3 -->
+        <section class="w-[100%] mx-auto noAnimation mt-20 bg-darkgreen pb-10 lg:pb-4 xl:pb-4" >
+          <section class="xl:max-w-[1400px] xl:mx-auto ">
+          <div class="my-9 block md:justify-end  md:hidden ">
+              <img src="{{ url_for('static', filename='media/' + featured['image']) }}" alt="image4" class="w-full object-cover">
+            </div>
+            <section class="flex flex-col p-[10px] md:flex-row items-center md:py-[10px]  md:w-[90%] mx-auto">
+            
+                <div class="text-center md:text-left">
+                    <h2 class="text-light  font-fraun font-bold text-2xl md:text-5xl mb-4 md:w-[90%] pb-6 md:pb-4">
+                      {{featured['name'] }}
+                    </h2>
+                    <p class="md:w-[80%] text-light pb-6 md:pb-4">Discover <span class="font-bold">NUOVA</span> {{ featured['description'] }}</p>
+                    <button class="bg-light text-darkgreen rounded-lg py-2 px-4 mt-4 font-bold hover:opacity-80 transition-opacity duration-300 "><a href="{{url_for('product', id=featured.id)}}"> Shop Now</a></button>
+                    
+                        
+                </div>
+                <div class="my-9 md:justify-end md:w-[70%] hidden md:block ">
+                  <img src="{{ url_for('static', filename='media/' + featured['image']) }}" alt="image4" class="w-full h-[330px] object-cover rounded-[70px]">
+                </div>
+              <section>
+            </section>
+        </section>
+        
+    </main>
+   
       <section class="mt-20 text-center xl:w-[1400px] xl:mx-auto">
         <div>
           <h2 class="text-2xl md:text-3xl font-bold mb-4 ">Our Products</h2>
@@ -289,7 +294,20 @@
             </div>
       </section>
       
-
+      <section class="bg-light bg-opacity-90 shadow-2xl w-[80%] mx-auto mt-24 rounded-xl py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-2xl font-fraun text-darkgreen font-bold text-darkgreen sm:text-3xl">
+            Find Your Perfect Skincare Moisturizer
+          </h2>
+          <p class="mt-4 text-lg ">
+            Tell us your skin type and budget, and we'll recommend the best product for you!
+          </p>
+          <div class="mt-8">
+            <a href="{{ url_for('formAI')}}" class="inline-flex items-center justify-center px-5 py-1 border border-transparent text-base font-medium rounded-lg text-light bg-darkgreen ">Find My Product</a>
+          </div>
+        </div>
+      </section>
+      
       <footer class="bg-darkgreen mt-20 noAnimation md:block pb-3 text-light items-center">
         <section class="w-[90%] mx-auto xl:max-w-[1400px] xl:mx-auto">
           <section class=" flex flex-col justify-center items-center md:flex md:flex-row  md:justify-between mx-auto ">

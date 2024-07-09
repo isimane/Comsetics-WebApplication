@@ -90,6 +90,23 @@ function validateInput(input) {
 // });
 
 
+function updateCartIcon() {
+  const cartIcon = document.getElementById('cart-icon');
+  if (!cartIcon) {
+    console.error('Cart icon element not found');
+    return;
+  }
+  let currentCount = parseInt(cartIcon.getAttribute('data-count') || '0');
+  currentCount++;
+  cartIcon.setAttribute('data-count', currentCount);
+  const counter = cartIcon.querySelector('.cart-count');
+  if (counter) {
+    counter.textContent = currentCount;
+  } else {
+    console.warn('Cart count element not found');
+  }
+}
+
 function addToCartBtns() {
   const addToCart = document.getElementsByClassName('addToCartBtn');
   for (let button of addToCart) {
@@ -118,44 +135,18 @@ function addToCartBtns() {
       .then(response => response.json())
       .then(data => {
         console.log('Server response:', data);
-        if (data.success) {
-          updateCartIcon(data.cartCount);
-        }
+        updateCartIcon();
         console.log('Item added to cart successfully');
       })
       .catch((error) => {
         console.error('Error:', error);
+       
       });
     });
   }
 }
 
-function updateCartIcon(count) {
-  const cartCountElement = document.getElementById('cart-count');
-  if (cartCountElement) {
-    cartCountElement.textContent = count;
-  }
-  
-  const cartIcon = document.getElementById('cart-icon');
-  if (cartIcon) {
-    cartIcon.setAttribute('data-count', count);
-  }
-}
-
-// Function to initialize the cart count
-function initializeCartCount() {
-  fetch('/get_cart_count')
-    .then(response => response.json())
-    .then(data => {
-      updateCartIcon(data.cartCount);
-    })
-    .catch(error => console.error('Error initializing cart count:', error));
-}
-
-  addToCartBtns();
-  initializeCartCount();
-  updateCartIcon(count);
-
+addToCartBtns();
 
 
 

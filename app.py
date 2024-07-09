@@ -8,6 +8,10 @@ from app_login_signup import *
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 from flask import request, jsonify
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+import joblib
 
 # from cart import cart
 # from flask_wtf import FlaskForm
@@ -26,6 +30,7 @@ app.config['UPLOAD_DIRECTORY'] = 'static/media/'
 # app.register_blueprint(shop_blueprint, url_prefix="")
 # cart=cart()
 print("Flask app is starting")
+
 #SIMANE
 @app.route("/")
 def home():
@@ -416,7 +421,7 @@ def orders():
             order['order_items'] = [dict(item) for item in cur.fetchall()]
 
     return render_template("orders.html", orders=orders)
-
+# pagenotfound
 @app.errorhandler(404)
 def error_handler(error):
     return render_template("pageNotFound.html")
@@ -551,6 +556,51 @@ def logout():
     flash("You have been logged out successfully.", "success")
     return redirect(url_for("login"))
 
+
+
+# KAMAL///////
+file_path = 'cosmetics.csv'
+cosmetics_data = pd.read_csv(file_path)
+cosmetics_data['Label'] = cosmetics_data['Label'].astype('category').cat.codes
+cosmetics_data['Brand'] = cosmetics_data['Brand'].astype('category').cat.codes
+
+
+X = cosmetics_data[['Price', 'Combination', 'Dry', 'Normal', 'Oily', 'Sensitive']]
+y = cosmetics_data['Label']
+
+
+model_path = 'cosmetics_model.pkl'
+if not os.path.exists(model_path):
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    clf = DecisionTreeClassifier()
+    clf.fit(X_train, y_train)
+    joblib.dump(clf, model_path)
+else:
+    clf = joblib.load(model_path)
+
+@app.route('/formAI')
+def formAI():
+    return render_template('formAI.html')
+
+@app.route('/recommend', methods=['POST'])
+def recommend():
+    try:
+        price = float(request.form['price'])
+        skin_type = request.form['skin_type']
+
+        combination = 1 if skin_type == 'combination' else 0
+        dry = 1 if skin_type == 'dry' else 0
+        normal = 1 if skin_type == 'normal' else 0
+        oily = 1 if skin_type == 'oily' else 0
+        sensitive = 1 if skin_type == 'sensitive' else 0
+
+        customer_features = [price, combination, dry, normal, oily, sensitive]
+        product_label = clf.predict([customer_features])[0]
+        recommended_product = cosmetics_data[cosmetics_data['Label'] == product_label].iloc[0]
+
+        return render_template('resultAI.html', product=recommended_product)
+    except Exception as e:
+        return str(e)
 if __name__ == "__main__":
     app.run(debug=True)
     
