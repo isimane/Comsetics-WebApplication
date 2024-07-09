@@ -5,7 +5,7 @@ import json
 import sys
 from flask import Flask, abort, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from flask import request, jsonify
+from flask import request, jsonify 
 
 # from cart import cart
 # from flask_wtf import FlaskForm
