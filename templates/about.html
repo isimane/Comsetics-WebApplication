@@ -99,7 +99,7 @@
     <!-- this navbar is for samll screens -->
     <nav class="flex flex-col noAnimation" id="navbar">
         <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
-            <a href="{{url_for('home')}}" class="text-light p-3">HOME</a>
+            <a href="{{url_for('home') }}" class="text-light p-3">HOME</a>
             <div class="dropdown">
                 <a href="{{ url_for('shop') }}" class="font-bold text-light p-8">SHOP</a>
                 <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
@@ -201,10 +201,10 @@
                   <div class=" md:flex md:gap-4  items-center text-center flex flex-col md:flex-row mt-10 md:mt-0  md:text-start">
                       <ul class="pb-2 ">
                         <li class="text-[24px] font-bold border-b-2 border-beige">Explore</li>
-                      <li class=" pt-3"> <a href="{{url_for('home')}}">HOME</a></li>
-                      <li class="pt-1">  <a href="{{ url_for('shop') }}">SHOP</a></li>
-                      <li class="pt-1"> <a href="{{ url_for('about') }}">ABOUT US</a></li>
-                      <li class="pt-1"><a href="{{ url_for('contact') }}">CONTACT US</a></li>
+                        <li class=" pt-3"> <a href="{{url_for('home')}}">HOME</a></li>
+                        <li class="pt-1">  <a href="{{ url_for('shop') }}">SHOP</a></li>
+                        <li class="pt-1"> <a href="{{ url_for('about') }}">ABOUT US</a></li>
+                        <li class="pt-1"><a href="{{ url_for('contact') }}">CONTACT US</a></li>
                       </ul>
                   </div>
         

@@ -62,11 +62,13 @@
 
         <h1 class="text-4xl font-bold mb-8 mt-40 text-darkgreen font-fraun text-center">Product Management Table</h1>
         
-        <div class="mb-6">
+        <div class="mb-6 flex jsutify-between">
             <a href="{{ url_for('add_product') }}" class="inline-block bg-darkgreen text-light px-6 py-2 rounded-2xl hover:bg-opacity-80  duration-300">
                 Add New Product
             </a>
+            <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="{{url_for('home'}}"> Go home</a></button>
         </div>
+
 
         <div class="overflow-x-auto bg-light rounded-xl shadow-2xl">
             <table class="w-full table-auto">
