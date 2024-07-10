@@ -61,6 +61,19 @@
     </head>
 <body class=>
 
+
+
+    {% if current_user.is_authenticated %}
+        {% if current_user.role == "admin" %}
+            <script>window.location.href = "{{ url_for('accountadmin') }}";</script>
+        {% elif current_user.role == "client" %}
+            <script>window.location.href = "{{ url_for('accountclient') }}";</script>
+        {% endif %}
+    {% endif %}
+
+
+
+
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
   <ul class="list-unstyled">

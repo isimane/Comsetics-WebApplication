@@ -23,7 +23,7 @@ print("Flask app is starting", flush=True)
 sys.stdout.flush()
 
 
-app = Flask(__name__,static_folder='static')
+app = Flask(__name__)
 app.secret_key = 'your_secret_key_here' 
 app.config['UPLOAD_DIRECTORY'] = 'static/media/'
 # app.register_blueprint(shop_blueprint, url_prefix="")
@@ -33,7 +33,7 @@ print("Flask app is starting")
 #SIMANE
 @app.route("/")
 def home():
-    with sqlite3.connect("instance\db.db") as con:
+    with sqlite3.connect("db.db") as con:
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute("""
@@ -64,7 +64,7 @@ def contact():
 @app.route("/shop")
 def shop():   
     category = request.args.get("category")
-    with sqlite3.connect("instance\db.db") as con:
+    with sqlite3.connect("db.db") as con:
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         sql = """
@@ -95,7 +95,7 @@ def shop():
     
 @app.route('/product/<int:id>')
 def product(id):
-    with sqlite3.connect("instance\db.db") as con:
+    with sqlite3.connect("db.db") as con:
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute("SELECT * FROM products WHERE id =?", (id,))
@@ -106,7 +106,7 @@ def product(id):
 #CRUD:
 @app.route("/product_table")
 def productTable():
-    with sqlite3.connect("instance\db.db") as con:
+    with sqlite3.connect("db.db") as con:
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute("""
@@ -133,7 +133,7 @@ def add_product():
                     secure_filename(image.filename)
                 ))
             
-        with sqlite3.connect("instance\db.db") as con:
+        with sqlite3.connect("db.db") as con:
                 cur = con.cursor()
                 cur.execute("INSERT INTO products (name, image, description, price, quantity, category_id) VALUES (?,?,?,?,?,?)", 
                             (name, image.filename, description, price, quantity, category_id))
@@ -142,7 +142,7 @@ def add_product():
                 
         return redirect(url_for("productTable"))
     else:
-        with sqlite3.connect("instance\db.db") as con:
+        with sqlite3.connect("db.db") as con:
             cur = con.cursor()
             cur.execute("""SELECT categ.*
                FROM categories categ
@@ -155,7 +155,7 @@ def add_product():
 @app.route("/edit_product/<int:id>", methods=['GET','POST'], endpoint='edit_product')
 def edit_product(id):
     product_id = int(id)
-    with sqlite3.connect("instance\db.db") as con:
+    with sqlite3.connect("db.db") as con:
       cur = con.cursor()
       cur.execute("SELECT * FROM products WHERE id =?", (id,))
       product=cur.fetchone()
@@ -191,7 +191,7 @@ def edit_product(id):
 @app.route("/delete_product/<int:id>", methods=['GET','POST'], endpoint='delete_product')
 def delete_product(id):
     product_id = int(id)
-    with sqlite3.connect("instance\db.db") as con:
+    with sqlite3.connect("db.db") as con:
       cur = con.cursor()
       cur.execute("DELETE FROM products WHERE id =?", (id,))
       con.commit()
@@ -259,7 +259,7 @@ def cart():
     cart_details = []
     total = 0
     
-    with sqlite3.connect("instance\db.db") as con:
+    with sqlite3.connect("db.db") as con:
         cur = con.cursor()
         for item in cart_items_list:
             cur.execute("SELECT name, price, image FROM products WHERE id = ?", (item['id'],))
@@ -295,7 +295,7 @@ def checkout():
         phone = request.form["phone"]
         email = request.form["email"]
         
-        with sqlite3.connect("instance\db.db") as con:
+        with sqlite3.connect("db.db") as con:
                 cur = con.cursor()
                 cur.execute("SELECT id FROM user WHERE email=?", (email,))
                 result = cur.fetchone()
@@ -340,7 +340,7 @@ def checkout():
         cart_items_list = json.loads(cart_items)
         
         total = 0
-        with sqlite3.connect("instance\db.db") as con:
+        with sqlite3.connect("db.db") as con:
             cur = con.cursor()
             for item in cart_items_list:
                 cur.execute("SELECT price FROM products WHERE id =?", (item['id'],))
@@ -353,7 +353,7 @@ def checkout():
 @app.route('/thankyou/<int:order_id>')
 def thankyou(order_id):
     customer = "Customer" 
-    with sqlite3.connect("instance\db.db") as con:
+    with sqlite3.connect("db.db") as con:
         cur = con.cursor()
         cur.execute("SELECT user_id FROM orders WHERE order_id = ?", (order_id,))
         result = cur.fetchone()
@@ -370,7 +370,7 @@ def thankyou(order_id):
 
 @app.route('/yourorders')
 def yourorders():
-    with sqlite3.connect("instance\db.db") as con:
+    with sqlite3.connect("db.db") as con:
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         
@@ -397,7 +397,7 @@ def yourorders():
     return render_template("yourorders.html", orders=orders)
 @app.route('/orders')
 def orders():
-    with sqlite3.connect("instance\db.db") as con:
+    with sqlite3.connect("db.db") as con:
         con.row_factory = sqlite3.Row
         cur = con.cursor()
         cur.execute("""
@@ -427,6 +427,153 @@ def error_handler(error):
 #SIMANE
 
 #KARADA
+
+
+class User(UserMixin):
+    def __init__(self, id, firstname, lastname, email, password, role):
+        self.id = id
+        self.firstname = firstname
+        self.lastname = lastname
+        self.email = email
+        self.password = password
+        self.role = role
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
+
+@login_manager.user_loader
+def load_user(user_id):
+    with sqlite3.connect("db.db") as con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM user WHERE id=?", (user_id,))
+        user_data = cur.fetchone()
+        if user_data:
+            return User(*user_data)
+        return None
+
+
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+        if not email or not password:
+            flash("Please provide both email and password", "danger")
+            return redirect(url_for("login"))
+        with sqlite3.connect("db.db") as con:
+            cur = con.cursor()
+            cur.execute("SELECT * FROM user WHERE email=?", (email,))
+            user_data = cur.fetchone()
+            if user_data:
+                user = User(*user_data)
+                if user.password == password:
+                    login_user(user)
+                    flash("Logged in successfully!", "success")
+                    if user.role == "admin":
+                        return redirect(url_for("accountadmin"))
+                    elif user.role == "client":
+                        return redirect(url_for("accountclient"))
+                else:
+                    flash("Invalid email or password", "danger")
+                    return render_template("login.html")
+            else:
+                flash("Invalid email or password", "danger")
+                return render_template("login.html")
+    else:
+        return render_template("login.html", user=current_user)
+
+@app.route('/signup', methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        firstname = request.form.get("firstname")
+        lastname = request.form.get("lastname")
+        email = request.form.get("email")
+        password = request.form.get("password")
+        if firstname and lastname and email and password:
+            with sqlite3.connect("db.db") as con:
+                cur = con.cursor()
+                cur.execute("SELECT * FROM user WHERE email=?", (email,))
+                if cur.fetchone():
+                    flash("Email already exists.", "danger")
+                else:
+                    cur.execute("INSERT INTO user (firstname, lastname, email, password, role) VALUES (?, ?, ?, ?, ?)",
+                                (firstname, lastname, email, password, "client"))
+                    con.commit()
+                    flash("Account created successfully!", "success")
+                    return redirect(url_for("accountclient"))
+        else:
+            flash("Please fill in all the fields", "danger")
+    return render_template("signup.html")
+
+@app.route('/update_data/<string:id>', methods=['POST', 'GET'])
+@login_required
+def update_data(id):
+    with sqlite3.connect("db.db") as con:
+        cur = con.cursor()
+        cur.execute("SELECT * FROM user WHERE id=?", (id,))
+        user_data = cur.fetchone()
+        if user_data:
+            user = User(*user_data)
+            if user.role == 'client':
+                if request.method == 'POST':
+                    firstname = request.form['firstname']
+                    lastname = request.form['lastname']
+                    email = request.form['email']
+
+                    if not firstname or not lastname or not email:
+                        flash('Please fill in all fields')
+                        return render_template("accountclient.html", user=current_user)
+                    cur.execute("UPDATE user SET firstname=?, lastname=?, email=? WHERE id=?",
+                                (firstname, lastname, email, id))
+                    con.commit()
+                    flash('User Updated', 'success')
+                    return redirect(url_for("accountclient"))
+                return render_template("accountclient.html", user=current_user)
+            elif user.role == 'admin':
+                if request.method == 'POST':
+                    firstname = request.form['firstname']
+                    lastname = request.form['lastname']
+                    email = request.form['email']
+
+                    if not firstname or not lastname or not email:
+                        flash('Please fill in all fields')
+                        return render_template("accountadmin.html", user=current_user)
+                    cur.execute("UPDATE user SET firstname=?, lastname=?, email=? WHERE id=?",
+                                (firstname, lastname, email, id))
+                    con.commit()
+                    flash('User Updated', 'success')
+                    return redirect(url_for("accountadmin"))
+                return render_template("accountadmin.html", user=current_user)
+        else:
+            flash('User not found', 'danger')
+            return redirect(url_for("login"))  # or any other route you want to redirect to
+        
+
+@app.route('/account')
+@login_required
+def account():
+    return render_template('accountclient.html', user=current_user)
+
+@app.route('/accountadmin')
+@login_required
+def accountadmin():
+    return render_template("accountadmin.html", user=current_user)
+
+@app.route('/accountclient')
+@login_required
+def accountclient():
+    return render_template("accountclient.html", user=current_user)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("You have been logged out successfully.", "success")
+    return redirect(url_for("login"))
+
+
 
 
 

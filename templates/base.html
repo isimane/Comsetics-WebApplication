@@ -72,10 +72,10 @@
                 <div class=" md:flex md:gap-4  items-center text-center flex flex-col md:flex-row mt-10 md:mt-0  md:text-start">
                     <ul class="pb-2 ">
                       <li class="text-[24px] font-bold border-b-2 border-beige">Explore</li>
-                      <li class=" pt-3"> <a href="index.html">HOME</a></li>
-                      <li class="pt-1">  <a href="shop.html">SHOP</a></li>
-                      <li class="pt-1"> <a href="about.html">ABOUT US</a></li>
-                      <li class="pt-1"><a href="contactus.html">CONTACT US</a></li>
+                      <li class=" pt-3"> <a href="{{ url_for('home') }}">HOME</a></li>
+                      <li class="pt-1">  <a href="{{ url_for('shop') }}">SHOP</a></li>
+                      <li class="pt-1"> <a href="{{ url_for('about') }}">ABOUT US</a></li>
+                      <li class="pt-1"><a href="{{ url_for('contact') }}">CONTACT US</a></li>
                     </ul>
                 </div>
       
