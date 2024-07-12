@@ -86,7 +86,6 @@
                         <p class="text-[12px] md:text-[16px]">Name: {{ order.firstname }}</p>
                         <p class="text-[12px] md:text-[16px]">Email: {{ order.email }}</p>
                     </div>
-                    <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="{{url_for('home') }}"> Go home</a></button>
                     
                     <!-- <div class="flex justify-between">
                         <button class="bg-lightgreen hover:bg-darkgreen text-white font-bold py-2 px-4 rounded transition duration-300">
@@ -99,6 +98,7 @@
                 </div>
                 {% endfor %}
             </div>
+            <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300 ml-[20%]"> <a href="{{url_for('home') }}"> Go home</a></button>
         </div>
     </body>
     </html>
