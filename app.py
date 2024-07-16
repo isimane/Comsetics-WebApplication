@@ -279,6 +279,31 @@ def cart():
     
     return render_template("cart.html", cart_items=cart_details, total=total)
 
+@app.route("/remove_from_cart", methods=['POST'])
+def remove_from_cart():
+    data = request.get_json()
+    if not data or 'id' not in data:
+        return jsonify({"error": "Invalid request"}), 400
+    
+    cart_items = request.cookies.get('cart_items')
+    if not cart_items:
+        return jsonify({"error": "Cart is empty"}), 400
+        
+    cart_items_list = json.loads(cart_items)
+    product_id = data['id']
+    
+    # Remove the item with the matching id
+    cart_items_list = [item for item in cart_items_list if item['id'] != product_id]
+    
+    total_quantity = sum(item['quantity'] for item in cart_items_list)
+    
+    response = jsonify({    
+        "success": True,
+        "cartCount": total_quantity 
+    })
+    response.set_cookie('cart_items', json.dumps(cart_items_list))  # Update cart_items cookie
+    return response
+
 
 @app.route('/checkout', methods=['GET', 'POST'])
 @login_required

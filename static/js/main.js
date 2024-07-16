@@ -96,15 +96,19 @@ function updateCartIcon() {
     console.error('Cart icon element not found');
     return;
   }
-  let currentCount = parseInt(cartIcon.getAttribute('data-count') || '0');
-  currentCount++;
-  cartIcon.setAttribute('data-count', currentCount);
-  const counter = cartIcon.querySelector('.cart-count');
-  if (counter) {
-    counter.textContent = currentCount;
-  } else {
-    console.warn('Cart count element not found');
-  }
+  fetch('/get_cart_count')
+    .then(response => response.json())
+    .then(data => {
+      const currentCount = data.cartCount;
+      cartIcon.setAttribute('data-count', currentCount);
+      const counter = cartIcon.querySelector('.cart-count');
+      if (counter) {
+        counter.textContent = currentCount;
+      } else {
+        console.warn('Cart count element not found');
+      }
+    })
+    .catch(error => console.error('Error updating cart icon:', error));
 }
 
 function addToCartBtns() {
@@ -145,6 +149,35 @@ function addToCartBtns() {
     });
   }
 }
+function removeFromCart(productId) {
+  fetch('/remove_from_cart', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id: parseInt(productId) })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Server response:', data);
+    updateCartIcon();
+    // Refresh the cart page
+    location.reload();
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const removeButtons = document.getElementsByClassName('remove-from-cart');
+  for (let button of removeButtons) {
+    button.addEventListener('click', function() {
+      const productId = this.getAttribute('data-product-id');
+      removeFromCart(productId);
+    });
+  }
+});
 
 addToCartBtns();
 
