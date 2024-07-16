@@ -281,8 +281,7 @@ def cart():
 
 
 @app.route('/checkout', methods=['GET', 'POST'])
-# @loginrequired
-
+@login_required
 def checkout():
     print(f"Request method: {request.method}")
     cart_items = request.cookies.get('cart_items', '[]')
