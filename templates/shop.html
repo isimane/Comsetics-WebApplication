@@ -59,6 +59,7 @@
           </style>
       </head>
       <body class="bg-light">
+        
         {% block content %}
           <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px] noAnimation">
             <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
@@ -73,23 +74,26 @@
                         <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
                     </div>
                 </div>
-                  <a href="{{ url_for('home') }}" class="p-8 hover:text-darkgreen">ABOUT US</a>
+                  <a href="{{ url_for('about') }}" class="p-8 hover:text-darkgreen">ABOUT US</a>
                   <a href="{{ url_for('contact') }}" class="hover:text-darkgreen">CONTACT US</a>
               </nav>
               <div class="flex hidden md:flex items-center gap-4">
                   
                   <button>
-                      <a href="login.html" class="hover:text-darkgreen">
+                      <a href="{{ url_for('login') }}" class="hover:text-darkgreen">
                           <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                               <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
                           </svg>
                       </a>
                   </button>
                   <button>
-                      <a href="{{ url_for('cart') }}" class="hover:text-darkgreen">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                              <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                          </svg>
+                    <a href="{{ url_for('cart') }}" class="hover:text-darkgreen">
+                        <div id="cart-icon" data-count="0" class="flex items-center ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                            </svg>
+                            <span class="cart-count bg-red-900  text-[8px] rounded-full px-[3.5px] text-white relative top-[7px] left-[-7px]">0</span>
+                        </div>
                       </a>
                   </button>
               </div>
@@ -119,20 +123,45 @@
                   <div class="flex block md:hidden items-center gap-4 mt-3">
                       
                       <button>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person dark:text-light" viewBox="0 0 16 16">
+                          <a href="{{ url_for('login') }}"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person dark:text-light" viewBox="0 0 16 16">
                               <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
                           </svg>
                       </button>
-                      <button>
-                          <a href="{{ url_for('cart') }}"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart dark:text-light" viewBox="0 0 16 16">
-                              <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                          </svg></a>
-                      </button>
+                      <a href="{{ url_for('cart') }}" class="hover:text-darkgreen">
+                        <div id="cart-icon" data-count="0" class="flex items-center ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                            </svg>
+                            <span class="cart-count bg-red-900  text-[8px] rounded-full px-[3.5px] text-white relative top-[7px] left-[-7px]">0</span>
+                        </div>
+                      </a>
                   </div>
               </div>
           </nav>
+          <div class="container mx-auto px-4 py-8">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert bg-darkgreen  text-center  bg-opacity-65 text-light px-6 py-3 rounded-xl shadow-md relative" role="alert" id="alert-{{ loop.index0 }}">
+                        <p class="font-bold">{{ message }}</p>
+                    </div>
+                    {% endfor %}
+                    <script>
+                        const alerts = document.querySelectorAll('.alert');
+                        alerts.forEach(function(alert) {
+                            setTimeout(function() {
+                                alert.classList.add('fade-out');
+                                setTimeout(function() {
+                                    alert.remove();
+                                }, 1500);
+                            }, 2000);
+                        });
+    
+                    </script>      
+                {% endif %}
+            {% endwith %}
+          </div>
      <main class="flex flex-col items-center py-16 bg-light w-[90%] mx-auto mt-10 xl:max-w-[1440px] xl:mx-auto noAnimation">
-
         <h1 class="text-3xl font-fraun font-bold text-center inline-block  md:w-[50%] w-[70%] text-center text-darkgreen ">Welcome to the Nuova Shop</h1>
         <p class="text-center max-w-xl text-dark mt-4 mb-1 ">Discover our wide range of premium beauty products designed to enhance your natural beauty and elevate your daily routine. From skincare essentials to luxurious fragrances, find everything you need to look and feel your best.</p>
        
@@ -155,7 +184,7 @@
                                 <h3 class="font-bold text-lg pb-3">{{ product.name }}</h3>
                                 <p class="text-darkgreen pb-3">{{ product.description }}</p>
                                 <p class="font-bold mt-2">{{ product.price }}$</p>
-                                <button class="addToCartBtn px-4 py-2 hover:font-bold mt-4 w-[90%] mx-auto items-center flex flex-row justify-center" data-product-id="{{ product.id }}" data-product-quantity="{{ product.quantity }}">Add to Cart
+                                <button class="addToCartBtn px-4 py-2 hover:font-bold mt-4 w-[90%] mx-auto items-center flex flex-row justify-center " data-product-id="{{ product.id }}" data-product-quantity="{{ product.quantity }}">Add to Cart
                                 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="text-beige bi bi-cart ml-2" viewBox="0 0 16 16">
                                     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                                 </svg>

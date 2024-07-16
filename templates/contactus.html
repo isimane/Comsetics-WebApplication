@@ -72,7 +72,7 @@
             </nav>
             <div class="flex hidden md:flex items-center gap-4">
                 <button>
-                    <a href="login.html" class="hover:text-darkgreen">
+                    <a href="{{ url_for('login') }}" class="hover:text-darkgreen">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                             <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
                         </svg>
@@ -112,12 +112,12 @@
                 <a href="{{ url_for('contact') }}" class="text-light font-bold pb-3">CONTACT US</a>
                 <div class="flex block md:hidden items-center gap-4 mt-3">
                     <button>
-                        <a href="{{ url_for('cart') }}"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person dark:text-light" viewBox="0 0 16 16">
+                        <a href="{{ url_for('login') }}"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person dark:text-light" viewBox="0 0 16 16">
                             <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
                         </svg></a>
                     </button>
                     <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart dark:text-light" viewBox="0 0 16 16">
+                        <a href="{{ url_for('cart') }}"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart dark:text-light" viewBox="0 0 16 16">
                             <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                         </svg>
                     </button>
@@ -137,18 +137,36 @@
             </div>
           </div>
           
-          <div class="pb-6 w-[90%] mt-10 md:w-[40%] md:mt-0 noAnimation">
-            <form action="" class="bg-[#D2C5AA] bg-opacity-10  mx-auto rounded-3xl p-7 md:w-[80%]">
-              <label for="FirstName" class="text-darkgreen font-bold mb-2">First Name </label><br>
-              <input type="text" id="FirstName" required  class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4"><br>
-              <label for="LastName" required class="text-darkgreen font-bold mb-2">Last Name </label><br>
-              <input type="text" required id="LastName" class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4"><br>
-              <label for="Email" class="text-darkgreen font-bold  mb-2">Email </label><br>
-              <input type="email" required id="Email" class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4"><br>
-              <label for="message" class="text-darkgreen font-bold  mb-2">Your Message </label><br>
-              <textarea type="text"id="message" class="py-3 bg-lightbeige bg-opacity-65 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] "></textarea><br>
-              <button type="submit" class="bg-darkgreen text-light font-pop py-1 px-5 rounded-lg mt-3 hover:opacity-80 transition-opacity duration-300">Submit</button>
-            </form>
+          <div class="pb-6 w-[90%] mt-20 md:w-[40%] md:mt-0 noAnimation ">
+            <div class="max-w-3xl mx-auto bg-light text-center mr-[10%] bg-opacity-30 rounded-3xl mb-2 shadow-lg p-8">      
+              <div class=" txt-center">
+                  <div >
+                      <h2 class="text-2xl font-bold text-center font-fraun text-darkgreen mb-4">Contact Information</h2>
+                      <ul class="">
+                          <li class="flex items-center text-center">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-beige" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                              </svg>
+                              Phone: +212 123-4567
+                          </li>
+                          <li class="flex items-center text-center">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-beige" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                              </svg>
+                              Email: nuova@gmail.com
+                          </li>
+                          <li class="flex items-center">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-beige" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                              </svg>
+                              Address: 123 Agadir Morocco
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+              </div>
+          </div>
           </div>
         </section>
         <p class="text-beige  font-fraun font-bold text-xl md:text-xl text-center mt-3 md:text-left w-[90%] mx-auto mt-20 noAnimation" >Thank you for reaching out to Nuova. We look forward to assisting you!</p>
@@ -200,6 +218,7 @@
         </section>
       
       </footer>
+      
       <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
 </body>
