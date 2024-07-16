@@ -282,9 +282,15 @@ def cart():
 
 @app.route('/checkout', methods=['GET', 'POST'])
 # @loginrequired
+
 def checkout():
     print(f"Request method: {request.method}")
+    cart_items = request.cookies.get('cart_items', '[]')
+    cart_items_list = json.loads(cart_items)
     
+    if not cart_items_list:
+        flash("Your cart is empty. Please add some items before checking out.", "info")
+        return redirect(url_for('shop'))
     if request.method == 'POST':
         print("POST request received")
         print(f"Form data: {request.form}")
@@ -426,9 +432,9 @@ def error_handler(error):
     return render_template("pageNotFound.html")
 #SIMANE
 
+
+
 #KARADA
-
-
 class User(UserMixin):
     def __init__(self, id, firstname, lastname, email, password, role):
         self.id = id
