@@ -195,7 +195,7 @@ def delete_product(id):
       cur = con.cursor()
       cur.execute("DELETE FROM products WHERE id =?", (id,))
       con.commit()
-      flash('Book Deleted','warning')
+      flash('Your Product was Deleted','warning')
       return redirect(url_for("productTable"))
   
 
@@ -231,7 +231,7 @@ def add_cart():
             "cartCount": total_quantity 
                        
     })
-    response.set_cookie('cart_items', json.dumps(cart_items_list))  # Update cart_items cookie
+    response.set_cookie('cart_items', json.dumps(cart_items_list)) 
     return response
     
     # cart_items.append({
@@ -301,13 +301,14 @@ def remove_from_cart():
         "success": True,
         "cartCount": total_quantity 
     })
-    response.set_cookie('cart_items', json.dumps(cart_items_list))  # Update cart_items cookie
+    response.set_cookie('cart_items', json.dumps(cart_items_list)) 
     return response
 
 
 @app.route('/checkout', methods=['GET', 'POST'])
 @login_required
 def checkout():
+    # flash("Your don't have an account . Please create one.")
     print(f"Request method: {request.method}")
     cart_items = request.cookies.get('cart_items', '[]')
     cart_items_list = json.loads(cart_items)
