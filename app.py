@@ -382,20 +382,19 @@ def checkout():
 
 @app.route('/thankyou/<int:order_id>')
 def thankyou(order_id):
-    customer = "Customer" 
-    with sqlite3.connect("db.db") as con:
-        cur = con.cursor()
-        cur.execute("SELECT user_id FROM orders WHERE order_id = ?", (order_id,))
-        result = cur.fetchone()
+    # customer = "Customer" 
+    # with sqlite3.connect("db.db") as con:
+    #     cur = con.cursor()
+    #     cur.execute("SELECT user_id FROM orders WHERE order_id = ?", (order_id,))
+    #     result = cur.fetchone()
         
-        if result:
-            user_id = result[0]
-            cur.execute("SELECT firstname FROM user WHERE id = ?", (user_id,))
-            user_result = cur.fetchone()
-            if user_result:
-                customer = user_result[0]  
-    
-    return render_template('thankyou.html', order_id=order_id, customer=customer)
+    #     if result:
+    #         user_id = result[0]
+    #         cur.execute("SELECT firstname FROM user WHERE id = ?", (user_id,))
+    #         user_result = cur.fetchone()
+    #         if user_result:
+    #             customer = user_result[0]  
+    return render_template('thankyou.html',user=current_user)
 
 
 @app.route('/yourorders')
