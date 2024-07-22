@@ -340,7 +340,6 @@ def checkout():
                 cart_items_list = json.loads(cart_items)
                 
                 print(f"Cart items: {cart_items_list}")
-                
                 total = 0
                 for item in cart_items_list:
                     cur.execute("SELECT price FROM products WHERE id =?", (item['id'],))
@@ -379,7 +378,7 @@ def checkout():
                 total += product_price * item['quantity']
         
         print(f"Rendering checkout template with total: {total}")
-        return render_template("checkout.html", total=total, cart_items=cart_items_list)
+        return render_template("checkout.html", total=total, cart_items=cart_items_list, user=current_user)
 
 @app.route('/thankyou/<int:order_id>')
 def thankyou(order_id):

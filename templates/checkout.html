@@ -123,11 +123,11 @@
                 <form class="flex-grow" method="post" action="{{ url_for('checkout') }}">
                     <div class="mb-4">
                         <label for="name" class="block font-pop text-sm font-semibold mb-2">First Name</label>
-                        <input type="text" id="name" name="firstname" class="w-full px-3 py-2 text-darkgreen outline-none bg-lightbeige bg-opacity-30 rounded-lg" required>
+                        <input type="text" id="name" name="firstname" value="{{ user.firstname }}" class="w-full px-3 py-2 text-darkgreen outline-none bg-lightbeige bg-opacity-30 rounded-lg" required>
                     </div>
                     <div class="mb-4">
                         <label for="name" class="block font-pop text-sm font-semibold mb-2">Last Name</label>
-                        <input type="text" id="name" name="lastname" class="w-full px-3 py-2 text-darkgreen outline-none bg-lightbeige bg-opacity-30 rounded-lg" required>
+                        <input type="text" id="name" name="lastname" value="{{ user.lastname }}" class="w-full px-3 py-2 text-darkgreen outline-none bg-lightbeige bg-opacity-30 rounded-lg" required>
                     </div>
                     <div class="mb-4">
                         <label for="address" class="block font-pop text-sm font-semibold mb-2">Delivery Address</label>
@@ -139,7 +139,7 @@
                     </div>
                     <div class="mb-6">
                         <label for="email"  class="block font-pop text-sm font-semibold mb-2">Email Address</label>
-                        <input type="email" name="email" id="email" class="w-full px-3 bg-lightbeige text-darkgreen outline-none bg-opacity-30 py-2 border-beige border-1 rounded-lg" required>
+                        <input type="email" name="email" id="email" value="{{ user.email }}" class="w-full px-3 bg-lightbeige text-darkgreen outline-none bg-opacity-30 py-2 border-beige border-1 rounded-lg" required>
                     </div>
                     <div class="mb-6">
                         <p class="font-pop text-sm font-semibold mb-2">Payment Method</p>
