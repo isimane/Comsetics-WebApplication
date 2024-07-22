@@ -40,14 +40,22 @@
             #unshowlist {
                 display: none;
             }
-           .dropdown:hover.dropdown-menu {
+            .dropdown:hover .dropdown-menu {
                 display: block;
             }
-        </style>
+            .animateScroll {
+                animation: fadeIn 1s ease-in-out;
+                }
+        
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+    </style>
     </head>
 </head>
 <body class="bg-light">
-    <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
+    <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px] noAnimation">
         <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
         <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
             <a href="{{url_for('home')}}" class="p-8  hover:text-darkgreen">HOME</a>
@@ -88,7 +96,7 @@
             </svg>
         </button>
     </header>
-    <nav class="flex flex-col" id="navbar">
+    <nav class="flex flex-col noAnimation" id="navbar">
         <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
             <a href="{{url_for('home')}}" class="text-light p-3">HOME</a>
             <div class="dropdown">
@@ -116,10 +124,10 @@
             </div>
         </div>
     </nav>
-    <main class="w-[90%]  mx-auto  bg-opacity-25  p-20 ">
+    <main class="w-[90%]  mx-auto  bg-opacity-25  p-20 noAnimation">
         <h1 class="text-darkgreen text-3xl md:text-5xl  font-fraun font-bold text-center">Thank You for Your Purchase!</h1>
         <div class="mt-20 text-center">
-            <h2 class="text-beige text-2xl md:text-3xl font-bold ">Dear {{customer}},</h2>
+            <h2 class="text-beige text-2xl md:text-3xl font-bold ">Dear {{user.firstname}} {{user.lastname}},</h2>
             <p class="w-[100%] md:w-[70%] mt-3 mx-auto">Thank you for shopping with us! We appreciate your business and are thrilled to have you as a customer. Your order has been successfully placed and is being processed.</p>
         </div>
         <div class="mt-20 text-center"> 
@@ -138,7 +146,7 @@
           
                </div>
         </div>
-        <a href="{{ url_for('home') }}"><button class=" \  flex justify-center mx-auto bg-darkgreen text-light  py-1 px-4 rounded-xl hover:opacity-80 transition-opacity duration-300 mt-10 ">Go back</button></a>
+        <a href="{{ url_for('home') }}"><button class="flex justify-center mx-auto bg-darkgreen text-light  py-1 px-4 rounded-xl hover:opacity-80 transition-opacity duration-300 mt-10 ">Go back</button></a>
    
     </main>
     <footer class="bg-darkgreen mt-20">

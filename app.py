@@ -340,7 +340,6 @@ def checkout():
                 cart_items_list = json.loads(cart_items)
                 
                 print(f"Cart items: {cart_items_list}")
-                
                 total = 0
                 for item in cart_items_list:
                     cur.execute("SELECT price FROM products WHERE id =?", (item['id'],))
@@ -379,24 +378,23 @@ def checkout():
                 total += product_price * item['quantity']
         
         print(f"Rendering checkout template with total: {total}")
-        return render_template("checkout.html", total=total, cart_items=cart_items_list)
+        return render_template("checkout.html", total=total, cart_items=cart_items_list, user=current_user)
 
 @app.route('/thankyou/<int:order_id>')
 def thankyou(order_id):
-    customer = "Customer" 
-    with sqlite3.connect("db.db") as con:
-        cur = con.cursor()
-        cur.execute("SELECT user_id FROM orders WHERE order_id = ?", (order_id,))
-        result = cur.fetchone()
+    # customer = "Customer" 
+    # with sqlite3.connect("db.db") as con:
+    #     cur = con.cursor()
+    #     cur.execute("SELECT user_id FROM orders WHERE order_id = ?", (order_id,))
+    #     result = cur.fetchone()
         
-        if result:
-            user_id = result[0]
-            cur.execute("SELECT firstname FROM user WHERE id = ?", (user_id,))
-            user_result = cur.fetchone()
-            if user_result:
-                customer = user_result[0]  
-    
-    return render_template('thankyou.html', order_id=order_id, customer=customer)
+    #     if result:
+    #         user_id = result[0]
+    #         cur.execute("SELECT firstname FROM user WHERE id = ?", (user_id,))
+    #         user_result = cur.fetchone()
+    #         if user_result:
+    #             customer = user_result[0]  
+    return render_template('thankyou.html',user=current_user)
 
 
 @app.route('/yourorders')

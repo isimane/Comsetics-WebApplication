@@ -133,7 +133,7 @@
                   <div class="cart_items space-y-4">
                     {% if cart_items %}
                         {% for item in cart_items %}
-                            <div class="flex flex-col text-center md:flex-row text-start items-center space-x-4 bg-lightbeige bg-opacity-30 p-4 rounded-2xl cart-item" data-product-id="{{ item['id'] }}">
+                            <div class="flex flex-col text-center md:flex-row text-start items-center  space-x-4 bg-lightbeige bg-opacity-30 p-4 rounded-2xl cart-item" data-product-id="{{ item['id'] }}">
                                 <a href="{{ url_for('product', id=item['id']) }}" class="cursor-pointer"><div class="flex-grow">
                                     <img src="{{ item['image'] }}" class="h-20 w-24 object-cover rounded-lg" alt="cartProduct">
                                     <h3 class="font-semibold text-darkgreen mt-2">{{ item['name'] }}</h3>
