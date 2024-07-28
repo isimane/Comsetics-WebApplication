@@ -3,20 +3,18 @@ from werkzeug.utils import secure_filename
 import os
 import json
 import sys
-
-# from flask import Flask, render_template, request, redirect, url_for, flash
+from functools import wraps
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from flask import request, jsonify
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 import joblib
+import sqlite3
 
 # from cart import cart
 # from flask_wtf import FlaskForm
 # from wtforms import StringField, SubmitField, FileField
 # from wtforms.validators import DataRequired
-import sqlite3
 
 
 print("Flask app is starting", flush=True)
