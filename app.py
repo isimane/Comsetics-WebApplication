@@ -598,7 +598,12 @@ def accountclient():
 def logout():
     logout_user()
     flash("You have been logged out successfully.", "success")
-    return redirect(url_for("login"))
+    # return redirect(url_for("login"))
+    
+    #added this so if someone logs out the cart items will get deleted
+    response = make_response(redirect(url_for("login")))
+    response.set_cookie('cart_items', '[]', expires=0)
+    return response
 
 
 

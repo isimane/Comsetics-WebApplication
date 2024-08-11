@@ -180,6 +180,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 addToCartBtns();
-
+updateCartIcon();
 
 
