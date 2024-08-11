@@ -119,7 +119,7 @@
     <div class=" font-pop p-8 mb-10">
         <div class="w-[90%] mx-auto md:w-[60%] xl:max-w-3xl mx-auto  rounded-2xl shadow-xl p-6">
             <h1 class="text-3xl font-fraun text-darkgreen mb-6 font-bold">Your Orders</h1>
-            
+            {% if orders %}  
             {% for order in orders %}
             <div class="mb-12 border-b pb-6">
                 <h2 class="text-xl font-pop font-bold text-beige mb-4">Order #{{order.order_id}}</h2>
@@ -149,31 +149,18 @@
                         <p>${{ order.total_amount }}</p>
                     </div>
                 </div>
-                <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="{{ url_for('home') }}"> go home</a></button>
-
-                
-                <!-- <div class="mb-6">
-                    <h3 class="text-lg font-fraun text-beige mb-2">Customer Information</h3>
-                    <p>Name: {{ order.firstname }}</p>
-                    <p>Email: {{ order.email }}</p>
-                </div>
-                
-                <div class="flex justify-between">
-                    <button class="bg-lightgreen hover:bg-darkgreen text-white font-bold py-2 px-4 rounded transition duration-300">
-                        Track Order
-                    </button>
-                    <button class="bg-beige hover:bg-darkgreen text-white font-bold py-2 px-4 rounded transition duration-300">
-                        Contact Support
-                    </button>
-                </div> -->
             </div>
             {% endfor %}
+            <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="{{ url_for('shop') }}"> shop more</a></button>
+            {% else %}
+            <div class="mx-auto flex flex-col justify-center">
+                <p>You haven't placed any orders yet.</p>
+                <button class="bg-darkgreen mt-10 text-white px-4 py-2  rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="{{ url_for('shop') }}"> discover our shop </a></button>
+            </div>
+            {% endif %}  
         </div>
     </div>
 
-    <footer class="bg-darkgreen mt-20">
-        <a href="{{ url_for('home') }}"><p class="p-4 text-center text-light font-semibold ">Nuova Beauty © 2024 Nuova. All rights reserved.</p></a>
-    </footer>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

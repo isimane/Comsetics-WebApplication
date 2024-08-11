@@ -395,23 +395,24 @@ def thankyou(order_id):
     return render_template('thankyou.html',user=current_user)
 
 
+from flask_login import login_required, current_user
+
 @app.route('/yourorders')
+@login_required
 def yourorders():
     with sqlite3.connect("db.db") as con:
         con.row_factory = sqlite3.Row
         cur = con.cursor()
-        
-       
         cur.execute("""
             SELECT o.order_id, o.user_id, o.total_amount, 
                    u.email, u.firstname, u.lastname
             FROM orders o
             JOIN user u ON o.user_id = u.id
-        """)
+            WHERE o.user_id = ?
+        """, (current_user.id,))
         orders = [dict(order) for order in cur.fetchall()]
    
         for order in orders:
-        
             cur.execute("""
                 SELECT oi.order_item_id, oi.product_id, oi.quantity, 
                        p.image, p.name as product_name, p.price
@@ -447,6 +448,8 @@ def orders():
             order['order_items'] = [dict(item) for item in cur.fetchall()]
 
     return render_template("orders.html", orders=orders)
+
+
 # pagenotfound
 @app.errorhandler(404)
 def error_handler(error):
