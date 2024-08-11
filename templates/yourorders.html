@@ -153,8 +153,10 @@
             {% endfor %}
             <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="{{ url_for('shop') }}"> shop more</a></button>
             {% else %}
-            <p>You haven't placed any orders yet.</p>
-            <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="{{ url_for('shop') }}"> discover our shop </a></button>
+            <div class="mx-auto flex flex-col justify-center">
+                <p>You haven't placed any orders yet.</p>
+                <button class="bg-darkgreen mt-10 text-white px-4 py-2  rounded-xl hover:opacity-80 transition-opacity duration-300"> <a href="{{ url_for('shop') }}"> discover our shop </a></button>
+            </div>
             {% endif %}  
         </div>
     </div>
