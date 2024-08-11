@@ -130,7 +130,7 @@
             {% if orders %}  
             {% for order in orders %}
             <div class="mb-12 border-b pb-6">
-                <h2 class="text-xl font-pop font-bold text-beige mb-4">Order #{{order.order_id}}</h2>
+                <h2 class="text-xl font-pop font-bold text-beige mb-4">Order {{loop.index}}:</h2>
                 <div class="mb-6 mt-4 ">
                     <h3 class="text-lg font-pop text-darkgreen font-semibold  mb-2">Items</h3>
                     {% for item in order.order_items %}
