@@ -46,7 +46,7 @@
             }
       </style>
   </head>
-<body class="bg-light">
+<!-- <body class="bg-light">
     <div class=" font-pop p-8 mb-10">
         <div class="w-[90%] mx-auto md:w-[60%] xl:max-w-3xl mx-auto  rounded-2xl shadow-xl p-6">
             <h1 class="text-3xl font-fraun text-darkgreen mb-6 font-bold">Users  Orders</h1>
@@ -58,7 +58,7 @@
                     <h3 class="text-lg font-pop text-darkgreen font-semibold  mb-2">Items</h3>
                     {% for item in order.order_items %}
                     <div class="border-t  border-lightbeige py-2 ">
-                        <!-- class {% if not loop.last %}border-b{% endif %} -->
+                        class {% if not loop.last %}border-b{% endif %}
                         <div class="flex flex-col md:flex-row justify-between items-center mb-2">
                             <div class="flex flex-col text-center md:flex-row md:text-start items-center">
                                 <img src="{{ url_for('static', filename='media/' + item.image) }}" alt="{{ item.product_name }}" class="w-20 h-20 object-cover mr-4 rounded-lg">
@@ -87,18 +87,130 @@
                     <p class="text-[12px] md:text-[16px]">Email: {{ order.email }}</p>
                 </div>
                 
-                <!-- <div class="flex justify-between">
-                    <button class="bg-lightgreen hover:bg-darkgreen text-white font-bold py-2 px-4 rounded transition duration-300">
-                        Track Order
-                    </button>
-                    <button class="bg-beige hover:bg-darkgreen text-white font-bold py-2 px-4 rounded transition duration-300">
-                        Contact Support
-                    </button>
-                </div> -->
+               
             </div>
             {% endfor %}
         </div>
         <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300 ml-[20%]"> <a href="{{url_for('accountadmin') }}"> Go back</a></button>
+    </div>
+</body> -->
+<body class="bg-light">
+    <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
+        <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
+        <nav class="hidden md:flex px-10 items-center text-[16px] gap-2">
+              <a href="{{url_for('home')}}" class="p-8 hover:text-darkgreen">HOME</a>
+              <div class="dropdown p-8">
+                  <a href="{{ url_for('shop') }}"" class="hover:text-darkgreen">SHOP</a>
+                  <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
+                    <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
+                    <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
+                    <a href="{{ url_for('shop', **dict(request.args, category=4)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
+                    <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
+                </div>
+              </div>
+              <a href="{{ url_for('about') }}" class="p-8 hover:text-darkgreen">ABOUT US</a>
+              <a href="{{ url_for('contact') }}" class="hover:text-darkgreen">CONTACT US</a>
+          </nav>
+          <div class="flex hidden md:flex items-center gap-4">
+              <button>
+                  <a href="{{ url_for('login') }}" class="hover:text-darkgreen">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                      </svg>
+                  </a>
+              </button>
+              <button>
+                  <a href="{{ url_for('cart') }}" class="hover:text-darkgreen">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                      </svg>
+                  </a>
+              </button>
+          </div>
+          <button class="block md:hidden">
+              <svg id="burgerlist" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+              </svg>
+              <svg id="unshowlist" xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+              </svg>
+          </button>
+      </header>
+      <nav class="flex flex-col" id="navbar">
+          <div class="flex flex-col justify-start w-[90%] items-center bg-opacity-90 mt-7 rounded-3xl bg-darkgreen mx-auto p-3 md:hidden">
+              <a href="{{url_for('home')}}" class="text-light p-3">HOME</a>
+              <div class="dropdown">
+                  <a href="{{ url_for('shop') }}"" class=" text-light p-8">SHOP</a>
+                  <div class="absolute hidden dropdown-menu bg-light text-darkgreen shadow-xl mt-1 rounded-lg">
+                    <a href="{{ url_for('shop', **dict(request.args, category=1)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Makeup</a>
+                    <a href="{{ url_for('shop', **dict(request.args, category=2)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Skincare</a>
+                    <a href="{{ url_for('shop', **dict(request.args, category=4)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Fragrance</a>
+                    <a href="{{ url_for('shop', **dict(request.args, category=3)) }}" class="block px-4 py-2 hover:bg-beige hover:bg-opacity-10">Men's grooming</a>
+                </div>
+              </div>
+              <a href="{{ url_for('about') }}" class="p-3 text-light font-bold">ABOUT US</a>
+              <a href="{{ url_for('contact') }}" class="text-light pb-3">CONTACT US</a>
+              <div class="flex block md:hidden items-center gap-4 mt-3">
+                  <button>
+                      <a href="{{ url_for('login') }}"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person dark:text-light" viewBox="0 0 16 16">
+                          <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                      </svg></a>
+                  </button>
+                  <button>
+                      <a href="{{ url_for('cart') }}"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-cart dark:text-light" viewBox="0 0 16 16">
+                          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                      </svg></a>
+                  </button>
+              </div>
+          </div>
+      </nav>
+    <div class="font-pop p-8 mb-10">
+        <div class="w-[90%] mx-auto  xl:max-w-6xl mx-auto  p-6">
+            <h1 class="text-3xl font-fraun text-darkgreen mb-6 font-bold">Users Orders</h1>
+            <p class="mb-4">Total number of orders: {{ orders|length }}</p>
+            
+            <div class="overflow-x-auto bg-light rounded-xl shadow-2xl">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="bg-beige bg-opacity-65 text-light">
+                            <th class="px-4 py-3 text-left">OrderID</th>
+                            <th class="px-4 py-3 text-left">Customer</th>
+                            <th class="px-4 py-3 text-left">Email</th>
+                            <th class="px-4 py-3 text-left">Items</th>
+                            <th class="px-4 py-3 text-left">Total Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr class=" hover:bg-lightbeige hover:bg-opacity-25 transition-colors duration-300">
+                            <td class="px-4 py-3 font-bold text-darkgreen font-fraun">#{{order.order_id}}</td>
+                            <td class="px-4 py-3">{{ order.firstname }}</td>
+                            <td class="px-4 py-3">{{ order.email }}</td>
+                            <td class="px-4 py-3">
+                                <ul>
+                                {% for item in order.order_items %}
+                                    <li class="mb-2">
+                                        <div class="flex items-center">
+                                            <img src="{{ url_for('static', filename='media/' + item.image) }}" alt="{{ item.product_name }}" class="w-20 h-20 object-cover mr-2 rounded-xl">
+                                            <div>
+                                                <p class="font-semibold">{{ item.product_name }}</p>
+                                                <p class="text-sm text-beige">Qty: {{ item.quantity }} x ${{ item.price }}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                                </ul>
+                            </td>
+                            <td class="px-4 py-3 text-right font-bold">${{ order.total_amount }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300 ml-[7%]">
+            <a href="{{url_for('accountadmin') }}">Go back</a>
+        </button>
     </div>
 </body>
 </html>
