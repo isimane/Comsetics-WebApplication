@@ -201,9 +201,12 @@
                                 <button class="font-pop font-bold border-b-2 w-fit border-beige mt-20 flex justify-center ">Edit Your Profile <span class="text-beige"> </span></button>
                                 <div class="pb-6  mt-10  md:mt-0 ">
                                     <form action="{{ url_for('update_data', id=user.id) }}" method="POST" class=" rounded-3xl mt-10  ">
-                                        <input type="text" id="firstname" name="firstname" placeholder="Edit Your First Name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%] md:w-[90%] mb-4 placeholder-darkgreen"><br>
-                                        <input type="text" id="lastname" name="lastname" placeholder="Edit Your Last Name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
-                                        <input type="email" id="email" name="email" placeholder="Edit Your Email" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
+                                        <label for="" class="">Edit Your First Name</label>
+                                        <input type="text" id="firstname" name="firstname" value="{{ user.firstname }}" placeholder="Edit Your First Name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%] md:w-[90%] mb-4 placeholder-darkgreen"><br>
+                                        <label for="">Edit Your Last Name</label>
+                                        <input type="text" id="lastname" name="lastname" value="{{ user.lastname }}" placeholder="Edit Your Last Name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
+                                        <label for="">Edit Your Email</label>
+                                        <input type="email" id="email" name="email" value="{{ user.email }}" placeholder="Edit Your Email" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen lg:w-[100%]  md:w-[90%] mb-4 placeholder-darkgreen"><br>
                                         <button type="submit" class="bg-darkgreen text-light font-pop py-2 px-5 rounded-lg mt-3 text-[13px] hover:opacity-80 transition-opacity duration-300">Save your changes</button>
                                     </form>
                                 </div>

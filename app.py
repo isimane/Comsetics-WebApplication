@@ -42,7 +42,7 @@ def home():
         """)
         data = cur.fetchall()
         products = [dict(row) for row in data]
-        featured = products[12] if products else None
+        featured = products[11] if products else None
         three = products[:3] if products else []
         two = products[3:5] if len(products) >= 5 else products[3:] if products else []
         

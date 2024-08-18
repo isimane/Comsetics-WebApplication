@@ -46,53 +46,45 @@
         </style>
     </head>
     <body class="bg-light">
-      <header class="w-[90%] mx-auto flex items-center justify-between mt-4 xl:mx-auto xl:max-w-[1280px]">
-        <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUovalogo2.png') }}" alt="" class="w-[79px] h-[30px]"> </a>
-        <div class="flex hidden md:flex items-center gap-4">
-            <button>
-                <a href="{{ url_for('login') }}" class="hover:text-darkgreen">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person " viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
-                    </svg>
-                </a>
-            </button>
-        </div>
-        <button class="block md:hidden">
-            <svg id="burgerlist" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-            </svg>
-            <svg id="unshowlist" xmlns="http://www.w3.org/2000/svg" width="26" height="20" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-            </svg>
-        </button>
-    </header>
-        <main class="mb-10">
-            <div class="pb-6 mt-10 w-[80%] md:w-[80%] md:mt-0 mx-auto xl:max-w-[1400px] xl:mx-auto">
-                <form id="Form" method="POST" enctype="multipart/form-data"  class="bg-lightbeige bg-opacity-30 shadow-2xl rounded-[50px] px-12  mt-10 md:w-[60%] mx-auto py-10  xl:max-w-[1400px] xl:mx-auto mb-20">
-                  <label for="ProductName" class="text-darkgreen font-bold " >Product Name </label><br>
-                  <input type="text" id="ProductName" name="ProductName" required placeholder="Enter your product's name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen  placeholder-opacity-65"><br>
-                  <label for="ProductImage" class="text-darkgreen font-bold ">Product Image </label><br>
-                  <input type="file" id="ProductImage"name="ProductImage" required placeholder="choose your product's image" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen pl file-opacity-25 file:border-0 file:bg-beige file:rounded-lg  file:shadow-xl  file:text-[14px]  file:text-light file:cursor-pointer file:hover:opacity-80 file:transition-opacity file:duration-300 "><br>
-                  <label for="ProductDescription" class="text-darkgreen font-bold ">Product
-                    Description </label><br>
-                  <textarea id="ProductDescription" name="ProductDescription" required placeholder="Edit your product's description" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"></textarea><br>
-                  <label for="ProductPrice" class="text-darkgreen font-bold ">Product
-                    Price </label><br>
-                  <input type="number" id="ProductPrice" name="ProductPrice" required placeholder="Enter your product price" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
-                  <label for="ProductQuantity" class="text-darkgreen font-bold ">Product
-                    Quantity </label><br>
-                  <input type="number" id="ProductQuantity" name="ProductQuantity" required placeholder="Enter your product's quantity" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
-                  <label for="ProductCategory" class="text-darkgreen font-bold ">Product
-                    Category </label><br>
-                  <select name="ProductCategory" id="ProductCategory" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65">
-                    {% for category in categories %}
-                      <option value="{{ category[0] }}">{{ category[1] }}</option>
-                    {% endfor %}
-                  </select>
-                    <button type="submit" class="bg-darkgreen text-[13px] text-light font-pop py-1 px-5 rounded-lg mt-3 hover:opacity-80 transition-opacity duration-300">Add your product</button>
-                </form>
-              </div> 
-        </main>
+        <div class="flex flex-col md:flex-row w-full">
+          <aside class="w-full md:w-64 bg-darkgreen  text-light rounded-r-xl ">
+              <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/NUOVAlogo2(white).png') }}" alt="logo" class="w-[79px] h-[30px] ml-4 mt-8"></a>
+              <nav class="mt-6 font-medium text-[16px]">
+                  <a href="{{ url_for('accountadmin') }}" class="block py-2 px-4  mx-2 hover:bg-[#3C4A30] rounded-lg hover:rounded-lg hover:opacity-80 duration-300 block py-2 px-4 hover:bg-opacity-75 ">Admin account</a>
+                  <a href="{{ url_for('productTable') }}" class="mx-2  rounded-lg hover:rounded-lg duration-300 block py-2 px-4   font-poppins bg-[#3C4A30] bg-opacity-75">Edit Stock</a>
+                  <a href="{{ url_for('orders') }}" class="mx-2 hover:bg-[#3C4A30] rounded-lg hover:rounded-lg hover:opacity-80 duration-300 block py-2 px-4 hover:bg-opacity-75 ">Users Orders</a>
+                  <a href="{{ url_for('home') }}" class="mx-2 hover:bg-[#3C4A30] rounded-lg hover:rounded-lg hover:opacity-80 duration-300 block py-2 px-4 hover:bg-opacity-75 ">Home</a>
+              </nav>
+          </aside>   
+          <div class="flex-1 p-4 pl-0">
+            <div class="pb-6 mt-10 w-[80%] md:w-[100%] md:mt-0 mx-auto xl:max-w-[1400px] xl:mx-auto">
+              <form id="Form" method="POST" enctype="multipart/form-data"  class="bg-lightbeige bg-opacity-30 shadow-2xl rounded-[50px] px-12  mt-10 md:w-[60%] mx-auto py-10  xl:max-w-[1400px] xl:mx-auto mb-20">
+                <label for="ProductName" class="text-darkgreen font-bold " >Product Name </label><br>
+                <input type="text" id="ProductName" name="ProductName" required placeholder="Enter your product's name" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen  placeholder-opacity-65"><br>
+                <label for="ProductImage" class="text-darkgreen font-bold ">Product Image </label><br>
+                <input type="file" id="ProductImage"name="ProductImage" required placeholder="choose your product's image" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen pl file-opacity-25 file:border-0 file:bg-beige file:rounded-lg  file:shadow-xl  file:text-[14px]  file:text-light file:cursor-pointer file:hover:opacity-80 file:transition-opacity file:duration-300 "><br>
+                <label for="ProductDescription" class="text-darkgreen font-bold ">Product
+                  Description </label><br>
+                <textarea id="ProductDescription" name="ProductDescription" required placeholder="Edit your product's description" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"></textarea><br>
+                <label for="ProductPrice" class="text-darkgreen font-bold ">Product
+                  Price </label><br>
+                <input type="number" id="ProductPrice" name="ProductPrice" required placeholder="Enter your product price" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
+                <label for="ProductQuantity" class="text-darkgreen font-bold ">Product
+                  Quantity </label><br>
+                <input type="number" id="ProductQuantity" name="ProductQuantity" required placeholder="Enter your product's quantity" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65"><br>
+                <label for="ProductCategory" class="text-darkgreen font-bold ">Product
+                  Category </label><br>
+                <select name="ProductCategory" id="ProductCategory" class="py-3 bg-[#D2C5AA] bg-opacity-30 rounded-lg outline-none pl-3 pr-10 text-darkgreen w-[85%] mb-4 placeholder-darkgreen placeholder-opacity-65">
+                  {% for category in categories %}
+                    <option value="{{ category[0] }}">{{ category[1] }}</option>
+                  {% endfor %}
+                </select>
+                  <button type="submit" class="bg-darkgreen text-[13px] text-light font-pop py-1 px-5 rounded-lg mt-3 hover:opacity-80 transition-opacity duration-300">Add your product</button>
+              </form>
+            </div> 
+          </div>
+      </div>
+  </div>
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
         
 
