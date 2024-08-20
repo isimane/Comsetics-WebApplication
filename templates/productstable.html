@@ -85,7 +85,7 @@
             
             <div class="flex-1 p-4 md:p-8 pl-0">
                 <div class="mb-6  ">
-                    <a href="{{ url_for('add_product') }}" class="inline-block bg-darkgreen text-light px-6 py-2 rounded-2xl hover:bg-opacity-80  duration-300">
+                    <a href="{{ url_for('add_product') }}" class="inline-block bg-darkgreen text-light text-sm px-4 py-2 rounded-xl hover:bg-opacity-80  duration-300">
                         Add New Product
                     </a>
                 </div>
@@ -108,7 +108,7 @@
                                 <td class="px-4 py-3">
                                     <img src="{{ url_for('static', filename='media/' + product['image']) }}" alt="{{ product.image }}" class="w-24 h-24 object-cover rounded-xl">
                                 </td>
-                                <td class="px-4 py-3 font-medium">{{ product.name }}</td>
+                                <td class="px-4 py-3 font-medium text-sm">{{ product.name }}</td>
                                 <td class="px-4 py-3 font-fraun text-darkgreen font-bold">{{ product.category_name }}</td>
                                 <td class="px-4 py-3">
                                     <p class="truncate w-48 text-sm">{{ product.description }}</p>
@@ -126,8 +126,8 @@
                         </tbody>
                     </table>
                 </div>
-                <button class="bg-darkgreen text-white px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300">
-                    <a href="{{ url_for('accountadmin') }}">Go Back</a>
+                <button class="bg-darkgreen text-white text-sm px-4 py-2 mt-4 rounded-xl hover:opacity-80 transition-opacity duration-300">
+                    <a href="{{ url_for('accountadmin') }}" >Go Back</a>
                 </button>
             </div>
         </div>
