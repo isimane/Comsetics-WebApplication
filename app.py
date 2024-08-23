@@ -589,7 +589,11 @@ def account():
 @app.route('/accountadmin')
 @login_required
 def accountadmin():
-    return render_template("accountadmin.html", user=current_user)
+    with sqlite3.connect("db.db") as con:
+        cur = con.cursor()
+        cur.execute("SELECT firstname, lastname FROM user WHERE role != 'admin'")
+        users = cur.fetchall()
+    return render_template("accountadmin.html", user=current_user, users=users)
 
 @app.route('/accountclient')
 @login_required

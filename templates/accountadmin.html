@@ -144,7 +144,28 @@
                        
                         <div class="bg-lightbeige bg-opacity-10 rounded-2xl shadow-xl p-6">
                             <h3 class="text-lg font-fraun font-bold mb-4 text-darkgreen">Users</h3>
-                            <p></p>
+                            {% if users %}
+                            <div class="max-h-[70vh] overflow-y-auto rounded-lg">
+                                <table class="w-full border-collapse overflow-y">
+                                    <thead class="sticky top-0 bg-beige  z-10">
+                                      <tr class="bg-beige border bg-opacity-65 text-light">
+                                            <th class="p-2 text-left">First Name</th>
+                                            <th class=" p-2 text-left">Last Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in users %}
+                                        <tr class="hover:bg-lightbeige hover:bg-opacity-25 transition-colors duration-300">
+                                            <td class="border-r border-b border-lightbeige p-2">{{ user[0] }}</td>
+                                            <td class="border-b border-lightbeige p-2">{{ user[1] }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% else %}
+                                    <p>No users found.</p>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
