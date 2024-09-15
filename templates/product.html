@@ -45,6 +45,9 @@
             .dropdown:hover .dropdown-menu {
                 display: block;
             }
+            .flash-message {
+                display: none;
+            }
       </style>
   </head>
   <body class="bg-light">
@@ -152,7 +155,7 @@
                                 </svg>
                         </button>
                     </div>
-                    
+                    <a href="{{ url_for('cart') }}"><div id="flashMessage" class="flash-message fixed bottom-[20px] right-[20px] rounded-lg z-[1000] py-[10px] px-[20px] bg-darkgreen font-bold text-light text-sm"></div></a>                     
                 </section>
         </div>
         <!-- small size -->
