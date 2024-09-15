@@ -616,7 +616,7 @@ def logout():
 
 
 
-# KAMAL///////
+# KAMAL///////I neeed to remember how to do this XD 
 file_path = 'cosmetics.csv'
 cosmetics_data = pd.read_csv(file_path)
 cosmetics_data['Label'] = cosmetics_data['Label'].astype('category').cat.codes
