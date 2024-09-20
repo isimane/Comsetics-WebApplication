@@ -140,6 +140,7 @@ function addToCartBtns() {
       .then(data => {
         console.log('Server response:', data);
         updateCartIcon();
+        showFlashMessage(data.message);
         console.log('Item added to cart successfully');
       })
       .catch((error) => {
@@ -148,6 +149,14 @@ function addToCartBtns() {
       });
     });
   }
+}
+function showFlashMessage(message) {
+  const flashMessage = document.getElementById('flashMessage');
+  flashMessage.textContent = message;
+  flashMessage.style.display = 'block';
+  setTimeout(() => {
+      flashMessage.style.display = 'none';
+  }, 3000);
 }
 function removeFromCart(productId) {
   fetch('/remove_from_cart', {
@@ -161,7 +170,6 @@ function removeFromCart(productId) {
   .then(data => {
     console.log('Server response:', data);
     updateCartIcon();
-    // Refresh the cart page
     location.reload();
   })
   .catch((error) => {

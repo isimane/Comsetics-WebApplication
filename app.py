@@ -226,8 +226,8 @@ def add_cart():
     
     response = jsonify ({    
             "success": True,
-            "cartCount": total_quantity 
-                       
+            "cartCount": total_quantity,
+            "message": f"Item was added to your cart . Total items: {total_quantity}"                 
     })
     response.set_cookie('cart_items', json.dumps(cart_items_list)) 
     return response
