@@ -1,14 +1,14 @@
-NUOVA is a beginner web application for cosmetics products. It aims to provide a simple and intuitive interface for users to explore and find cosmetics products. The application leverages AI for product recommendations.
-
+NUOVA is a beginner web application for cosmetics products. It aims to provide a simple and intuitive interface for users to explore and find cosmetics products. 
 Features:
     Browse and search for cosmetics products
     User authentication and management with Flask-Login
-    AI-based product recommendations using pandas and scikit-learn
     Responsive design with Tailwind CSS
+
 Technologies Used:
     Frontend: Tailwind CSS, JavaScript
     Backend: Flask, SQLite, Flask-Login
     AI: pandas, scikit-learn
+
 Installation:
     Prerequisites
     Python 3.x
