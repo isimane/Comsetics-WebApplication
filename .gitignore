@@ -5,7 +5,7 @@ venv
 env
 myenv
 __pycache__
-media
+# media
 # db.db
 # cosmetics.csv
 # cosmetics_model.pkl
