@@ -7,6 +7,6 @@ myenv
 __pycache__
 media
 db.db
-cosmetics.csv
-cosmetics_model.pkl
+# cosmetics.csv
+# cosmetics_model.pkl
 kamal.py
