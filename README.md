@@ -3,6 +3,7 @@ Features:
     Browse and search for cosmetics products
     User authentication and management with Flask-Login
     Responsive design with Tailwind CSS
+    
 
 Technologies Used:
     Frontend: Tailwind CSS, JavaScript
